@@ -1,0 +1,40 @@
+{
+  "name": "user-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.15",
+    "@mui/lab": "^5.0.0-alpha.150",
+    "@mui/material": "^5.14.15",
+    "@mui/x-date-pickers": "^6.17.0",
+    "bufferutil": "^4.0.8",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
+    "encoding": "^0.1.13",
+    "firebase": "^10.5.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-hot-toast": "^2.4.1",
+    "recharts": "^2.9.0",
+    "utf-8-validate": "^6.0.3",
+    "web3": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}
