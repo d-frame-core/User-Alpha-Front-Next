@@ -15,7 +15,7 @@ const TransactionDetails: React.FC<KYC1DetailsProps> = ({ event, sent }) => {
       <a
         href={'https://polygonscan.com/tx/' + event.transactionHash}
         target='_blank'>
-        <div className='flex justify-between px-2 text-sm'>
+        <div className='flex justify-between px-2 md:text-sm text-xl'>
           {sent ? (
             <div>
               To: {event.returnValues.to.slice(0, 5)}
@@ -42,7 +42,7 @@ const TransactionDetails: React.FC<KYC1DetailsProps> = ({ event, sent }) => {
             )}
           </div>
         </div>
-        <div className='flex mt-2 justify-between px-3 text-xs'>
+        <div className='flex mt-2 justify-between px-3 md:text-xs text-lg'>
           <div className='text-blue-800 font-semibold'>
             {(Web3.utils.fromWei(event.returnValues.value, 'ether') as any) >=
             1000

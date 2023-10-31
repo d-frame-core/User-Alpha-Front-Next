@@ -4,14 +4,13 @@ import KYCComponent from '@/components/KYCComponent';
 import ProfileDetails from '@/components/ProfileDetails';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
-import { Button } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function Profile() {
-  const { userWalletAddress, userData, setUserData, userToken, setUserToken } =
+  const { userWalletAddress, userData, setUserData, setUserToken } =
     useContext(AppContext);
   const router = useRouter();
   async function getUserData() {
@@ -48,24 +47,8 @@ export default function Profile() {
       const chainId = await window.ethereum.request({
         method: 'eth_chainId',
       });
-      // Check if the user is not connected to Polygon mainnet (chainId: "0x89" for Polygon mainnet)
       if (chainId !== '0x89') {
         try {
-          // await window.ethereum.request({
-          //   method: 'wallet_addEthereumChain',
-          //   params: [
-          //     {
-          //       chainId: '0x89',
-          //       chainName: 'Polygon Mainnet',
-          //       nativeCurrency: {
-          //         name: 'MATIC',
-          //         symbol: 'MATIC',
-          //         decimals: 18,
-          //       },
-          //       rpcUrls: ['https://polygon-mainnet.infura.io'],
-          //     },
-          //   ],
-          // });
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: '0x89' }],
@@ -84,24 +67,8 @@ export default function Profile() {
         const chainId = await window.ethereum.request({
           method: 'eth_chainId',
         });
-        // Check if the user is not connected to Polygon mainnet (chainId: "0x89" for Polygon mainnet)
         if (chainId !== '0x89') {
           try {
-            // await window.ethereum.request({
-            //   method: 'wallet_addEthereumChain',
-            //   params: [
-            //     {
-            //       chainId: '0x89',
-            //       chainName: 'Polygon Mainnet',
-            //       nativeCurrency: {
-            //         name: 'MATIC',
-            //         symbol: 'MATIC',
-            //         decimals: 18,
-            //       },
-            //       rpcUrls: ['https://polygon-mainnet.infura.io'],
-            //     },
-            //   ],
-            // });
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: '0x89' }],
@@ -143,7 +110,6 @@ export default function Profile() {
   const fileInputRef = React.useRef(null);
 
   const handleImageClick = () => {
-    // Trigger a click event on the hidden input when the image is clicked
     (fileInputRef.current as any).click();
   };
 
@@ -181,10 +147,10 @@ export default function Profile() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[60vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[65vh]'>
         <div className='w-full'>
-          <h1 className='text-3xl font-semibold mb-4'>Profile</h1>
-          <div className='flex md:flex-row flex-col justify-around w-full'>
+          <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Profile</h1>
+          <div className='flex md:flex-row flex-col justify-evenly w-full'>
             <div>
               <Image
                 alt='Image'
@@ -207,7 +173,7 @@ export default function Profile() {
               />
             </div>
             {userData && (
-              <div className=' md:w-[60%] w-full text-xl'>
+              <div className=' md:w-[60%] w-full'>
                 <ProfileDetails
                   title='First Name'
                   value={userData?.kyc1.details.firstName}

@@ -177,12 +177,12 @@ export default function Wallet() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-28 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[95vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-28 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[93vh]'>
         <div className='w-full'>
-          <h1 className='text-3xl font-semibold mb-4'>Wallet</h1>
+          <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Wallet</h1>
           <div className='flex md:flex-row flex-col justify-evenly '>
             <div className='bg-white h-[90%] p-3 rounded-lg md:w-2/5 mx-auto w-11/12 flex justify-center items-center flex-col'>
-              <div className='text-xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
+              <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                 Transactions
               </div>
               <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto min-h-[47vh] h-[47vh]'>
@@ -209,7 +209,7 @@ export default function Wallet() {
               </div>
             </div>
             <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 gap-4'>
-              <div className='bg-white w-full text-center rounded-lg  flex-col py-4 md:text-lg text-xl '>
+              <div className='bg-white w-full text-center rounded-lg  flex-col py-4 md:text-lg text-2xl '>
                 <div className='mb-4'>
                   {' '}
                   Wallet Balance :{' '}
@@ -226,17 +226,17 @@ export default function Wallet() {
                 </div>
               </div>
               <div className='bg-white w-full text-center rounded-lg flex-col py-3 md:text-sm text-xl'>
-                <div className='text-xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
+                <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                   Transfer Tokens
                 </div>
-                <div className='my-2'>
+                <div className='md:my-2 my-4 '>
                   Wallet Address :
                   <input
                     className='border-none w-4/5 bg-purple-200 rounded outline-none mx-auto p-1 pl-3 mt-2 shadow-lg'
                     onChange={(e) => setSendWalletAddress(e.target.value)}
                   />
                 </div>
-                <div className='my-2'>
+                <div className='md:my-2 my-4 '>
                   DFT Amount :
                   <input
                     className='border-none w-4/5 bg-purple-200 rounded outline-none mx-auto p-1 pl-3 mt-2 shadow-lg'
