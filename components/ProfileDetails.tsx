@@ -16,7 +16,8 @@ interface ButtonProps {
 
 const ProfileDetails: React.FC<ButtonProps> = ({ title, value, editable }) => {
   const [phoneNumberModal, setPhoneNumberModal] = useState(false);
-  const { userData, userWalletAddress } = React.useContext(AppContext);
+  const { userData, userWalletAddress, userToken } =
+    React.useContext(AppContext);
   const router = useRouter();
   function handleModalOpener() {
     if (title === 'Phone Number') {
@@ -49,23 +50,23 @@ const ProfileDetails: React.FC<ButtonProps> = ({ title, value, editable }) => {
 
         const walletAddress =
           userWalletAddress || localStorage.getItem('userPublicAddress');
+        const userAccessToken =
+          userToken || window.localStorage.getItem('userAccessToken');
         toast.loading('Updating Email Id', { id: '10' });
-        await fetch(
-          `https://user-backend-402016.el.r.appspot.com/user/api/kyc1/${walletAddress}`,
-          {
-            method: 'PATCH',
-            headers: {
-              'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-              firstName: userData.kyc1.details.firstName,
-              lastName: userData.kyc1.details.lastName,
-              userName: userData.kyc1.details.userName,
-              phoneNumber: userData.kyc1.details.phoneNumber,
-              email: user.email,
-            }),
-          }
-        )
+        await fetch(`http://localhost:8080/user/api/kyc1/${walletAddress}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `${userAccessToken}`,
+          },
+          body: JSON.stringify({
+            firstName: userData.kyc1.details.firstName,
+            lastName: userData.kyc1.details.lastName,
+            userName: userData.kyc1.details.userName,
+            phoneNumber: userData.kyc1.details.phoneNumber,
+            email: user.email,
+          }),
+        })
           .then((response) => {
             toast.success('Updated Email Id', { id: '10' });
           })

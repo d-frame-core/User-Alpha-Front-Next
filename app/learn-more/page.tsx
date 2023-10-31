@@ -3,18 +3,21 @@
 'use client';
 import BasicModal from '@/components/Modal';
 import Sidebar from '@/components/Sidebar';
+import { AppContext } from '@/context/Context';
 import React, { useEffect, useState } from 'react';
 
 export default function Page() {
+  const { userToken } = React.useContext(AppContext);
   const [learnMoreData, setLearnMoreData] = useState([]);
   async function getLearnMoreData() {
-    await fetch(
-      'https://user-backend-402016.el.r.appspot.com/learnmore/api/learnmore/getall',
-      {
-        method: 'GET',
-        cache: 'force-cache',
-      }
-    )
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
+    await fetch('http://localhost:8080/learnmore/api/learnmore/getall', {
+      method: 'GET',
+      cache: 'no-cache',
+
+      headers: { Authorization: `${userAccessToken}` },
+    })
       .then((response: any) => response.json())
       .then((data: any) => {
         console.log('FETCHED');

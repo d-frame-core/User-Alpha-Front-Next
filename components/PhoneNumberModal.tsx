@@ -30,7 +30,7 @@ const PhoneNumberModal: React.FC<PhoneNumberModalProps> = ({
   open,
   onClose,
 }) => {
-  const { userData, userWalletAddress } = useContext(AppContext);
+  const { userData, userWalletAddress, userToken } = useContext(AppContext);
   const router = useRouter();
 
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -88,23 +88,24 @@ const PhoneNumberModal: React.FC<PhoneNumberModalProps> = ({
         // Update user profile or do whatever you need
         const walletAddress =
           userWalletAddress || localStorage.getItem('userPublicAddress');
+        const userAccessToken =
+          userToken || window.localStorage.getItem('userAccessToken');
+
         toast.loading('Updating Phone Number', { id: '2' });
-        await fetch(
-          `https://user-backend-402016.el.r.appspot.com/user/api/kyc1/${walletAddress}`,
-          {
-            method: 'PATCH',
-            headers: {
-              'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-              firstName: userData.kyc1.details.firstName,
-              lastName: userData.kyc1.details.lastName,
-              userName: userData.kyc1.details.userName,
-              phoneNumber: phoneNumber,
-              email: userData.kyc1.details.email,
-            }),
-          }
-        )
+        await fetch(`http://localhost:8080/user/api/kyc1/${walletAddress}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `${userAccessToken}`,
+          },
+          body: JSON.stringify({
+            firstName: userData.kyc1.details.firstName,
+            lastName: userData.kyc1.details.lastName,
+            userName: userData.kyc1.details.userName,
+            phoneNumber: phoneNumber,
+            email: userData.kyc1.details.email,
+          }),
+        })
           .then((response) => {
             toast.success('Updated Phone Number', { id: '2' });
           })
@@ -148,7 +149,7 @@ const PhoneNumberModal: React.FC<PhoneNumberModalProps> = ({
           <div className=' w-[3%]'>:</div>
           <input
             type='text'
-            placeholder='Enter with Country Code'
+            placeholder='Enter WITH Country Code'
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             className='border rounded-lg py-1 px-3 w-[64%]'

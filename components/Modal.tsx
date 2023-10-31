@@ -13,7 +13,7 @@ const BasicModal = (props: { name: string; paragraph: string }) => {
     <div>
       <div
         onClick={handleOpen}
-        className='cursor-pointer w-[97%] md:m-3 my-10 md:my-3 bg-white text-black rounded md:p-2 p-5 hover:bg-black hover:text-white md:text-xl text-3xl '>
+        className='cursor-pointer w-[97%] md:m-3 my-10 md:my-4 bg-white text-black rounded md:p-2 p-5 hover:bg-black hover:text-white md:text-xl text-3xl '>
         {props.name}
       </div>
       {open && (

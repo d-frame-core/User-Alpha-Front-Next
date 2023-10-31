@@ -16,7 +16,7 @@ export default function KYC1() {
   const [userName, setUserName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
-  const { userWalletAddress, userData } = useContext(AppContext);
+  const { userWalletAddress, userData, userToken } = useContext(AppContext);
   const router = useRouter();
   async function submitKYC1() {
     if (!firstName || !lastName || !userName || !phoneNumber || !email) {
@@ -27,23 +27,23 @@ export default function KYC1() {
     toast.loading('Updating KYC Level-1 Details', { id: '1' });
     const walletAddress =
       userWalletAddress || localStorage.getItem('userPublicAddress');
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
 
-    await fetch(
-      `https://user-backend-402016.el.r.appspot.com/user/api/kyc1/${walletAddress}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          userName,
-          phoneNumber: `+91${phoneNumber}`,
-          email,
-        }),
-      }
-    )
+    await fetch(`http://localhost:8080/user/api/kyc1/${walletAddress}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `${userAccessToken}`,
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        userName,
+        phoneNumber,
+        email,
+      }),
+    })
       .then((response) => {
         toast.success('Updated KYC Level-1 Details', { id: '1' });
         console.log(response);
@@ -74,22 +74,27 @@ export default function KYC1() {
               <KYC1Details
                 title='First Name'
                 onChange={(e) => setFirstName(e)}
+                placeHolder='Enter your first Name'
               />
               <KYC1Details
                 title='Last Name'
                 onChange={(e) => setLastName(e)}
+                placeHolder='Enter your Last Name'
               />
               <KYC1Details
                 title='username'
                 onChange={(e) => setUserName(e)}
+                placeHolder='Enter a short userName'
               />
               <KYC1Details
                 title='Phone Number'
                 onChange={(e) => setPhoneNumber(e)}
+                placeHolder='Phone No. WITH country code'
               />
               <KYC1Details
                 title='Email'
                 onChange={(e) => setEmail(e)}
+                placeHolder='Enter your active email id'
               />
             </div>
             <div className='w-11/12 mx-auto md:my-4 my-10'>

@@ -1,8 +1,5 @@
 /** @format */
 
-// /** @format */
-
-/** @format */
 'use client';
 import BasicModal from '@/components/Modal';
 import Sidebar from '@/components/Sidebar';
@@ -10,19 +7,18 @@ import { AppContext } from '@/context/Context';
 import React, { useContext, useEffect, useState } from 'react';
 
 export default function Page() {
-  const { userWalletAddress } = useContext(AppContext);
+  const { userToken } = useContext(AppContext);
 
   const [helpData, setHelpData] = useState([]);
   async function getHelpData() {
-    const walletAddress =
-      userWalletAddress || localStorage.getItem('userPublicAddress');
-    await fetch(
-      'https://user-backend-402016.el.r.appspot.com/help/api/help/getall',
-      {
-        method: 'GET',
-        cache: 'force-cache',
-      }
-    )
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
+
+    await fetch('http://localhost:8080/help/api/help/getall', {
+      method: 'GET',
+      cache: 'force-cache',
+      headers: { Authorization: `${userAccessToken}` },
+    })
       .then((response: any) => response.json())
       .then((data: any) => {
         console.log('FETCHED');
@@ -48,6 +44,7 @@ export default function Page() {
                   <BasicModal
                     name={item.title}
                     paragraph={item.text}
+                    key={index}
                   />
                 ))}
             </div>

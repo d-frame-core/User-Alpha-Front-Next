@@ -10,7 +10,6 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useContext } from 'react';
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { useState } from 'react';
 import Button from '@/components/Button';
 import KYC2Details from '@/components/KYC2Details';
@@ -18,8 +17,8 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
 import toast from 'react-hot-toast';
+import { countries } from '@/utils/Utils';
 import { AppContext } from '@/context/Context';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -45,7 +44,7 @@ export default function KYC2() {
     }));
   };
   const [next, setNext] = useState(false);
-  const { userWalletAddress, userData } = useContext(AppContext);
+  const { userWalletAddress, userData, userToken } = useContext(AppContext);
 
   const [dob, setDob] = useState<string>(
     new Date().toLocaleDateString('en-GB')
@@ -59,202 +58,6 @@ export default function KYC2() {
     '> 10,000,000',
   ];
 
-  const countries = [
-    'Afghanistan',
-    'Albania',
-    'Algeria',
-    'Andorra',
-    'Angola',
-    'Antigua and Barbuda',
-    'Argentina',
-    'Armenia',
-    'Australia',
-    'Austria',
-    'Azerbaijan',
-    'Bahamas',
-    'Bahrain',
-    'Bangladesh',
-    'Barbados',
-    'Belarus',
-    'Belgium',
-    'Belize',
-    'Benin',
-    'Bhutan',
-    'Bolivia',
-    'Bosnia and Herzegovina',
-    'Botswana',
-    'Brazil',
-    'Brunei',
-    'Bulgaria',
-    'Burkina Faso',
-    'Burundi',
-    'Cabo Verde',
-    'Cambodia',
-    'Cameroon',
-    'Canada',
-    'Central African Republic',
-    'Chad',
-    'Chile',
-    'China',
-    'Colombia',
-    'Comoros',
-    'Congo (Congo-Brazzaville)',
-    'Costa Rica',
-    'Croatia',
-    'Cuba',
-    'Cyprus',
-    'Czechia (Czech Republic)',
-    'Denmark',
-    'Djibouti',
-    'Dominica',
-    'Dominican Republic',
-    'Ecuador',
-    'Egypt',
-    'El Salvador',
-    'Equatorial Guinea',
-    'Eritrea',
-    'Estonia',
-    'Eswatini (fmr. "Swaziland")',
-    'Ethiopia',
-    'Fiji',
-    'Finland',
-    'France',
-    'Gabon',
-    'Gambia',
-    'Georgia',
-    'Germany',
-    'Ghana',
-    'Greece',
-    'Grenada',
-    'Guatemala',
-    'Guinea',
-    'Guinea-Bissau',
-    'Guyana',
-    'Haiti',
-    'Honduras',
-    'Hungary',
-    'Iceland',
-    'India',
-    'Indonesia',
-    'Iran',
-    'Iraq',
-    'Ireland',
-    'Israel',
-    'Italy',
-    'Jamaica',
-    'Japan',
-    'Jordan',
-    'Kazakhstan',
-    'Kenya',
-    'Kiribati',
-    'Kuwait',
-    'Kyrgyzstan',
-    'Laos',
-    'Latvia',
-    'Lebanon',
-    'Lesotho',
-    'Liberia',
-    'Libya',
-    'Liechtenstein',
-    'Lithuania',
-    'Luxembourg',
-    'Madagascar',
-    'Malawi',
-    'Malaysia',
-    'Maldives',
-    'Mali',
-    'Malta',
-    'Marshall Islands',
-    'Mauritania',
-    'Mauritius',
-    'Mexico',
-    'Micronesia',
-    'Moldova',
-    'Monaco',
-    'Mongolia',
-    'Montenegro',
-    'Morocco',
-    'Mozambique',
-    'Myanmar (formerly Burma)',
-    'Namibia',
-    'Nauru',
-    'Nepal',
-    'Netherlands',
-    'New Zealand',
-    'Nicaragua',
-    'Niger',
-    'Nigeria',
-    'North Korea',
-    'North Macedonia (formerly Macedonia)',
-    'Norway',
-    'Oman',
-    'Pakistan',
-    'Palau',
-    'Palestine State',
-    'Panama',
-    'Papua New Guinea',
-    'Paraguay',
-    'Peru',
-    'Philippines',
-    'Poland',
-    'Portugal',
-    'Qatar',
-    'Romania',
-    'Russia',
-    'Rwanda',
-    'Saint Kitts and Nevis',
-    'Saint Lucia',
-    'Saint Vincent and the Grenadines',
-    'Samoa',
-    'San Marino',
-    'Sao Tome and Principe',
-    'Saudi Arabia',
-    'Senegal',
-    'Serbia',
-    'Seychelles',
-    'Sierra Leone',
-    'Singapore',
-    'Slovakia',
-    'Slovenia',
-    'Solomon Islands',
-    'Somalia',
-    'South Africa',
-    'South Korea',
-    'South Sudan',
-    'Spain',
-    'Sri Lanka',
-    'Sudan',
-    'Suriname',
-    'Sweden',
-    'Switzerland',
-    'Syria',
-    'Tajikistan',
-    'Tanzania',
-    'Thailand',
-    'Timor-Leste',
-    'Togo',
-    'Tonga',
-    'Trinidad and Tobago',
-    'Tunisia',
-    'Turkey',
-    'Turkmenistan',
-    'Tuvalu',
-    'Uganda',
-    'Ukraine',
-    'United Arab Emirates',
-    'United Kingdom',
-    'United States of America',
-    'Uruguay',
-    'Uzbekistan',
-    'Vanuatu',
-    'Vatican City',
-    'Venezuela',
-    'Vietnam',
-    'Yemen',
-    'Zambia',
-    'Zimbabwe',
-  ];
-
   async function submitKYC2() {
     if (!formData) {
       toast.error('Fill All fields');
@@ -265,17 +68,17 @@ export default function KYC2() {
     toast.loading('Updating KYC Level-2 Details', { id: '1' });
     const walletAddress =
       userWalletAddress || localStorage.getItem('userPublicAddress');
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
 
-    await fetch(
-      `https://user-backend-402016.el.r.appspot.com/user/api/kyc2/${walletAddress}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      }
-    )
+    await fetch(`http://localhost:8080/user/api/kyc2/${walletAddress}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `${userAccessToken}`,
+      },
+      body: JSON.stringify(formData),
+    })
       .then((response) => {
         toast.success('Updated KYC Level-2 Details', { id: '1' });
         console.log(response);

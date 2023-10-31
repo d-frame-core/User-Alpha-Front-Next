@@ -14,7 +14,7 @@ import React, { useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function page() {
-  const { userWalletAddress } = useContext(AppContext);
+  const { userWalletAddress, userToken } = useContext(AppContext);
   const [formData, setFormData] = React.useState({
     browserData: true,
     storageOption: 'GCP',
@@ -27,8 +27,6 @@ export default function page() {
       ...formData,
       [name]: name === 'storageOption' ? value : checked,
     });
-
-    console.log(name, value, checked);
   };
 
   const handlesubmit = async (e: any) => {
@@ -39,14 +37,15 @@ export default function page() {
       const walletAddress =
         userWalletAddress || localStorage.getItem('userPublicAddress');
 
-      console.log(formData);
-
+      const userAccessToken =
+        userToken || window.localStorage.getItem('userAccessToken');
       await fetch(
-        `https://user-backend-402016.el.r.appspot.com/user/api/permissions/${walletAddress}`,
+        `http://localhost:8080/user/api/permissions/${walletAddress}`,
         {
           method: 'PATCH',
           headers: {
             'Content-type': 'application/json',
+            Authorization: `${userAccessToken}`,
           },
           body: JSON.stringify({
             browserData: formData.browserData,
@@ -61,7 +60,9 @@ export default function page() {
       ).then((response) => {
         toast.success('Updated permissions', { id: '1' });
         console.log(response);
-        getPermissions();
+        setTimeout(() => {
+          getPermissions();
+        }, 2000);
       });
 
       // You can display a succesFs message or redirect the user as needed
@@ -79,13 +80,10 @@ export default function page() {
     const walletAddress =
       userWalletAddress || localStorage.getItem('userPublicAddress');
     toast.loading('Fetching Permissions', { id: '2' });
-    await fetch(
-      `https://user-backend-402016.el.r.appspot.com/user/api/user/${walletAddress}`,
-      {
-        method: 'GET',
-        cache: 'no-cache',
-      }
-    )
+    await fetch(`http://localhost:8080/user/api/user/${walletAddress}`, {
+      method: 'GET',
+      cache: 'no-cache',
+    })
       .then((response) => response.json())
       .then((data) => {
         toast.success('Fetched Permissions', { id: '2' });

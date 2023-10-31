@@ -11,17 +11,21 @@ export default function SitesByVisits() {
   var h: number = 240;
   var w: number = 650;
   const [topSitesByTime, setTopSitesByTime] = useState([]);
-  const { userWalletAddress } = useContext(AppContext);
+  const { userWalletAddress, userToken } = useContext(AppContext);
   const walletAddress =
     userWalletAddress || window.localStorage.getItem('userPublicAddress');
 
   async function fetchTopSitesByTime() {
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
     toast.loading('Fetching top Sites', { id: '1' });
     await fetch(
-      `https://user-backend-402016.el.r.appspot.com/user/api/user-data/top-times/${walletAddress}`,
+      `http://localhost:8080/user/api/user-data/top-times/${walletAddress}`,
       {
         method: 'GET',
         cache: 'force-cache',
+
+        headers: { Authorization: `${userAccessToken}` },
       }
     )
       .then((response) => response.json())

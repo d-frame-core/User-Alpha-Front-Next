@@ -17,19 +17,17 @@ export default function Profile() {
     const walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
     toast.loading('Fetching User Details', { id: '1' });
-    await fetch(
-      `https://user-backend-402016.el.r.appspot.com/user/api/user/${walletAddress}`,
-      {
-        method: 'GET',
-        cache: 'no-cache',
-      }
-    )
+    await fetch(`http://localhost:8080/user/api/user/${walletAddress}`, {
+      method: 'GET',
+      cache: 'no-cache',
+    })
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);
         setUserToken(data.token);
+
         window.localStorage.setItem('userAccessToken', data.token);
-        console.log(data.user);
+        // console.log(data.user);
         toast.success('Fetched User Details', { id: '1' });
       })
       .catch((error) => {
