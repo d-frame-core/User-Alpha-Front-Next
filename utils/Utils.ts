@@ -2,7 +2,6 @@
 
 export const dframeAddress = '0x0B6163c61D095b023EC3b52Cc77a9099f6231FCC';
 
-// set the ABI for the DFT token contract
 export const dframeABI = [
   { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
   {

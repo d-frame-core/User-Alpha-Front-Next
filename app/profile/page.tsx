@@ -10,7 +10,7 @@ import React, { useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function Profile() {
-  const { userWalletAddress, userData, setUserData, setUserToken } =
+  const { userWalletAddress, userData, setUserData, setUserToken, userToken } =
     useContext(AppContext);
   const router = useRouter();
   async function getUserData() {
@@ -118,15 +118,17 @@ export default function Profile() {
 
     const walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
     const formData = new FormData();
     formData.append('profile-image', selectedFile);
-    await fetch(
-      `https://user-backend-402016.el.r.appspot.com/user/api/image/${walletAddress}`,
-      {
-        method: 'PATCH',
-        body: formData,
-      }
-    )
+    await fetch(`http://localhost:8080/user/api/image/${walletAddress}`, {
+      method: 'PATCH',
+
+      body: formData,
+
+      headers: { Authorization: `${userAccessToken}` },
+    })
       .then((response) => {
         toast.success('Updated Profile Image', { id: '4' });
         console.log(response);

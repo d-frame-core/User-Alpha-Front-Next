@@ -23,7 +23,7 @@ export default function SitesByVisits() {
       `http://localhost:8080/user/api/user-data/top-sites/${walletAddress}`,
       {
         method: 'GET',
-        cache: 'force-cache',
+        cache: 'no-cache',
 
         headers: { Authorization: `${userAccessToken}` },
       }

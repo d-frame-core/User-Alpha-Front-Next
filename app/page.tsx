@@ -46,24 +46,8 @@ const Home: React.FC = () => {
         const chainId = await window.ethereum.request({
           method: 'eth_chainId',
         });
-        // Check if the user is not connected to Polygon mainnet (chainId: "0x89" for Polygon mainnet)
         if (chainId !== '0x89') {
           try {
-            // await window.ethereum.request({
-            //   method: 'wallet_addEthereumChain',
-            //   params: [
-            //     {
-            //       chainId: '0x89',
-            //       chainName: 'Polygon Mainnet',
-            //       nativeCurrency: {
-            //         name: 'MATIC',
-            //         symbol: 'MATIC',
-            //         decimals: 18,
-            //       },
-            //       rpcUrls: ['https://polygon-mainnet.infura.io'],
-            //     },
-            //   ],
-            // });
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
               params: [{ chainId: '0x89' }],

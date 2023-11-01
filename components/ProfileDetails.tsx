@@ -29,7 +29,7 @@ const ProfileDetails: React.FC<ButtonProps> = ({ title, value, editable }) => {
   }
 
   const firebaseConfig = {
-    apiKey: 'AIzaSyAsX11BlepBimnAmN_RifD2-At63PMQzkk',
+    apiKey: process.env.FIREBASE_API,
     authDomain: 'user-frontend-alpha.firebaseapp.com',
     projectId: 'user-frontend-alpha',
     storageBucket: 'user-frontend-alpha.appspot.com',
