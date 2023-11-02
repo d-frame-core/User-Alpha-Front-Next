@@ -1,7 +1,6 @@
 /** @format */
 'use client';
 import Button from '@/components/Button';
-import MoreSurveys from '@/components/MoreSurveys';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
 import { useRouter } from 'next/navigation';
@@ -9,7 +8,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function Survey() {
-  const { userWalletAddress, userData, userToken, setToggleTab } =
+  const { userWalletAddress, userId, userToken, setToggleTab } =
     useContext(AppContext);
   const [unseenSurveys, setUnseenSurveys] = useState([]);
   const [particularSurveyData, setParticularSurveyData] = useState();
@@ -21,7 +20,7 @@ export default function Survey() {
     selectedOptions.current[currentQuestionIndex] =
       selectedOptions.current[currentQuestionIndex] || [];
     selectedOptions.current[currentQuestionIndex].push(option);
-    // Copy the previous selected options and add the current option
+
     if (
       currentQuestionIndex + 1 <
       (particularSurveyData as any).totalQues.length
@@ -64,7 +63,7 @@ export default function Survey() {
 
   async function updateSurveyStatus() {
     toast.loading('Submitting Survey', { id: '2' });
-    const userId = localStorage.getItem('dframeUserId');
+    const userIdD = userId || localStorage.getItem('dframeUserId');
 
     console.log('SELECTED FINAL', selectedOptions);
     let finalOptions = selectedOptions.current;
@@ -89,7 +88,7 @@ export default function Survey() {
         },
         body: JSON.stringify({
           options: options,
-          userId: userId,
+          userId: userIdD,
           publicAddress: walletAddress,
         }),
       }

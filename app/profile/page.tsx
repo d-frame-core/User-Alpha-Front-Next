@@ -32,6 +32,7 @@ export default function Profile() {
         setUserData(data.user);
         setUserToken(data.token);
         setUserId(data.user.id);
+        window.localStorage.setItem('dframeUserId', data.user.id);
         window.localStorage.setItem('userAccessToken', data.token);
         // console.log(data.user);
         toast.success('Fetched User Details', { id: '1' });
