@@ -46,7 +46,7 @@ export default function LineChartComponent(data: any) {
           />
           <Line
             type='monotone'
-            dataKey={data.type === 'daily' ? 'ad' : 'ads'}
+            dataKey={'ads'}
             stroke='#1DCE79'
             activeDot={{ r: 8 }}
           />

@@ -10,8 +10,14 @@ import React, { useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function Profile() {
-  const { userWalletAddress, userData, setUserData, setUserToken, userToken } =
-    useContext(AppContext);
+  const {
+    userWalletAddress,
+    userData,
+    setUserData,
+    setUserToken,
+    userToken,
+    setUserId,
+  } = useContext(AppContext);
   const router = useRouter();
   async function getUserData() {
     const walletAddress =
@@ -25,7 +31,7 @@ export default function Profile() {
       .then((data) => {
         setUserData(data.user);
         setUserToken(data.token);
-
+        setUserId(data.user.id);
         window.localStorage.setItem('userAccessToken', data.token);
         // console.log(data.user);
         toast.success('Fetched User Details', { id: '1' });

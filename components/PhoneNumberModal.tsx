@@ -12,10 +12,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Button from './Button';
 import {
   getAuth,
-  GoogleAuthProvider,
   RecaptchaVerifier,
   signInWithPhoneNumber,
-  signInWithPopup,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import toast from 'react-hot-toast';

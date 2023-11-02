@@ -38,17 +38,17 @@ export default function DailyRewards() {
         const summedValues = data.reduce(
           (accumulator: any, currentValue: any) => {
             accumulator.browserData += currentValue.browserData;
-            accumulator.ad += currentValue.ad;
+            accumulator.ads += currentValue.ads;
             accumulator.survey += currentValue.survey;
             accumulator.referral += currentValue.referral;
             return accumulator;
           },
-          { browserData: 0, ad: 0, survey: 0, referral: 0 }
+          { browserData: 0, ads: 0, survey: 0, referral: 0 }
         );
 
         // Pass summed values to the components
         setBrowserDataReward(summedValues.browserData);
-        setAdReward(summedValues.ad);
+        setAdReward(summedValues.ads);
         setSurveyReward(summedValues.survey);
         setReferralReward(summedValues.referral);
         toast.success('Fetched Daily Rewards', { id: '1' });

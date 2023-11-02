@@ -9,6 +9,7 @@ function AppContextProvider(props) {
   const [userWalletAddress, setUserWalletAddress] = useState('');
   const [userData, setUserData] = useState(null);
   const [userToken, setUserToken] = useState('');
+  const [userId, setUserId] = useState('');
 
   return (
     <AppContext.Provider
@@ -21,6 +22,8 @@ function AppContextProvider(props) {
         setUserData,
         userToken,
         setUserToken,
+        userId,
+        setUserId,
       }}>
       {props.children}
     </AppContext.Provider>
