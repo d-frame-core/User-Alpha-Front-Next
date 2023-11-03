@@ -1,15 +1,18 @@
 /** @format */
 'use client';
+import AddTagsModal from '@/components/AddTags';
+import Button from '@/components/Button';
 import KYCComponent from '@/components/KYCComponent';
 import ProfileDetails from '@/components/ProfileDetails';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function Profile() {
+  const [addTagsModal, setAddTagsModal] = useState(false);
   const {
     userWalletAddress,
     userData,
@@ -154,7 +157,7 @@ export default function Profile() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 overflow-y-auto border-2 border-blue-400 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[65vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 overflow-y-auto border-4 border-[#e3daf6] md:mx-auto md:mt-20 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[84vh] h-[65vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Profile</h1>
           <div className='flex md:flex-row flex-col justify-evenly w-full'>
@@ -222,7 +225,7 @@ export default function Profile() {
               </div>
             )}
           </div>
-          <div className='bg-white w-[85%] mx-auto mt-7 rounded-md p-3'>
+          <div className='bg-white w-[85%] mx-auto mt-2 rounded-md p-3'>
             {userData &&
               (userData.kyc1.status === 'UNSUBMITTED' ? (
                 <KYCComponent
@@ -245,25 +248,26 @@ export default function Profile() {
               ) : userData.kyc3.status === 'UNVERIFIED' &&
                 userData.kyc2.status === 'UNVERIFIED' &&
                 userData.kyc1.status === 'UNVERIFIED' ? (
-                <KYCComponent
-                  title='KYC Verification'
-                  description='Your KYC details are submitted but not verified yet'
-                  button='default'
-                />
+                <></>
               ) : (
-                <KYCComponent
-                  title='KYC Verification'
-                  description='Your KYC details are Verified '
-                  button='default'
-                />
+                <></>
               ))}
-            <KYCComponent
-              title='KYC Verification'
-              description='Your KYC details are Verified '
-              button='default'
+          </div>
+          <div className='bg-white w-[85%] mx-auto my-4 rounded-md p-2 flex flex-col text-center items-center gap-1'>
+            <div className='text-xl font-semibold'>User Tags</div>
+            <div className='text-sm'>
+              These tags help us to show you personalized ads
+            </div>
+            <Button
+              content={'Add Tags'}
+              onClick={() => setAddTagsModal(true)}
             />
           </div>
         </div>
+        <AddTagsModal
+          open={addTagsModal}
+          onClose={() => setAddTagsModal(false)}
+        />
       </div>
     </div>
   );
