@@ -271,7 +271,7 @@ export default function KYC2() {
               KYC Level-2
             </h1>
             <div
-              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center italic text-3xl font-semibold
+              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center text-3xl
                    '>
               <Image
                 src={'/assets/success.svg'}

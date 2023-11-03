@@ -110,6 +110,7 @@ export default function Survey() {
   }
 
   async function fetchUnseenSurveys() {
+    toast.loading('Fetching Unseen Surveys', { id: '1' });
     const walletAddress =
       userWalletAddress || localStorage.getItem('userPublicAddress');
     const userAccessToken =
@@ -132,12 +133,16 @@ export default function Survey() {
         if (data !== null) {
           setAllSurveyData(data);
           setParticularSurveyData(data[data.length - 1]);
-          console.log('UNSEEN DATA', data);
+          toast.success('Fetched Unseen Surveys', { id: '1' });
         }
       })
       .catch((error) => {
         console.error(error);
+        toast.loading('Error Fetching Unseen Surveys', { id: '1' });
       });
+    setTimeout(() => {
+      toast.remove();
+    }, 1000);
   }
 
   useEffect(() => {
@@ -197,7 +202,7 @@ export default function Survey() {
                 </div>
               </div>
             ) : (
-              <div className='bg-white md:h-[57vh] h-[25vh] md:w-1/2 w-full rounded-md md:ml-12 flex text-center justify-center items-center text-3xl italic'>
+              <div className='bg-white md:h-[57vh] h-[25vh] md:w-1/2 w-full rounded-md md:ml-12 flex text-center justify-center items-center text-3xl'>
                 **No New Surveys**
               </div>
             )}
@@ -232,7 +237,7 @@ export default function Survey() {
                   ))}
                 </div>
               ) : (
-                <div className='bg-white md:h-[40vh] h-[20vh] flex justify-center items-center text-xl italic rounded-md'>
+                <div className='bg-white md:h-[40vh] h-[20vh] flex justify-center items-center text-xl rounded-md'>
                   **No New Surveys**
                 </div>
               )}

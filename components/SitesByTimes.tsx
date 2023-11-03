@@ -63,23 +63,28 @@ export default function SitesByVisits() {
       <div className='md:text-3xl text-4xl font-semibold'>
         Top Sites By Time
       </div>
-      {topSitesByTime && (
-        <div className='md:-mt-5 md:block hidden'>
-          {Charts(topSitesByTime as any[], 'time', h, w, ma)}
+      {topSitesByTime.length > 0 ? (
+        <>
+          <div className='md:-mt-5 md:block hidden'>
+            {Charts(topSitesByTime as any[], 'time', h, w, ma)}
+          </div>
+          <div className='bg-white h-[30vh] md:mt-3 mt-10 w-full text-sm overflow-y-auto'>
+            {topSitesByTime.map((item: any) => {
+              const formattedTime = formatTime(item.time);
+              return (
+                <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>
+                  <div>{item.name}</div>
+                  <div>{formattedTime}</div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <div className='w-full h-full flex justify-center items-center text-3xl'>
+          **Minimum 6 hours of data needed**
         </div>
       )}
-      <div className='bg-white h-[30vh] md:mt-3 mt-10 w-full text-sm overflow-y-auto'>
-        {topSitesByTime &&
-          topSitesByTime.map((item: any) => {
-            const formattedTime = formatTime(item.time);
-            return (
-              <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>
-                <div>{item.name}</div>
-                <div>{formattedTime}</div>
-              </div>
-            );
-          })}
-      </div>
     </div>
   );
 }
