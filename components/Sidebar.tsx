@@ -2,7 +2,6 @@
 
 'use client';
 import React, { useContext, useState } from 'react';
-import Button from './Button';
 import { useRouter } from 'next/navigation';
 import { AppContext } from '@/context/Context';
 import Navbar from './Navbar';
@@ -13,7 +12,7 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import PollIcon from '@mui/icons-material/Poll';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
-import Link from 'next/link';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 const Sidebar: React.FC = () => {
   const router = useRouter();
   const { toggleTab, setToggleTab } = useContext(AppContext);
@@ -36,9 +35,9 @@ const Sidebar: React.FC = () => {
   return (
     // <div className='flex'>
     <div
-      className={`bg-gradient-to-b from-[rgba(92,15,255,.66)] to-pink-300 text-white ${
+      className={`bg-gradient-to-b from-[rgba(92,15,255,.66)] to-pink-300 text-white h-screen  ${
         menuOpen ? 'md:w-[18%] w-[50vw]' : 'md:w-[18%] w-0'
-      } h-screen`}>
+      } `}>
       {/* Hamburger Icon (visible on mobile screens) */}
       <div className='md:hidden'>
         <button
@@ -63,7 +62,7 @@ const Sidebar: React.FC = () => {
       {/* Middle Section with specified background color (visible on medium and large screens) */}
       <div className={`mb-4 bg-blue-950 ${menuOpen ? '' : 'hidden'}`}>
         <div
-          className={`flex justify-start ml-6 pt-2 my-2 cursor-pointer`}
+          className={`flex justify-start ml-6 pt-2 mt-1 cursor-pointer`}
           onClick={() => {
             setToggleTab('profile');
             router.push('/profile');
@@ -81,7 +80,7 @@ const Sidebar: React.FC = () => {
           )}
         </div>
         <div
-          className={`flex justify-start ml-6 pt-2 my-2 cursor-pointer`}
+          className={`flex justify-start ml-6 pt-2 mt-1 cursor-pointer`}
           onClick={() => {
             setToggleTab('wallet');
             router.push('/wallet');
@@ -99,7 +98,7 @@ const Sidebar: React.FC = () => {
           )}
         </div>
         <div
-          className={`flex justify-start ml-6 pt-2 my-2 cursor-pointer`}
+          className={`flex justify-start ml-6 pt-2 mt-1 cursor-pointer`}
           onClick={() => {
             setToggleTab('permissions');
             router.push('/permissions');
@@ -117,7 +116,7 @@ const Sidebar: React.FC = () => {
           )}
         </div>
         <div
-          className={`flex justify-start ml-6 pt-2 my-2 cursor-pointer`}
+          className={`flex justify-start ml-6 pt-2 mt-1 cursor-pointer`}
           onClick={() => {
             setToggleTab('rewards');
             router.push('/rewards');
@@ -135,7 +134,7 @@ const Sidebar: React.FC = () => {
           )}
         </div>
         <div
-          className={`flex justify-start ml-6 pt-2 my-2 cursor-pointer`}
+          className={`flex justify-start ml-6 pt-2 mt-1 cursor-pointer`}
           onClick={() => {
             setToggleTab('analytics');
             router.push('/analytics');
@@ -153,7 +152,7 @@ const Sidebar: React.FC = () => {
           )}
         </div>
         <div
-          className={`flex justify-start ml-6 pt-2 my-2 cursor-pointer`}
+          className={`flex justify-start ml-6 pt-2 mt-1 cursor-pointer`}
           onClick={() => {
             setToggleTab('survey');
             router.push('/survey');
@@ -171,7 +170,7 @@ const Sidebar: React.FC = () => {
           )}
         </div>
         <div
-          className={`flex justify-start ml-6 py-2 my-2 cursor-pointer`}
+          className={`flex justify-start ml-6 py-2 mt-1 cursor-pointer`}
           onClick={() => {
             setToggleTab('data');
             router.push('/data');
@@ -185,6 +184,24 @@ const Sidebar: React.FC = () => {
             <div className='pl-7 flex gap-4'>
               <AdsClickIcon />
               Data
+            </div>
+          )}
+        </div>
+        <div
+          className={`flex justify-start ml-6 py-2 mt-1 cursor-pointer`}
+          onClick={() => {
+            setToggleTab('dex');
+            router.push('/dex');
+          }}>
+          {toggleTab == 'dex' ? (
+            <div className='bg-white w-full gap-4 rounded-l text-black flex justify-start pl-7 py-1'>
+              <StorefrontIcon />
+              Sell DFT
+            </div>
+          ) : (
+            <div className='pl-7 flex gap-4'>
+              <StorefrontIcon />
+              Sell DFT
             </div>
           )}
         </div>
@@ -202,7 +219,7 @@ const Sidebar: React.FC = () => {
         <p className='pt-8 text-sm'>Need Help with D Frame?</p>
         <div>
           <div
-            className='rounded-lg text-sm px-2 py-1 my-2 text-center text-white bg-[#017EFA] w-[80%] m-auto cursor-pointer'
+            className='rounded-lg text-sm px-2 py-1 mt-1 text-center text-white bg-[#017EFA] w-[80%] m-auto cursor-pointer'
             onClick={() => {
               setToggleTab('help');
               router.push('/help');
@@ -212,7 +229,7 @@ const Sidebar: React.FC = () => {
         </div>
       </div>
       <div
-        className='text-center underline mt-5 cursor-pointer'
+        className='text-center underline mb-4 mt-2 cursor-pointer'
         onClick={() => {
           setToggleTab('learn-more');
           router.push('/learn-more');

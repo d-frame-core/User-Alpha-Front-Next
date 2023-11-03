@@ -154,7 +154,7 @@ export default function Profile() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[65vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 overflow-y-auto border-2 border-blue-400 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[65vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Profile</h1>
           <div className='flex md:flex-row flex-col justify-evenly w-full'>
@@ -224,27 +224,27 @@ export default function Profile() {
           </div>
           <div className='bg-white w-[85%] mx-auto mt-7 rounded-md p-3'>
             {userData &&
-              (userData.kyc1.status === 'unsubmitted' ? (
+              (userData.kyc1.status === 'UNSUBMITTED' ? (
                 <KYCComponent
                   title='KYC Verification'
                   description='The verification makes us aware that you are a valid user. It may take up to 24 hours.'
                   button='kyc1'
                 />
-              ) : userData.kyc2.status === 'unsubmitted' ? (
+              ) : userData.kyc2.status === 'UNSUBMITTED' ? (
                 <KYCComponent
                   title='KYC Verification'
                   description='The verification makes us aware that you are a valid user. It may take up to 24 hours.'
                   button='kyc2'
                 />
-              ) : userData.kyc3.status === 'unsubmitted' ? (
+              ) : userData.kyc3.status === 'UNSUBMITTED' ? (
                 <KYCComponent
                   title='KYC Verification'
                   description='The verification makes us aware that you are a valid user. It may take up to 24 hours.'
                   button='kyc3'
                 />
-              ) : userData.kyc3.status === 'unverified' &&
-                userData.kyc2.status === 'unverified' &&
-                userData.kyc1.status === 'unverified' ? (
+              ) : userData.kyc3.status === 'UNVERIFIED' &&
+                userData.kyc2.status === 'UNVERIFIED' &&
+                userData.kyc1.status === 'UNVERIFIED' ? (
                 <KYCComponent
                   title='KYC Verification'
                   description='Your KYC details are submitted but not verified yet'
@@ -257,6 +257,11 @@ export default function Profile() {
                   button='default'
                 />
               ))}
+            <KYCComponent
+              title='KYC Verification'
+              description='Your KYC details are Verified '
+              button='default'
+            />
           </div>
         </div>
       </div>

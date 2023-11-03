@@ -185,28 +185,34 @@ export default function Wallet() {
               <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                 Transactions
               </div>
-              <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto min-h-[47vh] h-[47vh]'>
-                {pastTransactions.map((event: any) => {
-                  if (
-                    event.returnValues.from.toString().toLowerCase() ===
-                    walletAddress.toString().toLowerCase()
-                  ) {
-                    return (
-                      <TransactionDetails
-                        event={event}
-                        sent={true}
-                      />
-                    );
-                  } else {
-                    return (
-                      <TransactionDetails
-                        event={event}
-                        sent={false}
-                      />
-                    );
-                  }
-                })}
-              </div>
+              {pastTransactions.length > 0 ? (
+                <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto min-h-[47vh] h-[47vh]'>
+                  {pastTransactions.map((event: any) => {
+                    if (
+                      event.returnValues.from.toString().toLowerCase() ===
+                      walletAddress.toString().toLowerCase()
+                    ) {
+                      return (
+                        <TransactionDetails
+                          event={event}
+                          sent={true}
+                        />
+                      );
+                    } else {
+                      return (
+                        <TransactionDetails
+                          event={event}
+                          sent={false}
+                        />
+                      );
+                    }
+                  })}
+                </div>
+              ) : (
+                <div className='border-b-2 border-gray-200 w-full text-2xl flex justify-center items-center text-center min-h-[47vh] h-[47vh]'>
+                  **No Past Transactions**
+                </div>
+              )}
             </div>
             <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 gap-4'>
               <div className='bg-white w-full text-center rounded-lg  flex-col py-4 md:text-lg text-2xl '>
