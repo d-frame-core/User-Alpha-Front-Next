@@ -1,10 +1,12 @@
 /** @format */
 'use client';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from './Button';
 import { AppContext } from '@/context/Context';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 interface AddTagsModalProps {
   open: boolean;
@@ -12,19 +14,149 @@ interface AddTagsModalProps {
 }
 
 const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
-  const { userData } = useContext(AppContext);
+  const {
+    userData,
+    userWalletAddress,
+    userToken,
+    setUserData,
+    setUserToken,
+    setUserId,
+  } = useContext(AppContext);
   const [inputValue, setInputValue] = useState('');
+  const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  const handleButtonClick = () => {
-    // Define the functionality for the button click here
-    console.log('Button clicked');
-    // You can add your functionality here
-    onClose();
-  };
+  async function addTag() {
+    if (!inputValue) {
+      toast.error('Enter a valid tag');
+      setTimeout(() => {
+        toast.remove();
+      }, 1000);
+      return;
+    }
+    toast.loading('Adding Tag', { id: '1' });
+    const walletAddress =
+      userWalletAddress || localStorage.getItem('userPublicAddress');
+
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
+    await fetch(`http://localhost:8080/user/api/add-tag/${walletAddress}`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `${userAccessToken}`,
+      },
+      body: JSON.stringify({
+        tag: inputValue,
+      }),
+    })
+      .then((response) => {
+        toast.success('Added Tag', { id: '1' });
+        console.log(response);
+        getUserData();
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        toast.error('Error Adding DFT', { id: '1' });
+      });
+    setTimeout(() => {
+      setInputValue('');
+      onClose();
+      toast.remove();
+    }, 1000);
+  }
+
+  async function getUserData() {
+    const walletAddress =
+      userWalletAddress || window.localStorage.getItem('userPublicAddress');
+
+    await fetch(`http://localhost:8080/user/api/user/${walletAddress}`, {
+      method: 'GET',
+      cache: 'no-cache',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.user);
+        setUserToken(data.token);
+        setUserId(data.user.id);
+        window.localStorage.setItem('dframeUserId', data.user.id);
+        window.localStorage.setItem('userAccessToken', data.token);
+        // console.log(data.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    getUserData();
+    const handleChainChange = async () => {
+      const chainId = await window.ethereum.request({
+        method: 'eth_chainId',
+      });
+      if (chainId !== '0x89') {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x89' }],
+          });
+        } catch (error) {
+          console.error('Error switching to Polygon mainnet', error);
+        }
+      }
+    };
+    handleChainChange();
+  }, []);
+
+  useEffect(() => {
+    if (window.ethereum) {
+      const handleChainChange = async () => {
+        const chainId = await window.ethereum.request({
+          method: 'eth_chainId',
+        });
+        if (chainId !== '0x89') {
+          try {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x89' }],
+            });
+          } catch (error) {
+            console.error('Error switching to Polygon mainnet', error);
+          }
+        }
+      };
+
+      const handleDisconnect = () => {
+        // Redirect on disconnect
+        router.push('/');
+      };
+
+      const handleAccountChange = () => {
+        // Redirect on account change
+        router.push('/');
+      };
+
+      if (window.ethereum) {
+        window.ethereum.on('chainChanged', handleChainChange);
+        window.ethereum.on('disconnect', handleDisconnect);
+        window.ethereum.on('accountsChanged', handleAccountChange);
+
+        return () => {
+          window.ethereum.removeListener('chainChanged', handleChainChange);
+          window.ethereum.removeListener('disconnect', handleDisconnect);
+          window.ethereum.removeListener(
+            'accountsChanged',
+            handleAccountChange
+          );
+        };
+      }
+
+      handleChainChange();
+    }
+  }, []);
 
   return (
     <Dialog
@@ -40,10 +172,14 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
         </div>
       </DialogTitle>
       <DialogContent>
-        {userData && userData.tags.userTags.length > 1 && (
+        {userData && userData.tags.userTags.length > 0 && (
           <div className='mb-4 text-center flex justify-center items-center gap-3'>
-            {userData.tags.dailyTags.map((item: any) => (
-              <div key={item}>{item}</div>
+            {userData.tags.userTags.map((item: any, index: any) => (
+              <div
+                key={index}
+                className='px-2 border border-purple-400 rounded'>
+                {item}
+              </div>
             ))}
           </div>
         )}
@@ -55,7 +191,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
               <div className='w-11/12 mx-auto text-center'>
                 <input
                   type='text'
-                  placeholder='Enter something'
+                  placeholder='Enter your tag'
                   value={inputValue}
                   onChange={handleInputChange}
                   className='border rounded-lg py-1 px-3 w-full'
@@ -63,13 +199,16 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
               </div>
               <div className='flex mt-4 justify-end'>
                 <Button
-                  content={'Perform Action'}
-                  onClick={handleButtonClick}
+                  content={'Add Tag'}
+                  onClick={addTag}
                 />
               </div>
             </div>
           )}
       </DialogContent>
+      <div className='py-3 border-t-2 border-gray-200 text-center text-gray-500 text-sm'>
+        **You can add upto 5 personalized tags**
+      </div>
     </Dialog>
   );
 };

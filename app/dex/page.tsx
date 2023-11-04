@@ -324,7 +324,7 @@ export default function SellDFT() {
                 <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                   List DFT for Sale
                 </div>
-                {userData && userData.dftForSale.amount < 1000 ? (
+                {userData && userData?.dftForSale.amount < 1000 ? (
                   <>
                     <div className='md:my-2 my-4 flex flex-col gap-2'>
                       Amount to sell :
@@ -334,7 +334,7 @@ export default function SellDFT() {
                         onChange={(e) => setSendDFTAmount(e.target.value)}
                       />
                     </div>
-                    <div className='mt-8'>
+                    <div className='mt-6'>
                       <button
                         className={` font-bold py-2 px-4 rounded ${
                           eligible
@@ -362,7 +362,7 @@ export default function SellDFT() {
                         />
                       ) : (
                         <div className='text-lg text-blue-400'>
-                          {userData.dftForSale.amount} DFT
+                          {userData?.dftForSale.amount} DFT
                         </div>
                       )}
                     </div>
@@ -382,6 +382,11 @@ export default function SellDFT() {
                     </div>
                   </>
                 )}
+                <div
+                  className='mt-3
+                '>
+                  Minimum 1000 DFT balance required to sell
+                </div>
               </div>
             </div>
           </div>

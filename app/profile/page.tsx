@@ -157,7 +157,7 @@ export default function Profile() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 overflow-y-auto border-4 border-[#e3daf6] md:mx-auto md:mt-20 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[84vh] h-[65vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 overflow-y-auto border-8 border-[#e3daf6] md:mx-auto md:mt-20 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[84vh] h-[65vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Profile</h1>
           <div className='flex md:flex-row flex-col justify-evenly w-full'>
@@ -197,12 +197,16 @@ export default function Profile() {
                 <ProfileDetails
                   title='Phone Number'
                   value={userData?.kyc1.details.phoneNumber}
-                  editable={true}
+                  editable={
+                    userData?.kyc1.status === 'UNSUBMITTED' ? false : true
+                  }
                 />
                 <ProfileDetails
                   title='Email'
                   value={userData?.kyc1.details.email}
-                  editable={true}
+                  editable={
+                    userData?.kyc1.status === 'UNSUBMITTED' ? false : true
+                  }
                 />
                 <ProfileDetails
                   title='Address'
@@ -253,7 +257,7 @@ export default function Profile() {
                 <></>
               ))}
           </div>
-          <div className='bg-white w-[85%] mx-auto my-4 rounded-md p-2 flex flex-col text-center items-center gap-1'>
+          <div className='bg-white w-[85%] mx-auto rounded-md p-1 mt-2 flex flex-col text-center items-center gap-1'>
             <div className='text-xl font-semibold'>User Tags</div>
             <div className='text-sm'>
               These tags help us to show you personalized ads
