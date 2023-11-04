@@ -59,7 +59,7 @@ export default function SitesByVisits() {
     }
   }
   return (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col w-full justify-between gap-4'>
       <div className='md:text-3xl text-4xl font-semibold'>
         Top Sites By Time
       </div>
@@ -68,7 +68,7 @@ export default function SitesByVisits() {
           <div className='md:-mt-5 md:block hidden'>
             {Charts(topSitesByTime as any[], 'time', h, w, ma)}
           </div>
-          <div className='bg-white h-[30vh] md:mt-3 mt-10 w-full text-sm overflow-y-auto'>
+          <div className='bg-white w-full text-sm overflow-y-auto'>
             {topSitesByTime.map((item: any) => {
               const formattedTime = formatTime(item.time);
               return (

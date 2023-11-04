@@ -46,7 +46,7 @@ export default function SitesByVisits() {
     fetchTopSitesByVisits();
   }, []);
   return (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col justify-between w-full gap-4'>
       <div className='md:text-3xl text-4xl font-semibold'>
         Top Sites Visited
       </div>
@@ -55,7 +55,7 @@ export default function SitesByVisits() {
           <div className='md:-mt-5 md:block hidden'>
             {Charts(topSitesByVisits as any[], 'visits', h, w, ma)}
           </div>
-          <div className='bg-white h-[30vh] md:mt-3 mt-10 text-sm w-full overflow-y-auto'>
+          <div className='bg-white text-sm w-full overflow-y-auto'>
             {topSitesByVisits &&
               topSitesByVisits.map((item: any) => (
                 <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>

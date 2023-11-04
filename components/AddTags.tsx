@@ -158,6 +158,39 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
     }
   }, []);
 
+  async function deleteTag(item: String) {
+    toast.loading('Deleting Tag', { id: '3' });
+    const walletAddress =
+      userWalletAddress || localStorage.getItem('userPublicAddress');
+
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
+    await fetch(`http://localhost:8080/user/api/delete-tag/${walletAddress}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `${userAccessToken}`,
+      },
+      body: JSON.stringify({
+        tag: String(item),
+      }),
+    })
+      .then((response) => {
+        toast.success('Deleted Tag', { id: '3' });
+        console.log(response);
+        getUserData();
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        toast.error('Error Deleting DFT', { id: '3' });
+      });
+    setTimeout(() => {
+      setInputValue('');
+      onClose();
+      toast.remove();
+    }, 1000);
+  }
+
   return (
     <Dialog
       open={open}
@@ -177,8 +210,19 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
             {userData.tags.userTags.map((item: any, index: any) => (
               <div
                 key={index}
-                className='px-2 border border-purple-400 rounded'>
-                {item}
+                className='relative h-10 pt-2'>
+                <div
+                  className='px-2 border border-purple-400 rounded'
+                  style={{ display: 'inline-block' }}>
+                  {item}
+                </div>
+                <IconButton
+                  size='small'
+                  onClick={() => deleteTag(item)}
+                  className='absolute -top-0 -right-1'
+                  style={{ backgroundColor: 'red', padding: '2px' }}>
+                  <CloseIcon style={{ fontSize: 12, color: 'white' }} />
+                </IconButton>
               </div>
             ))}
           </div>
