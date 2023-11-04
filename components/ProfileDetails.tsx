@@ -86,8 +86,8 @@ const ProfileDetails: React.FC<ButtonProps> = ({ title, value, editable }) => {
     }, 1000);
   };
   return (
-    <div className='flex md:text-lg md:text-left text-2xl md:my-3 my-9'>
-      <div className='md:w-[30%] w-[36%]'>{title}</div>
+    <div className='flex md:text-lg md:text-left text-2xl md:my-3 my-10'>
+      <div className='md:w-[30%] w-[38%]'>{title}</div>
       <div className='md:w-[5%] w-[2%]'>:</div>
       <div className='w-[50%] flex items-center'>
         {value}
@@ -99,6 +99,7 @@ const ProfileDetails: React.FC<ButtonProps> = ({ title, value, editable }) => {
       </div>
       <PhoneNumberModal
         open={phoneNumberModal}
+        title='Update'
         onClose={() => setPhoneNumberModal(false)}
       />
     </div>

@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 export default function SitesByTags() {
   const ma = useMediaQuery('(min-width:880px)');
   var h: number = 240;
-  var w: number = 550;
+  var w: number = 640;
   const [topSitesByTags, setTopSitesByTags] = useState([
     { name: 'binance.com', visits: 5 },
     { name: 'mexc.com', visits: 10 },
@@ -89,12 +89,12 @@ export default function SitesByTags() {
         Top Sites by Tags
       </div>
       {topSitesByTags.length > 0 ? (
-        <div className='flex flex-row justify-between w-full border-blue-500'>
-          <div className='flex flex-col gap-5 border border-yellow-500'>
-            <div className='md:-mt-5 md:block hidden border border-red-600'>
+        <div className='flex flex-row justify-between w-full '>
+          <div className='flex flex-col gap-5 '>
+            <div className='md:-mt-5 md:block hidden '>
               {Charts(topSitesByTags as any[], 'visits', h, w, ma)}
             </div>
-            <div className='bg-white text-sm w-full overflow-y-auto border border-green-600 h-40'>
+            <div className='bg-white text-sm w-full overflow-y-auto  h-40'>
               {topSitesByTags &&
                 topSitesByTags.map((item: any) => (
                   <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>
@@ -104,9 +104,9 @@ export default function SitesByTags() {
                 ))}
             </div>
           </div>
-          <div className='flex items-center justify-evenly text-xl flex-col border border-blue-500 w-1/4 max-h-[85%] overflow-y-auto p-2 '>
+          <div className='flex text-xl flex-col w-[10%] max-h-[85%] overflow-y-auto p-2 pr-0 m-0 '>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'web3'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
@@ -115,49 +115,49 @@ export default function SitesByTags() {
               Web3
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'sports'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
               }`}
               onClick={() => setToggleMenu('sports')}>
-              Sports
+              sports
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'social'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
               }`}
               onClick={() => setToggleMenu('social')}>
-              Social
+              social
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'food'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
               }`}
               onClick={() => setToggleMenu('food')}>
-              Food
+              food
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'news'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
               }`}
               onClick={() => setToggleMenu('news')}>
-              News
+              news
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'stocks'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
               }`}
               onClick={() => setToggleMenu('stocks')}>
-              Stocks
+              stocks
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@ export default function SitesByTags() {
 /**
  *      <div className='flex h-10 items-center justify-center text-xl'>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'web3'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
@@ -181,7 +181,7 @@ export default function SitesByTags() {
               Web3
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'sports'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
@@ -190,7 +190,7 @@ export default function SitesByTags() {
               Sports
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'social'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
@@ -199,7 +199,7 @@ export default function SitesByTags() {
               Social
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'food'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
@@ -208,7 +208,7 @@ export default function SitesByTags() {
               Food
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'news'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'
@@ -217,7 +217,7 @@ export default function SitesByTags() {
               News
             </div>
             <div
-              className={`w-full border flex items-center justify-center cursor-pointer h-full ${
+              className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'stocks'
                   ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
                   : 'bg-[rgba(92,15,255,.66)] text-white'

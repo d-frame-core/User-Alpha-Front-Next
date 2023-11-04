@@ -21,7 +21,7 @@ export default function Data() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='flex flex-col justify-between w-4/5 mx-auto mt-16 pb-4 px-auto'>
+      <div className='flex flex-col md:justify-between w-4/5 mx-auto mt-16 md:pb-4 px-auto'>
         <div className='flex h-14 items-center justify-center text-xl'>
           <div
             className={`w-[33.4%] border flex items-center justify-center cursor-pointer h-full ${
@@ -51,7 +51,7 @@ export default function Data() {
             Call Data
           </div>
         </div>
-        <div className='mx-5 w-11/12 md:mx-auto bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[70vh]'>
+        <div className='mx-5 w-11/12 md:mx-auto bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[40vh] md:mt-0 mt-16'>
           {contentComponent}
         </div>
       </div>

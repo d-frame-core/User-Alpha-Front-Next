@@ -104,11 +104,13 @@ export default function page() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-28 bg-[#e3daf6] rounded flex flex-col p-5 md:h-[75vh] h-[60vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex flex-col p-5 md:h-[80vh] h-[60vh]'>
         <div className='w-full'>
-          <h1 className='text-3xl font-semibold mb-4'>Permissions</h1>
+          <h1 className='md:text-3xl font-semibold mb-4 text-5xl'>
+            Permissions
+          </h1>
         </div>
-        <div className='flex flex-col md:gap-4 gap-10'>
+        <div className='flex flex-col md:gap-6 gap-10'>
           <div className='flex items-center md:text-lg text-2xl '>
             <h2 className='md:w-[18%] w-[30%]'>Browser Data</h2>
             <div className='w-[2%]'>:</div>

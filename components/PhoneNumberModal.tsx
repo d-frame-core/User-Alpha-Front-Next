@@ -21,12 +21,14 @@ import { AppContext } from '@/context/Context';
 import { useRouter } from 'next/navigation';
 interface PhoneNumberModalProps {
   open: boolean;
+  title: string;
   onClose: () => void;
 }
 
 const PhoneNumberModal: React.FC<PhoneNumberModalProps> = ({
   open,
   onClose,
+  title,
 }) => {
   const { userData, userWalletAddress, userToken } = useContext(AppContext);
   const router = useRouter();
@@ -134,7 +136,7 @@ const PhoneNumberModal: React.FC<PhoneNumberModalProps> = ({
       <DialogTitle>
         <div className='flex justify-between items-center pb-2 border-b-2 border-gray-200'>
           <div className='md:text-xl text-2xl font-semibold'>
-            Change Phone Number
+            {title} Phone Number
           </div>
           <IconButton onClick={onClose}>
             <CloseIcon />

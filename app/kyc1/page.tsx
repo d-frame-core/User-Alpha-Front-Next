@@ -65,7 +65,7 @@ export default function KYC1() {
     <div className='flex'>
       <Sidebar />
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[82vh] h-[55vh]'>
-        {userData?.kyc1.status === 'UNSUBMITTED' ? (
+        {userData?.kyc1.status !== 'UNSUBMITTED' ? (
           <div className='w-full'>
             <h1 className='md:text-3xl font-semibold mb-4 text-5xl'>
               KYC Level-1
@@ -97,7 +97,7 @@ export default function KYC1() {
                 placeHolder='Enter your active email id'
               />
             </div>
-            <div className='w-11/12 mx-auto md:my-4 my-10'>
+            <div className='w-11/12 mx-auto md:my-2 my-10'>
               <Stepper
                 activeStep={0}
                 alternativeLabel>
@@ -108,7 +108,7 @@ export default function KYC1() {
                 ))}
               </Stepper>
             </div>
-            <div className='text-center'>
+            <div className='text-center mt-4'>
               <Button
                 content={'Submit'}
                 onClick={submitKYC1}

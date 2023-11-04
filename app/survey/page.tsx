@@ -157,7 +157,7 @@ export default function Survey() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-28 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[70vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[70vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl font-semibold pb-4 text-5xl'>Survey</h1>
           <div className='flex md:flex-row flex-col items-center gap-10 mt-5'>

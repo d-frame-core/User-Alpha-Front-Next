@@ -177,16 +177,16 @@ export default function Wallet() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-28 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[93vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 h-[80vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Wallet</h1>
           <div className='flex md:flex-row flex-col justify-evenly '>
-            <div className='bg-white h-[90%] p-3 rounded-lg md:w-2/5 mx-auto w-11/12 flex justify-center items-center flex-col'>
+            <div className='bg-white p-3 rounded-lg md:w-2/5 mx-auto w-11/12 flex justify-center items-center flex-col'>
               <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                 Transactions
               </div>
               {pastTransactions.length > 0 ? (
-                <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto min-h-[47vh] h-[47vh]'>
+                <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto md:h-80 md:max-h-80 h-96 max-h-96'>
                   {pastTransactions.map((event: any) => {
                     if (
                       event.returnValues.from.toString().toLowerCase() ===
@@ -209,12 +209,12 @@ export default function Wallet() {
                   })}
                 </div>
               ) : (
-                <div className='border-b-2 border-gray-200 w-full text-2xl flex justify-center items-center text-center min-h-[47vh] h-[47vh]'>
+                <div className='border-b-2 border-gray-200 w-full text-2xl flex justify-center items-center text-center h-80 max-h-80'>
                   **No Past Transactions**
                 </div>
               )}
             </div>
-            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 gap-4'>
+            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 gap-8'>
               <div className='bg-white w-full text-center rounded-lg  flex-col py-4 md:text-lg text-2xl '>
                 <div className='mb-4'>
                   {' '}

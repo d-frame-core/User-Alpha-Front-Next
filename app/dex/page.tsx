@@ -266,9 +266,11 @@ export default function SellDFT() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-28 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[93vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[93vh]'>
         <div className='w-full'>
-          <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Sell DFT</h1>
+          <h1 className='md:text-3xl text-5xl font-semibold md:mb-4 mb-10'>
+            Sell DFT
+          </h1>
           <div className='flex md:flex-row flex-col justify-evenly '>
             <div className='bg-white h-[90%] p-3 rounded-lg md:w-2/5 mx-auto w-11/12 flex justify-center items-center flex-col'>
               <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
@@ -298,12 +300,12 @@ export default function SellDFT() {
                   })}
                 </div>
               ) : (
-                <div className='border-b-2 border-gray-200 w-full text-2xl flex justify-center items-center text-center min-h-[47vh] h-[47vh]'>
+                <div className='border-b-2 border-gray-200 w-full text-2xl flex justify-center items-center text-center md:h-80 md:max-h-80 h-96 max-h-96'>
                   **No Past Transactions**
                 </div>
               )}
             </div>
-            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 gap-4'>
+            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 md:gap-4 gap-10'>
               <div className='bg-white w-full text-center rounded-lg  flex-col py-4 md:text-lg text-2xl '>
                 <div className='mb-4'>
                   {' '}
@@ -352,7 +354,7 @@ export default function SellDFT() {
                   </>
                 ) : (
                   <>
-                    <div className='md:my-2 my-4 flex flex-col gap-2 text-xl'>
+                    <div className='md:my-2 my-4 flex flex-col gap-2 md:text-xl text-3xl'>
                       Your Listing
                       {edit ? (
                         <input
@@ -361,7 +363,7 @@ export default function SellDFT() {
                           onChange={(e) => setSendDFTAmount(e.target.value)}
                         />
                       ) : (
-                        <div className='text-lg text-blue-400'>
+                        <div className='md:text-lg text-2xl text-blue-400'>
                           {userData?.dftForSale.amount} DFT
                         </div>
                       )}

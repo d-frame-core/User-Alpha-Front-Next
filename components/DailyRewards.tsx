@@ -68,7 +68,7 @@ export default function DailyRewards() {
       <div className='md:text-3xl text-5xl font-semibold pb-5'>
         Daily Rewards
       </div>
-      <div className='md:h-[60vh] h-[30vh]'>
+      <div className='md:h-3/4 md:block hidden'>
         {dailyRewards && (
           <LineChartComponent
             data={dailyRewards}
@@ -76,7 +76,7 @@ export default function DailyRewards() {
           />
         )}
       </div>
-      <div className='bg-white md:h-[30vh] w-full md:text-sm text-2xl overflow-y-auto mt-10 md:mt-0'>
+      <div className='bg-white  w-full md:text-sm text-2xl overflow-y-auto mt-40 md:mt-0'>
         <RewardDetail
           title='Browser Data'
           value={browserDataReward}

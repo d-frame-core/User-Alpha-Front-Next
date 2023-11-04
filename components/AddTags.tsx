@@ -195,7 +195,8 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
     <Dialog
       open={open}
       onClose={onClose}
-      maxWidth='sm'>
+      maxWidth='xs'
+      fullWidth={true}>
       <DialogTitle>
         <div className='flex justify-between items-center pb-2 border-b-2 border-gray-200'>
           <div className='md:text-xl text-2xl font-semibold'>Your Tags</div>
@@ -206,11 +207,11 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
       </DialogTitle>
       <DialogContent>
         {userData && userData.tags.userTags.length > 0 && (
-          <div className='mb-4 text-center flex justify-center items-center gap-3'>
+          <div className='mb-4 text-center flex justify-center items-center gap-3 flex-wrap'>
             {userData.tags.userTags.map((item: any, index: any) => (
               <div
                 key={index}
-                className='relative h-10 pt-2'>
+                className='relative h-15 pt-2'>
                 <div
                   className='px-2 border border-purple-400 rounded'
                   style={{ display: 'inline-block' }}>
@@ -221,7 +222,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
                   onClick={() => deleteTag(item)}
                   className='absolute -top-0 -right-1'
                   style={{ backgroundColor: 'red', padding: '2px' }}>
-                  <CloseIcon style={{ fontSize: 12, color: 'white' }} />
+                  <CloseIcon style={{ fontSize: 8, color: 'white' }} />
                 </IconButton>
               </div>
             ))}
@@ -238,7 +239,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
                   placeholder='Enter your tag'
                   value={inputValue}
                   onChange={handleInputChange}
-                  className='border rounded-lg py-1 px-3 w-full'
+                  className='border-none w-4/5 bg-purple-200 rounded outline-none mx-auto p-1 pl-3 mt-2 shadow-lg'
                 />
               </div>
               <div className='flex mt-4 justify-end'>

@@ -24,7 +24,7 @@ const style = {
   backgroundColor: 'white',
   padding: '4px',
   fontSize: '13px',
-  borderRadius: '10px',
+  borderRadius: '5px',
 };
 
 // function for chart

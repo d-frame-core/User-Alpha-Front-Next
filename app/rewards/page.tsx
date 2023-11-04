@@ -51,7 +51,7 @@ export default function Rewards() {
             Monthly Rewards
           </div>
         </div>
-        <div className='mx-5 w-11/12 md:mx-auto bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[60vh] md:mt-0 mt-24'>
+        <div className='mx-5 w-11/12 md:mx-auto bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[75vh] h-[80vh] md:mt-0 mt-24'>
           {contentComponent}
         </div>
       </div>
