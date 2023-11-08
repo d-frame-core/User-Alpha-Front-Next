@@ -20,7 +20,7 @@ const KYCComponent: React.FC<KYCComponentProps> = ({
     router.push(`/${button}`);
   };
   return (
-    <div className='flex items-center flex-col justify-center gap-1'>
+    <div className='flex items-center flex-col justify-center gap-1 p-3'>
       <div className='text-xl font-semibold'>{title}</div>
       <div>{description}</div>
       {button === 'kyc1' || button === 'kyc2' || button === 'kyc3' ? (

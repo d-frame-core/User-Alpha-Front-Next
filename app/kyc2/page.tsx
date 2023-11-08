@@ -51,11 +51,13 @@ export default function KYC2() {
   );
 
   const incomes = [
-    '< 100000',
-    '100,000 - 500,000',
-    '500,000 - 1,000,000',
-    '1,000,000- 5,000,000',
-    '> 10,000,000',
+    '< $1000',
+    '$1000 - $10,000',
+    '$10,000 - $20,000',
+    '$20,000 - $60,000',
+    '$60,000 - $100,000',
+    '$100,000 - $200,000',
+    '> $200,000',
   ];
 
   async function submitKYC2() {
@@ -271,7 +273,7 @@ export default function KYC2() {
               KYC Level-2
             </h1>
             <div
-              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center text-3xl
+              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center md:text-3xl text-5xl text-center
                    '>
               <Image
                 src={'/assets/success.svg'}
@@ -280,7 +282,7 @@ export default function KYC2() {
                 alt='success'
                 className='animate-bounce'
               />
-              **Your details are submitted**
+              Your details are submitted
             </div>
           </div>
         )}

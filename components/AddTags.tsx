@@ -199,7 +199,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
       fullWidth={true}>
       <DialogTitle>
         <div className='flex justify-between items-center pb-2 border-b-2 border-gray-200'>
-          <div className='md:text-xl text-2xl font-semibold'>Your Tags</div>
+          <div className='md:text-xl text-2xl font-semibold'>Tags</div>
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>
@@ -220,7 +220,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
                 <IconButton
                   size='small'
                   onClick={() => deleteTag(item)}
-                  className='absolute -top-0 -right-1'
+                  className='absolute -top-3 right-2'
                   style={{ backgroundColor: 'red', padding: '2px' }}>
                   <CloseIcon style={{ fontSize: 8, color: 'white' }} />
                 </IconButton>
@@ -239,7 +239,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
                   placeholder='Enter your tag'
                   value={inputValue}
                   onChange={handleInputChange}
-                  className='border-none w-4/5 bg-purple-200 rounded outline-none mx-auto p-1 pl-3 mt-2 shadow-lg'
+                  className='border-none w-4/5 bg-purple-100 text-black rounded outline-none mx-auto p-1 pl-5 mt-2 shadow-lg'
                 />
               </div>
               <div className='flex mt-4 justify-end'>
@@ -252,7 +252,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
           )}
       </DialogContent>
       <div className='py-3 border-t-2 border-gray-200 text-center text-gray-500 text-sm'>
-        **You can add upto 5 personalized tags**
+        **You can add upto 5 personalised tags**
       </div>
     </Dialog>
   );

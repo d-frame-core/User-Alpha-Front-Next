@@ -14,7 +14,7 @@ import React, { useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export default function page() {
-  const { userWalletAddress, userToken } = useContext(AppContext);
+  const { userWalletAddress, userToken, userData } = useContext(AppContext);
   const [formData, setFormData] = React.useState({
     browserData: true,
     storageOption: 'GCP',

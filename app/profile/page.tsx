@@ -37,6 +37,10 @@ export default function Profile() {
         setUserId(data.user.id);
         window.localStorage.setItem('dframeUserId', data.user.id);
         window.localStorage.setItem('userAccessToken', data.token);
+        window.localStorage.setItem(
+          'dframeUserData',
+          JSON.stringify(data.user)
+        );
         // console.log(data.user);
         toast.success('Fetched User Details', { id: '1' });
       })
@@ -69,52 +73,6 @@ export default function Profile() {
     handleChainChange();
   }, []);
 
-  useEffect(() => {
-    if (window.ethereum) {
-      const handleChainChange = async () => {
-        const chainId = await window.ethereum.request({
-          method: 'eth_chainId',
-        });
-        if (chainId !== '0x89') {
-          try {
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x89' }],
-            });
-          } catch (error) {
-            console.error('Error switching to Polygon mainnet', error);
-          }
-        }
-      };
-
-      const handleDisconnect = () => {
-        // Redirect on disconnect
-        router.push('/');
-      };
-
-      const handleAccountChange = () => {
-        // Redirect on account change
-        router.push('/');
-      };
-
-      if (window.ethereum) {
-        window.ethereum.on('chainChanged', handleChainChange);
-        window.ethereum.on('disconnect', handleDisconnect);
-        window.ethereum.on('accountsChanged', handleAccountChange);
-
-        return () => {
-          window.ethereum.removeListener('chainChanged', handleChainChange);
-          window.ethereum.removeListener('disconnect', handleDisconnect);
-          window.ethereum.removeListener(
-            'accountsChanged',
-            handleAccountChange
-          );
-        };
-      }
-
-      handleChainChange();
-    }
-  }, []);
   const fileInputRef = React.useRef(null);
 
   const handleImageClick = () => {
@@ -220,16 +178,16 @@ export default function Profile() {
                 <ProfileDetails
                   title='Wallet Address'
                   value={
-                    userData?.publicAddress.slice(0, 8) +
+                    userData?.publicAddress.slice(0, 10) +
                     '...' +
-                    userData?.publicAddress.slice(-8)
+                    userData?.publicAddress.slice(-10)
                   }
                   editable={false}
                 />
               </div>
             )}
           </div>
-          <div className='bg-white w-[85%] mx-auto mt-2 rounded-md p-3'>
+          <div className='bg-white w-[85%] mx-auto mt-2 rounded-md'>
             {userData &&
               (userData.kyc1.status === 'UNSUBMITTED' ? (
                 <KYCComponent
@@ -240,28 +198,22 @@ export default function Profile() {
               ) : userData.kyc2.status === 'UNSUBMITTED' ? (
                 <KYCComponent
                   title='KYC Verification'
-                  description='The verification makes us aware that you are a valid user. It may take up to 24 hours.'
+                  description='You have completed KYC Level-1. Please Complete KYC Level-2 and KYC Level-3'
                   button='kyc2'
                 />
               ) : userData.kyc3.status === 'UNSUBMITTED' ? (
                 <KYCComponent
                   title='KYC Verification'
-                  description='The verification makes us aware that you are a valid user. It may take up to 24 hours.'
+                  description='You have completed KYC Level-1 and KYC Level-2. Please Complete KYC Level-3'
                   button='kyc3'
                 />
               ) : userData.kyc3.status === 'UNVERIFIED' &&
                 userData.kyc2.status === 'UNVERIFIED' &&
-                userData.kyc1.status === 'UNVERIFIED' ? (
-                <></>
-              ) : (
-                <></>
-              ))}
+                userData.kyc1.status === 'UNVERIFIED' ? null : null)}
           </div>
-          <div className='bg-white w-[85%] mx-auto rounded-md p-1 md:mt-2 mt-6 flex flex-col text-center items-center gap-1'>
+          <div className='bg-white w-[85%] mx-auto rounded-md p-3 md:mt-3 mt-6 flex flex-col text-center items-center gap-1'>
             <div className='text-xl font-semibold'>User Tags</div>
-            <div className='text-sm'>
-              These tags help us to show you personalized ads
-            </div>
+            <div className='text-sm'>Which Ads would you like to see?</div>
             <Button
               content={'Add Tags'}
               onClick={() => setAddTagsModal(true)}

@@ -130,7 +130,7 @@ export default function KYC1() {
               KYC Level-3
             </h1>
             <div
-              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center text-3xl
+              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center md:text-3xl text-5xl text-center
                    '>
               <Image
                 src={'/assets/success.svg'}
@@ -139,7 +139,7 @@ export default function KYC1() {
                 alt='success'
                 className='animate-bounce'
               />
-              **Your details are submitted**
+              Your details are submitted
             </div>
           </div>
         )}

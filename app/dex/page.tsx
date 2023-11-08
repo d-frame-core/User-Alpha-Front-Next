@@ -48,6 +48,10 @@ export default function SellDFT() {
   }
 
   async function sendDFTFunction() {
+    if (!/^\d+$/.test(sendDFTAmount)) {
+      toast.error('Please enter a valid numeric amount');
+      return;
+    }
     if (sendDFTAmount < 1000 || sendDFTAmount > 10000) {
       toast.error('Limit 1,000-10,000');
       return;
@@ -115,6 +119,10 @@ export default function SellDFT() {
   }
 
   async function editDFTListing() {
+    if (!/^\d+$/.test(sendDFTAmount)) {
+      toast.error('Please enter a valid numeric amount');
+      return;
+    }
     if (sendDFTAmount < 1000 || sendDFTAmount > 10000) {
       toast.error('Limit 1,000-10,000');
       return;
@@ -150,7 +158,7 @@ export default function SellDFT() {
     }, 1000);
   }
   async function getBalance() {
-    const web3 = new Web3(process.env.ALCHEMY_RPC);
+    const web3 = new Web3(window.ethereum);
     const _walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
 
@@ -190,6 +198,10 @@ export default function SellDFT() {
         setUserId(data.user.id);
         window.localStorage.setItem('dframeUserId', data.user.id);
         window.localStorage.setItem('userAccessToken', data.token);
+        window.localStorage.setItem(
+          'dframeUserData',
+          JSON.stringify(data.user)
+        );
         // console.log(data.user);
       })
       .catch((error) => {
@@ -199,70 +211,8 @@ export default function SellDFT() {
 
   useEffect(() => {
     getUserData();
-    const handleChainChange = async () => {
-      const chainId = await window.ethereum.request({
-        method: 'eth_chainId',
-      });
-      if (chainId !== '0x89') {
-        try {
-          await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x89' }],
-          });
-        } catch (error) {
-          console.error('Error switching to Polygon mainnet', error);
-        }
-      }
-    };
-    handleChainChange();
   }, []);
 
-  useEffect(() => {
-    if (window.ethereum) {
-      const handleChainChange = async () => {
-        const chainId = await window.ethereum.request({
-          method: 'eth_chainId',
-        });
-        if (chainId !== '0x89') {
-          try {
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x89' }],
-            });
-          } catch (error) {
-            console.error('Error switching to Polygon mainnet', error);
-          }
-        }
-      };
-
-      const handleDisconnect = () => {
-        // Redirect on disconnect
-        router.push('/');
-      };
-
-      const handleAccountChange = () => {
-        // Redirect on account change
-        router.push('/');
-      };
-
-      if (window.ethereum) {
-        window.ethereum.on('chainChanged', handleChainChange);
-        window.ethereum.on('disconnect', handleDisconnect);
-        window.ethereum.on('accountsChanged', handleAccountChange);
-
-        return () => {
-          window.ethereum.removeListener('chainChanged', handleChainChange);
-          window.ethereum.removeListener('disconnect', handleDisconnect);
-          window.ethereum.removeListener(
-            'accountsChanged',
-            handleAccountChange
-          );
-        };
-      }
-
-      handleChainChange();
-    }
-  }, []);
   return (
     <div className='flex'>
       <Sidebar />
@@ -328,10 +278,10 @@ export default function SellDFT() {
                 </div>
                 {userData && userData?.dftForSale.amount < 1000 ? (
                   <>
-                    <div className='md:my-2 my-4 flex flex-col gap-2'>
+                    <div className='md:my-4 my-5 flex flex-col gap-5 text-lg'>
                       Amount to sell :
                       <input
-                        className='border-none w-4/5 bg-purple-200 text-sm text-center rounded outline-none mx-auto p-2 pl-3 mt-2 shadow-lg'
+                        className='border-none w-4/5 bg-purple-100 text-sm text-center rounded outline-none mx-auto p-2 pl-5 shadow-lg'
                         placeholder='Amount 1,000-10,000'
                         onChange={(e) => setSendDFTAmount(e.target.value)}
                       />
@@ -354,21 +304,21 @@ export default function SellDFT() {
                   </>
                 ) : (
                   <>
-                    <div className='md:my-2 my-4 flex flex-col gap-2 md:text-xl text-3xl'>
+                    <div className='md:my-2 my-4 flex flex-col gap-7 md:text-xl text-3xl'>
                       Your Listing
                       {edit ? (
                         <input
-                          className='border-none w-4/5 bg-purple-200 text-sm text-center rounded outline-none mx-auto p-2 pl-3 mt-2 shadow-lg'
+                          className='border-none w-4/5 bg-purple-100 text-sm text-center rounded outline-none mx-auto p-2 pl-3 mt-2 shadow-lg'
                           placeholder='Amount 1,000-10,000'
                           onChange={(e) => setSendDFTAmount(e.target.value)}
                         />
                       ) : (
-                        <div className='md:text-lg text-2xl text-blue-400'>
+                        <div className='md:text-xl text-3xl text-blue-700 font-semibold'>
                           {userData?.dftForSale.amount} DFT
                         </div>
                       )}
                     </div>
-                    <div className='my-2 mx-auto w-3/5 flex justify-around '>
+                    <div className=' my-6 mx-auto w-3/5 flex justify-around text-3xl'>
                       {edit ? (
                         <div onClick={editDFTListing}>
                           <DoneIcon className='text-blue-900 cursor-pointer font-bold' />
@@ -385,9 +335,9 @@ export default function SellDFT() {
                   </>
                 )}
                 <div
-                  className='mt-3
+                  className='mt-4
                 '>
-                  Minimum 1000 DFT balance required to sell
+                  Minimum 1000 DFT required to sell
                 </div>
               </div>
             </div>

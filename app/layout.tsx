@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import { AppContextProvider } from '@/context/Context';
+import Middleware from '@/middleware/Middleware';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppContextProvider>
           <Toaster />
+          <Middleware />
           {children}
         </AppContextProvider>
       </body>

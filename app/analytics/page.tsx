@@ -47,7 +47,7 @@ export default function Analytics() {
                 : 'bg-blue-900 text-white'
             }`}
             onClick={() => setToggleMenu('sites-distribution')}>
-            Sites by Tags
+            Sites Distribution
           </div>
         </div>
         {toggleMenu === 'sites-distribution' ? (

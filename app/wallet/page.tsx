@@ -19,74 +19,6 @@ export default function Wallet() {
   const [sendDFTAmount, setSendDFTAmount] = useState<any>('');
 
   const [walletBalance, setWalletBalance] = useState<String>('');
-  // async function getPastTransactions() {
-  //   toast.loading('Getting past transactions', { id: '2' });
-  //   const _walletAddress =
-  //     userWalletAddress || window.localStorage.getItem('userPublicAddress');
-  //   console.log(_walletAddress);
-  //   const web3 = new Web3(process.env.ALCHEMY_RPC);
-  //   // set the contract address of the DFT token
-
-  //   console.log('ESTABLISED CONNECTION');
-  //   // get the DFT token contract instance
-  //   const dframeContract = new web3.eth.Contract(
-  //     dframeABI as any,
-  //     dframeAddress
-  //   );
-  //   // get the transfer events of the MATIC token for the specified wallet address
-  //   const transferFromEvents = await dframeContract.getPastEvents('Transfer', {
-  //     fromBlock: 0,
-  //     toBlock: 'latest',
-  //     filter: {
-  //       from: _walletAddress,
-  //     },
-  //   });
-
-  //   //  get the transfer events of the MATIC token for the specified wallet address
-  //   const eventFromPromises = transferFromEvents.map(async (event: any) => {
-  //     const block = await web3.eth.getBlock(event.blockNumber);
-  //     return {
-  //       ...event,
-  //       timestamp: block.timestamp,
-  //     };
-  //   });
-
-  //   // get the transfer events of the MATIC token for the specified wallet address
-  //   const eventsFromWithTimestamps = await Promise.all(eventFromPromises);
-  //   const transferToEvents = await dframeContract.getPastEvents('Transfer', {
-  //     fromBlock: 0,
-  //     toBlock: 'latest',
-  //     filter: {
-  //       to: _walletAddress,
-  //     },
-  //   });
-
-  //   // get the transfer events of the MATIC token for the specified wallet address
-  //   const eventToPromises = transferToEvents.map(async (event: any) => {
-  //     const block = await web3.eth.getBlock(event.blockNumber);
-  //     return {
-  //       ...event,
-  //       timestamp: block.timestamp,
-  //     };
-  //   });
-
-  //   // get the transfer events of the MATIC token for the specified wallet address
-  //   const eventsToWithTimestamps = await Promise.all(eventToPromises);
-  //   const allEvents = [...eventsFromWithTimestamps, ...eventsToWithTimestamps];
-  //   console.log('allEvents', allEvents);
-  //   const sortedEvents = allEvents.sort((a, b) =>
-  //     (b.timestamp as BigInt)
-  //       .toString()
-  //       .localeCompare((a.timestamp as BigInt).toString())
-  //   );
-
-  //   setPastTransactions(sortedEvents);
-  //   console.log('sorted events', sortedEvents);
-  //   toast.success('Fetched transactions', { id: '2' });
-  //   setTimeout(() => {
-  //     toast.remove();
-  //   }, 1000);
-  // }
 
   async function getPastTransactions() {
     toast.loading('Fetching Past Transactions', { id: '5' });
@@ -94,7 +26,7 @@ export default function Wallet() {
       `http://localhost:8080/wallet/past-transactions/${walletAddress}`,
       {
         method: 'GET',
-        cache: 'no-cache',
+        cache: 'force-cache',
       }
     )
       .then((response) => response.json())
@@ -176,7 +108,7 @@ export default function Wallet() {
   }
 
   async function getBalance() {
-    const web3 = new Web3(process.env.ALCHEMY_RPC);
+    const web3 = new Web3(window.ethereum);
     const _walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
 
@@ -230,7 +162,7 @@ export default function Wallet() {
                   })}
                 </div>
               ) : (
-                <div className='border-b-2 border-gray-200 w-full text-2xl flex justify-center items-center text-center h-80 max-h-80'>
+                <div className='border-b-2 border-gray-200 w-full text-xl flex justify-center items-center text-center h-80 max-h-80'>
                   **No Past Transactions**
                 </div>
               )}
@@ -244,12 +176,13 @@ export default function Wallet() {
                     {walletBalance} DFT
                   </span>
                 </div>
-                <div
-                  className=''
-                  onClick={copyWalletAddress}>
+                <div className=''>
                   {walletAddress.slice(0, 7) + '...' + walletAddress.slice(-7)}
 
-                  <ContentCopyIcon className='ml-2 text-purple-400 text-lg cursor-pointer font-semibold' />
+                  <ContentCopyIcon
+                    className='ml-2 text-purple-400 text-lg cursor-pointer font-semibold'
+                    onClick={copyWalletAddress}
+                  />
                 </div>
               </div>
               <div className='bg-white w-full text-center rounded-lg flex-col py-3 md:text-sm text-xl'>
@@ -259,14 +192,14 @@ export default function Wallet() {
                 <div className='md:my-2 my-4 '>
                   Wallet Address :
                   <input
-                    className='border-none w-4/5 bg-purple-200 rounded outline-none mx-auto p-1 pl-3 mt-2 shadow-lg'
+                    className='border-none w-4/5 bg-purple-100 rounded outline-none mx-auto p-1 pl-5 mt-2 shadow-lg'
                     onChange={(e) => setSendWalletAddress(e.target.value)}
                   />
                 </div>
                 <div className='md:my-2 my-4 '>
                   DFT Amount :
                   <input
-                    className='border-none w-4/5 bg-purple-200 rounded outline-none mx-auto p-1 pl-3 mt-2 shadow-lg'
+                    className='border-none w-4/5 bg-purple-100 rounded outline-none mx-auto p-1 pl-5 mt-2 shadow-lg'
                     onChange={(e) => setSendDFTAmount(e.target.value)}
                   />
                 </div>

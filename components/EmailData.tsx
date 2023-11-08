@@ -9,8 +9,8 @@ export default function EmailData() {
         Email Data Collected
       </h1>
 
-      <div className='bg-white md:h-4/5 h-full overflow-y-auto rounded flex justify-center items-center text-3xl'>
-        **Will be implemented in BETA release**
+      <div className='bg-white md:h-4/5 h-full overflow-y-auto rounded flex justify-center items-center md:text-2xl text-4xl text-center'>
+        Will be implemented in BETA release
       </div>
     </div>
   );

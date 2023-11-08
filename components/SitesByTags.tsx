@@ -94,7 +94,7 @@ export default function SitesByTags() {
             <div className='md:-mt-5 md:block hidden '>
               {Charts(topSitesByTags as any[], 'visits', h, w, ma)}
             </div>
-            <div className='bg-white text-sm w-full overflow-y-auto  h-40'>
+            <div className='bg-white text-sm w-[128%] overflow-y-auto  h-40'>
               {topSitesByTags &&
                 topSitesByTags.map((item: any) => (
                   <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>
@@ -104,12 +104,12 @@ export default function SitesByTags() {
                 ))}
             </div>
           </div>
-          <div className='flex text-xl flex-col w-[10%] max-h-[85%] overflow-y-auto p-2 pr-0 m-0 '>
+          <div className='flex text-xl flex-col w-[10%] max-h-[57%] h-[57%] overflow-y-auto p-0 m-0'>
             <div
               className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'web3'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('web3')}>
               Web3
@@ -117,8 +117,8 @@ export default function SitesByTags() {
             <div
               className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'sports'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('sports')}>
               sports
@@ -126,8 +126,8 @@ export default function SitesByTags() {
             <div
               className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'social'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('social')}>
               social
@@ -135,8 +135,8 @@ export default function SitesByTags() {
             <div
               className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'food'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('food')}>
               food
@@ -144,8 +144,8 @@ export default function SitesByTags() {
             <div
               className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'news'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('news')}>
               news
@@ -153,8 +153,8 @@ export default function SitesByTags() {
             <div
               className={`border  py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'stocks'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('stocks')}>
               stocks
@@ -174,8 +174,8 @@ export default function SitesByTags() {
             <div
               className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'web3'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('web3')}>
               Web3
@@ -183,8 +183,8 @@ export default function SitesByTags() {
             <div
               className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'sports'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('sports')}>
               Sports
@@ -192,8 +192,8 @@ export default function SitesByTags() {
             <div
               className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'social'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('social')}>
               Social
@@ -201,8 +201,8 @@ export default function SitesByTags() {
             <div
               className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'food'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('food')}>
               Food
@@ -210,8 +210,8 @@ export default function SitesByTags() {
             <div
               className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'news'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('news')}>
               News
@@ -219,8 +219,8 @@ export default function SitesByTags() {
             <div
               className={`w-full border px-4 py-2   rounded text-center cursor-pointer h-full ${
                 toggleMenu === 'stocks'
-                  ? 'bg-white text-black  border-[rgba(92,15,255,.66)]'
-                  : 'bg-[rgba(92,15,255,.66)] text-white'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
               }`}
               onClick={() => setToggleMenu('stocks')}>
               Stocks

@@ -7,7 +7,7 @@ import { AppContext } from '@/context/Context';
 import { Step, StepLabel, Stepper } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function KYC1() {
@@ -16,7 +16,8 @@ export default function KYC1() {
   const [userName, setUserName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
-  const { userWalletAddress, userData, userToken } = useContext(AppContext);
+  const { userWalletAddress, userData, userToken, setUserData } =
+    useContext(AppContext);
   const router = useRouter();
   async function submitKYC1() {
     if (!firstName || !lastName || !userName || !phoneNumber || !email) {
@@ -65,7 +66,7 @@ export default function KYC1() {
     <div className='flex'>
       <Sidebar />
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[82vh] h-[55vh]'>
-        {userData?.kyc1.status !== 'UNSUBMITTED' ? (
+        {userData?.kyc1.status === 'UNSUBMITTED' ? (
           <div className='w-full'>
             <h1 className='md:text-3xl font-semibold mb-4 text-5xl'>
               KYC Level-1
@@ -121,7 +122,7 @@ export default function KYC1() {
               KYC Level-1
             </h1>
             <div
-              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center text-3xl
+              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center md:text-3xl text-5xl text-center
                    '>
               <Image
                 src={'/assets/success.svg'}
@@ -130,7 +131,7 @@ export default function KYC1() {
                 alt='success'
                 className='animate-bounce'
               />
-              **Your details are submitted**
+              Your details are submitted
             </div>
           </div>
         )}
