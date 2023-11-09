@@ -10,6 +10,10 @@ const Navbar: React.FC = () => {
   const { userData } = useContext(AppContext);
   const router = useRouter();
   const handleLogout = async () => {
+    window.localStorage.removeItem('dframeUserId');
+    window.localStorage.removeItem('userAccessToken');
+    window.localStorage.removeItem('dframeUserData');
+    window.localStorage.removeItem('userPublicAddress');
     try {
       await window.ethereum.request({
         method: 'eth_requestAccounts',
