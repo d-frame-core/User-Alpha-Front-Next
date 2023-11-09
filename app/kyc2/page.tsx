@@ -1,14 +1,7 @@
 /** @format */
 'use client';
 import Sidebar from '@/components/Sidebar';
-import {
-  Checkbox,
-  FormControlLabel,
-  Step,
-  StepLabel,
-  Stepper,
-  TextField,
-} from '@mui/material';
+import { Step, StepLabel, Stepper } from '@mui/material';
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import Button from '@/components/Button';
@@ -21,7 +14,7 @@ import toast from 'react-hot-toast';
 import { countries } from '@/utils/Utils';
 import { AppContext } from '@/context/Context';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import KYCSubmitted from '@/components/KYCSubmitted';
 // import FormControlLabel from '@mui/'
 export default function KYC2() {
   const [formData, setFormData] = useState({
@@ -45,10 +38,6 @@ export default function KYC2() {
   };
   const [next, setNext] = useState(false);
   const { userWalletAddress, userData, userToken } = useContext(AppContext);
-
-  const [dob, setDob] = useState<string>(
-    new Date().toLocaleDateString('en-GB')
-  );
 
   const incomes = [
     '< $1000',
@@ -268,23 +257,7 @@ export default function KYC2() {
             )}
           </div>
         ) : (
-          <div className='w-full'>
-            <h1 className='md:text-3xl font-semibold mb-4 text-5xl'>
-              KYC Level-2
-            </h1>
-            <div
-              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center md:text-3xl text-5xl text-center
-                   '>
-              <Image
-                src={'/assets/success.svg'}
-                width={200}
-                height={200}
-                alt='success'
-                className='animate-bounce'
-              />
-              Your details are submitted
-            </div>
-          </div>
+          <KYCSubmitted level={2} />
         )}
       </div>
     </div>

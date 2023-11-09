@@ -1,6 +1,7 @@
 /** @format */
 
 'use client';
+import FAQModal from '@/components/FAQModal';
 import BasicModal from '@/components/Modal';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
@@ -48,6 +49,7 @@ export default function Page() {
                   key={index}
                 />
               ))}
+            <FAQModal />
           </div>
         </div>
       </div>

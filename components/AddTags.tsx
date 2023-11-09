@@ -84,6 +84,10 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
         setUserId(data.user.id);
         window.localStorage.setItem('dframeUserId', data.user.id);
         window.localStorage.setItem('userAccessToken', data.token);
+        window.localStorage.setItem(
+          'dframeUserData',
+          JSON.stringify(data.user)
+        );
         // console.log(data.user);
       })
       .catch((error) => {
@@ -92,7 +96,6 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
   }
 
   useEffect(() => {
-    getUserData();
     const handleChainChange = async () => {
       const chainId = await window.ethereum.request({
         method: 'eth_chainId',
@@ -220,7 +223,7 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
                 <IconButton
                   size='small'
                   onClick={() => deleteTag(item)}
-                  className='absolute -top-3 right-2'
+                  className='-top-3 right-2'
                   style={{ backgroundColor: 'red', padding: '2px' }}>
                   <CloseIcon style={{ fontSize: 8, color: 'white' }} />
                 </IconButton>

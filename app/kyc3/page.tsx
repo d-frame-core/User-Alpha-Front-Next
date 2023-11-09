@@ -2,10 +2,10 @@
 'use client';
 import Button from '@/components/Button';
 import KYC3Details from '@/components/KYC3Details';
+import KYCSubmitted from '@/components/KYCSubmitted';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
 import { Step, StepLabel, Stepper } from '@mui/material';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -125,23 +125,7 @@ export default function KYC1() {
             </div>
           </div>
         ) : (
-          <div className='w-full'>
-            <h1 className='md:text-3xl font-semibold mb-4 text-5xl'>
-              KYC Level-3
-            </h1>
-            <div
-              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center md:text-3xl text-5xl text-center
-                   '>
-              <Image
-                src={'/assets/success.svg'}
-                width={200}
-                height={200}
-                alt='success'
-                className='animate-bounce'
-              />
-              Your details are submitted
-            </div>
-          </div>
+          <KYCSubmitted level={3} />
         )}
       </div>
     </div>

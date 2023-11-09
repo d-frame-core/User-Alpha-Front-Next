@@ -2,12 +2,12 @@
 'use client';
 import Button from '@/components/Button';
 import KYC1Details from '@/components/KYC1Details';
+import KYCSubmitted from '@/components/KYCSubmitted';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
 import { Step, StepLabel, Stepper } from '@mui/material';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function KYC1() {
@@ -16,8 +16,7 @@ export default function KYC1() {
   const [userName, setUserName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
-  const { userWalletAddress, userData, userToken, setUserData } =
-    useContext(AppContext);
+  const { userWalletAddress, userData, userToken } = useContext(AppContext);
   const router = useRouter();
   async function submitKYC1() {
     if (!firstName || !lastName || !userName || !phoneNumber || !email) {
@@ -117,23 +116,7 @@ export default function KYC1() {
             </div>
           </div>
         ) : (
-          <div className='w-full'>
-            <h1 className='md:text-3xl font-semibold mb-4 text-5xl'>
-              KYC Level-1
-            </h1>
-            <div
-              className='flex flex-col gap-4 md:h-[70vh] h-[40vh] justify-center items-center md:text-3xl text-5xl text-center
-                   '>
-              <Image
-                src={'/assets/success.svg'}
-                width={200}
-                height={200}
-                alt='success'
-                className='animate-bounce'
-              />
-              Your details are submitted
-            </div>
-          </div>
+          <KYCSubmitted level={1} />
         )}
       </div>
     </div>

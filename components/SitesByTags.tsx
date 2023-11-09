@@ -13,9 +13,9 @@ export default function SitesByTags() {
   const [topSitesByTags, setTopSitesByTags] = useState([
     { name: 'binance.com', visits: 5 },
     { name: 'mexc.com', visits: 10 },
-    { name: 'binance.com', visits: 5 },
-    { name: 'mexc.com', visits: 10 },
-    { name: 'mexc.com', visits: 10 },
+    { name: 'bybit.com', visits: 5 },
+    { name: 'wazirx.com', visits: 10 },
+    { name: 'coindcx.com', visits: 10 },
   ]);
   const { userWalletAddress, userToken } = useContext(AppContext);
   const walletAddress =
@@ -94,7 +94,7 @@ export default function SitesByTags() {
             <div className='md:-mt-5 md:block hidden '>
               {Charts(topSitesByTags as any[], 'visits', h, w, ma)}
             </div>
-            <div className='bg-white text-sm w-[128%] overflow-y-auto  h-40'>
+            <div className='bg-white text-sm w-[128.6%] overflow-y-auto  h-40'>
               {topSitesByTags &&
                 topSitesByTags.map((item: any) => (
                   <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>

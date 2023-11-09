@@ -17,8 +17,8 @@ const BasicModal = (props: { name: string; paragraph: string }) => {
         {props.name}
       </div>
       {open && (
-        <div className='fixed inset-0 flex items-center justify-center z-50 shadow-lg'>
-          <div className='relative bg-white p-4 rounded-lg shadow-lg max-w-md border border-gray-200'>
+        <div className='fixed inset-0 flex items-center justify-center z-50 shadow-lg  '>
+          <div className='relative bg-white p-4 rounded-lg shadow-lg max-w-md min-w-[28rem] border border-gray-200'>
             <h2 className='md:text-xl text-2xl font-semibold border-b-2 border-purple-700 pb-2'>
               {props.name}
             </h2>
