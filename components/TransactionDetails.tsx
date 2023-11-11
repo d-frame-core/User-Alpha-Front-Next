@@ -2,12 +2,15 @@
 
 import React from 'react';
 import Web3 from 'web3';
-interface KYC1DetailsProps {
+interface TransactionDetailsProps {
   event: any;
   sent: boolean;
 }
 
-const TransactionDetails: React.FC<KYC1DetailsProps> = ({ event, sent }) => {
+const TransactionDetails: React.FC<TransactionDetailsProps> = ({
+  event,
+  sent,
+}) => {
   return (
     <div
       className='bg-purple-100 hover:bg-purple-300 w-11/12 mx-auto my-4 py-2 px-1 rounded cursor-pointer'

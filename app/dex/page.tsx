@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useRouter } from 'next/navigation';
 import DoneIcon from '@mui/icons-material/Done';
+import SaleHistory from '@/components/SaleHistory';
 export default function SellDFT() {
   const {
     userWalletAddress,
@@ -20,6 +21,7 @@ export default function SellDFT() {
     userData,
     setUserData,
     setUserId,
+    userId,
     setUserToken,
   } = useContext(AppContext);
   const [pastTransactions, setPastTransactions] = useState<any[] | never[]>([]);
@@ -30,7 +32,15 @@ export default function SellDFT() {
   const [edit, setEdit] = useState(false);
 
   const walletAddress =
-    userWalletAddress || window.localStorage.getItem('userPublicAddress');
+    userWalletAddress ||
+    (typeof window !== 'undefined' &&
+      window.localStorage.getItem('userPublicAddress'));
+
+  const userMongoID =
+    userId ||
+    (typeof window !== 'undefined' &&
+      window.localStorage.getItem('dframeUserId'));
+
   const [walletBalance, setWalletBalance] = useState<String>('');
 
   useEffect(() => {
@@ -46,7 +56,6 @@ export default function SellDFT() {
       toast.remove();
     }, 1000);
   }
-
   async function sendDFTFunction() {
     if (!/^\d+$/.test(sendDFTAmount)) {
       toast.error('Please enter a valid numeric amount');
@@ -209,9 +218,40 @@ export default function SellDFT() {
       });
   }
 
+  async function getSaleHistory() {
+    const walletAddress =
+      userWalletAddress || window.localStorage.getItem('userPublicAddress');
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
+
+    await fetch(`http://localhost:8080/dex/api/pastsale/${walletAddress}`, {
+      method: 'GET',
+      cache: 'no-cache',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `${userAccessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // console.log(data.user);
+        setPastTransactions(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   useEffect(() => {
+    getSaleHistory();
     getUserData();
   }, []);
+
+  const formatDate = (dateString: string): string => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(dateString).toLocaleDateString('en-GB', options as any);
+  };
 
   return (
     <div className='flex'>
@@ -229,19 +269,16 @@ export default function SellDFT() {
               {pastTransactions.length > 0 ? (
                 <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto min-h-[47vh] h-[47vh]'>
                   {pastTransactions.map((event: any) => {
-                    if (
-                      event.returnValues.from.toString().toLowerCase() ===
-                      walletAddress.toString().toLowerCase()
-                    ) {
+                    if (event.from.toString().toLowerCase() === userMongoID) {
                       return (
-                        <TransactionDetails
+                        <SaleHistory
                           event={event}
                           sent={true}
                         />
                       );
                     } else {
                       return (
-                        <TransactionDetails
+                        <SaleHistory
                           event={event}
                           sent={false}
                         />
@@ -278,7 +315,7 @@ export default function SellDFT() {
                 </div>
                 {userData && userData?.dftForSale.amount < 1000 ? (
                   <>
-                    <div className='md:my-4 my-5 flex flex-col gap-5 text-lg'>
+                    <div className='md:my-2 my-5 flex flex-col gap-3 text-lg'>
                       Amount to sell :
                       <input
                         className='border-none w-4/5 bg-purple-100 text-sm text-center rounded outline-none mx-auto p-2 pl-5 shadow-lg'
@@ -286,7 +323,7 @@ export default function SellDFT() {
                         onChange={(e) => setSendDFTAmount(e.target.value)}
                       />
                     </div>
-                    <div className='mt-6'>
+                    <div className='mt-5'>
                       <button
                         className={` font-bold py-2 px-4 rounded ${
                           eligible
@@ -304,21 +341,21 @@ export default function SellDFT() {
                   </>
                 ) : (
                   <>
-                    <div className='md:my-2 my-4 flex flex-col gap-7 md:text-xl text-3xl'>
+                    <div className='md:my-2 my-4 flex flex-col gap-4 md:text-xl text-3xl'>
                       Your Listing
                       {edit ? (
                         <input
-                          className='border-none w-4/5 bg-purple-100 text-sm text-center rounded outline-none mx-auto p-2 pl-3 mt-2 shadow-lg'
+                          className='border-none w-4/5 bg-purple-100 text-sm text-center rounded outline-none mx-auto p-2 pl-3 shadow-lg'
                           placeholder='Amount 1,000-10,000'
                           onChange={(e) => setSendDFTAmount(e.target.value)}
                         />
                       ) : (
-                        <div className='md:text-xl text-3xl text-blue-700 font-semibold'>
+                        <div className='md:text-xl text-3xl text-blue-700 font-semibold my-1'>
                           {userData?.dftForSale.amount} DFT
                         </div>
                       )}
                     </div>
-                    <div className=' my-6 mx-auto w-3/5 flex justify-around text-3xl'>
+                    <div className=' my-3 mx-auto w-3/5 flex justify-around text-3xl'>
                       {edit ? (
                         <div onClick={editDFTListing}>
                           <DoneIcon className='text-blue-900 cursor-pointer font-bold' />
