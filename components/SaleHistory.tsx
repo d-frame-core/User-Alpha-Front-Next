@@ -37,10 +37,7 @@ const SaleHistory: React.FC<SaleHistoryProps> = ({ event, sent }) => {
         </div>
       </div>
       <div className='flex mt-2 justify-between px-3 md:text-xs text-lg'>
-        <div className='text-blue-800 font-semibold'>
-          {event.amount}
-          DFT
-        </div>
+        <div className='text-blue-800 font-semibold'>{event.amount} DFT</div>
         <div>
           {' '}
           At:

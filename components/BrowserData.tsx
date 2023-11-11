@@ -29,11 +29,11 @@ export default function BrowserData() {
         Browser Data Collected
       </h1>
       {eventData && (
-        <div className='bg-white md:h-4/5 h-full overflow-y-auto rounded'>
+        <div className='bg-white md:h-[85%] h-full overflow-y-auto rounded'>
           {Object.keys(eventData).map((key) => (
             <div
               key={key}
-              className='p-4 text-lg border-b border-b-gray-200'>
+              className='p-4 border-b border-b-gray-200'>
               You visited {key} website on{' '}
               {new Date((eventData as any)[key].timeStamp).toLocaleString()}.{' '}
             </div>
