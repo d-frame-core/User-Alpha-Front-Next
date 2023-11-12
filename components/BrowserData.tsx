@@ -7,9 +7,7 @@ export default function BrowserData() {
   const [eventData, setEventData] = useState({});
 
   useEffect(() => {
-    console.log('ENTERED USE EFFECT');
     window.addEventListener('message', function (event) {
-      console.log('ENTERED EVENT LISTENER');
       if (
         event.source === window &&
         event.data.direction &&
@@ -18,7 +16,6 @@ export default function BrowserData() {
         // alert("Page script received message: \"" + event.data.message + "\"");
         if (event.data.message != null || undefined) {
           setEventData(event.data.message);
-          console.log(event.data.message);
         }
       }
     });
