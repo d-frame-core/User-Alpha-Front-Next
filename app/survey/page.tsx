@@ -14,6 +14,7 @@ export default function Survey() {
   const [particularSurveyData, setParticularSurveyData] = useState();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [allSurveyData, setAllSurveyData] = useState();
+  const [surveyRewardsData, setSurveyRewardsData] = useState();
   const selectedOptions = useRef<Array<string[]>>([]);
   const router = useRouter();
   const optionClicked = (option: string) => {
@@ -145,8 +146,38 @@ export default function Survey() {
     }, 1000);
   }
 
+  async function getSurveyRewardsData() {
+    const walletAddress =
+      userWalletAddress || localStorage.getItem('userPublicAddress');
+    const userAccessToken =
+      userToken || window.localStorage.getItem('userAccessToken');
+    await fetch(
+      `http://localhost:8080/survey/api/rewards-data/${walletAddress}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data !== null) {
+          setSurveyRewardsData(data);
+        }
+      })
+      .catch((error) => {
+        toast.error('Cannot fetch Survey Rewards Data');
+        console.error(error);
+      });
+    setTimeout(() => {
+      toast.remove();
+    }, 1000);
+  }
   useEffect(() => {
     fetchLatestSurveys();
+    getSurveyRewardsData();
   }, []);
 
   useEffect(() => {
@@ -208,8 +239,19 @@ export default function Survey() {
             )}
             <div className=' h-[57vh] md:w-[30%] w-[80%] mx-auto flex flex-col gap-10'>
               <div className='bg-white rounded-md text-center py-3 text-sm'>
-                <div>Total Survey Answered : 35</div>
-                <div>Total DFT earned : 506 DFT</div>
+                <div>
+                  Total Survey Answered :{' '}
+                  {surveyRewardsData
+                    ? (surveyRewardsData as any).surveyCount
+                    : 0}{' '}
+                </div>
+                <div>
+                  Total Survey Rewards :{' '}
+                  {surveyRewardsData
+                    ? (surveyRewardsData as any).totalRewards
+                    : 0}{' '}
+                  DFT
+                </div>
               </div>
               {allSurveyData && particularSurveyData ? (
                 <div className='bg-white md:h-[40vh] h-[20vh] overflow-y-auto rounded-md py-1'>
