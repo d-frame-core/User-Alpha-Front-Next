@@ -88,7 +88,7 @@ const Home: React.FC = () => {
           height={100}
           src='/assets/dframe1.png' // Use the relative path to the image
           alt='Background'
-          className='mt-10 mx-auto object-cover'
+          className='mt-16 mx-auto object-cover'
         />
         <div className='mt-10 text-center'>
           <h1 className='text-black text-4xl font-bold'>

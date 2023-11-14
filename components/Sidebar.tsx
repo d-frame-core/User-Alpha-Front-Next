@@ -229,7 +229,7 @@ const Sidebar: React.FC = () => {
         </div>
       </div>
       <div
-        className='text-center underline mb-4 mt-2 cursor-pointer'
+        className='text-center underline mb-4 mt-4 cursor-pointer'
         onClick={() => {
           setToggleTab('learn-more');
           router.push('/learn-more');

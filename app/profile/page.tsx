@@ -219,7 +219,7 @@ export default function Profile() {
                 userData.kyc2.status === 'UNVERIFIED' &&
                 userData.kyc1.status === 'UNVERIFIED' ? null : null)}
           </div>
-          <div className='bg-white w-[85%] mx-auto rounded-md p-3 md:mt-3 mt-6 flex flex-col text-center items-center gap-1'>
+          <div className='bg-white w-[85%] mx-auto rounded-md p-3 md:mt-4 mt-6 flex flex-col text-center items-center gap-1'>
             <div className='text-xl font-semibold'>User Tags</div>
             <div className='text-sm'>Which Ads would you like to see?</div>
             <Button

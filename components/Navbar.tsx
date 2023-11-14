@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div className='absolute top-0 md:left-[12.94rem] md:z-10 -z-10 left-[0rem] h-12 md:h-16 bg-gradient-to-r from-[rgba(92,15,255,.66)] to-white text-black md:w-4/5 w-11/12 flex items-center p-2 justify-between'>
+    <div className='absolute top-0 md:left-[13.5rem] md:z-10 -z-10 left-[0rem] h-12 md:h-16 bg-gradient-to-r from-[rgba(92,15,255,.66)] to-white text-black md:w-4/5 w-11/12 flex items-center p-2 justify-between'>
       {/* Left Side of Navbar */}
       <div className='flex items-center'></div>
 
