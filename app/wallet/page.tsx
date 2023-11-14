@@ -136,18 +136,18 @@ export default function Wallet() {
   return (
     <div className='flex'>
       <Sidebar />
-      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 h-[80vh]'>
+      <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 h-[82vh]'>
         <div className='w-full'>
-          <h1 className='md:text-3xl text-5xl font-semibold md:pb-8 pb-16'>
+          <h1 className='md:text-3xl text-5xl font-semibold md:pb-8 pb-12'>
             Wallet
           </h1>
           <div className='flex md:flex-row flex-col justify-evenly '>
-            <div className='bg-white p-3 rounded-lg md:w-2/5 mx-auto w-11/12 flex justify-center items-center flex-col'>
+            <div className='bg-white p-3 rounded-lg md:w-2/5 mx-auto w-11/12 flex justify-start items-center flex-col h-[30rem]'>
               <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                 Transactions
               </div>
               {pastTransactions && pastTransactions.length > 0 ? (
-                <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto h-[22rem] max-h-[22rem]'>
+                <div className='border-b-13 border-gray-200 w-full text-lg text-center overflow-y-auto '>
                   {pastTransactions.map((event: any) => {
                     if (
                       event.returnValues.from.toString().toLowerCase() ===
@@ -175,7 +175,7 @@ export default function Wallet() {
                 </div>
               )}
             </div>
-            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 gap-8'>
+            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 gap-[4rem]'>
               <div className='bg-white w-full text-center rounded-lg  flex-col py-4 md:text-lg text-2xl '>
                 <div className='mb-4'>
                   {' '}
@@ -197,25 +197,25 @@ export default function Wallet() {
                   </div>
                 )}
               </div>
-              <div className='bg-white w-full text-center rounded-lg flex-col py-3 md:text-sm text-xl'>
+              <div className='bg-white w-full text-center rounded-lg flex-col py-3 text-xl'>
                 <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                   Transfer Tokens
                 </div>
-                <div className='md:my-2 my-4 '>
+                <div className='my-5'>
                   Wallet Address :
                   <input
                     className='border-none w-4/5 bg-purple-100 rounded outline-none mx-auto p-1 pl-5 mt-2 shadow-lg'
                     onChange={(e) => setSendWalletAddress(e.target.value)}
                   />
                 </div>
-                <div className='md:my-2 my-4 '>
+                <div className='my-5 '>
                   DFT Amount :
                   <input
                     className='border-none w-4/5 bg-purple-100 rounded outline-none mx-auto p-1 pl-5 mt-2 shadow-lg'
                     onChange={(e) => setSendDFTAmount(e.target.value)}
                   />
                 </div>
-                <div className='mt-4'>
+                <div className='mt-6'>
                   <Button
                     onClick={sendDFTFunction}
                     content={'Send DFT'}

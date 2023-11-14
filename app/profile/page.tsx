@@ -3,6 +3,7 @@
 import AddTagsModal from '@/components/AddTags';
 import Button from '@/components/Button';
 import KYCComponent from '@/components/KYCComponent';
+import Navbar from '@/components/Navbar';
 import ProfileDetails from '@/components/ProfileDetails';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
@@ -123,6 +124,7 @@ export default function Profile() {
   return (
     <div className='flex'>
       <Sidebar />
+      {/* <Navbar /> */}
       <div className='mx-5 md:w-3/4 w-11/12 overflow-y-auto border-8 border-[#e3daf6] md:mx-auto mt-24 md:mt-20 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[84vh] h-[80vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl text-5xl font-semibold md:pb-8 pb-16'>
