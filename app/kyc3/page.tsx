@@ -51,7 +51,9 @@ export default function KYC1() {
     toast.loading('Updating KYC Level-3 Details', { id: '1' });
 
     const walletAddress =
-      userWalletAddress || window.localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
     const formData = new FormData();
     formData.append('idProof', governmentProof1);
     formData.append('addressProof', governmentProof2);

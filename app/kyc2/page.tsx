@@ -58,9 +58,13 @@ export default function KYC2() {
 
     toast.loading('Updating KYC Level-2 Details', { id: '1' });
     const walletAddress =
-      userWalletAddress || localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
     const userAccessToken =
-      userToken || window.localStorage.getItem('userAccessToken');
+      userToken ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userAccessToken'));
 
     await fetch(
       `https://user-backend-402016.el.r.appspot.com/user/api/kyc2/${walletAddress}`,

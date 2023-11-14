@@ -13,7 +13,9 @@ import Button from '@/components/Button';
 export default function Wallet() {
   const { userWalletAddress } = useContext(AppContext);
   const walletAddress =
-    userWalletAddress || window.localStorage.getItem('userPublicAddress');
+    userWalletAddress ||
+    (typeof window !== 'undefined' &&
+      window.localStorage.getItem('userPublicAddress'));
   const [pastTransactions, setPastTransactions] = useState<any[] | never[]>([]);
   const [sendWalletAddress, setSendWalletAddress] = useState<any>('');
   const [sendDFTAmount, setSendDFTAmount] = useState<any>('');
@@ -63,7 +65,9 @@ export default function Wallet() {
 
     // set the wallet address to query
     const _walletAddress =
-      userWalletAddress || window.localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
     // set the contract address of the DFRAME token
 
     // get the DFRAME token contract instance
@@ -110,7 +114,9 @@ export default function Wallet() {
   async function getBalance() {
     const web3 = new Web3(window.ethereum);
     const _walletAddress =
-      userWalletAddress || window.localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
 
     // get the DFT token contract instance
     const dframeContract = new web3.eth.Contract(

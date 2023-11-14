@@ -4,6 +4,13 @@
 import { AppContext } from '@/context/Context';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useEffect } from 'react';
+/** @format */
+declare global {
+  interface Window {
+    ethereum: any;
+    localStorage: Storage;
+  }
+}
 
 export default function Middleware() {
   const { setUserData } = useContext(AppContext);

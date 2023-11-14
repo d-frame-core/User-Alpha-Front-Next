@@ -8,11 +8,6 @@ import { toast } from 'react-hot-toast';
 import Web3 from 'web3';
 import { useContext } from 'react';
 import Image from 'next/image';
-declare global {
-  interface Window {
-    ethereum?: any; // This is to declare ethereum as an optional property
-  }
-}
 
 const Home: React.FC = () => {
   const router = useRouter();

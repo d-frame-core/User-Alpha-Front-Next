@@ -74,9 +74,13 @@ export default function Survey() {
       options.push(finalOptions[i][0]);
     }
     const walletAddress =
-      userWalletAddress || localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
     const userAccessToken =
-      userToken || window.localStorage.getItem('userAccessToken');
+      userToken ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userAccessToken'));
     // console.log(options);
     await fetch(
       `https://user-backend-402016.el.r.appspot.com/survey/api/update-survey/${
@@ -114,9 +118,13 @@ export default function Survey() {
   async function fetchUnseenSurveys() {
     toast.loading('Fetching Unseen Surveys', { id: '1' });
     const walletAddress =
-      userWalletAddress || localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
     const userAccessToken =
-      userToken || window.localStorage.getItem('userAccessToken');
+      userToken ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userAccessToken'));
     await fetch(
       `https://user-backend-402016.el.r.appspot.com/survey/api/get-surveys/${walletAddress}`,
       {
@@ -149,9 +157,13 @@ export default function Survey() {
 
   async function getSurveyRewardsData() {
     const walletAddress =
-      userWalletAddress || localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        localStorage.getItem('userPublicAddress'));
     const userAccessToken =
-      userToken || window.localStorage.getItem('userAccessToken');
+      userToken ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userAccessToken'));
     await fetch(
       `https://user-backend-402016.el.r.appspot.com/survey/api/rewards-data/${walletAddress}`,
       {

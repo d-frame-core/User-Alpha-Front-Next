@@ -35,10 +35,14 @@ export default function page() {
 
     try {
       const walletAddress =
-        userWalletAddress || localStorage.getItem('userPublicAddress');
+        userWalletAddress ||
+        (typeof window !== 'undefined' &&
+          localStorage.getItem('userPublicAddress'));
 
       const userAccessToken =
-        userToken || window.localStorage.getItem('userAccessToken');
+        userToken ||
+        (typeof window !== 'undefined' &&
+          window.localStorage.getItem('userAccessToken'));
       await fetch(
         `https://user-backend-402016.el.r.appspot.com/user/api/permissions/${walletAddress}`,
         {

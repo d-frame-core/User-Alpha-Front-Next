@@ -24,7 +24,9 @@ export default function Profile() {
   const router = useRouter();
   async function getUserData() {
     const walletAddress =
-      userWalletAddress || window.localStorage.getItem('userPublicAddress');
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
     toast.loading('Fetching User Details', { id: '1' });
     await fetch(
       `https://user-backend-402016.el.r.appspot.com/user/api/user/${walletAddress}`,

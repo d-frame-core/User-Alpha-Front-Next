@@ -7,8 +7,6 @@ import Web3 from 'web3';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import toast from 'react-hot-toast';
 import { dframeABI, dframeAddress } from '@/utils/Utils';
-import TransactionDetails from '@/components/TransactionDetails';
-import Button from '@/components/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useRouter } from 'next/navigation';
@@ -266,11 +264,6 @@ export default function SellDFT() {
     getUserData();
   }, []);
 
-  const formatDate = (dateString: string): string => {
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    return new Date(dateString).toLocaleDateString('en-GB', options as any);
-  };
-
   return (
     <div className='flex'>
       <Sidebar />
@@ -319,13 +312,17 @@ export default function SellDFT() {
                     {walletBalance} DFT
                   </span>
                 </div>
-                <div
-                  className=''
-                  onClick={copyWalletAddress}>
-                  {walletAddress.slice(0, 7) + '...' + walletAddress.slice(-7)}
+                {walletAddress && (
+                  <div
+                    className=''
+                    onClick={copyWalletAddress}>
+                    {walletAddress.slice(0, 7) +
+                      '...' +
+                      walletAddress.slice(-7)}
 
-                  <ContentCopyIcon className='ml-2 text-purple-400 text-lg cursor-pointer font-semibold' />
-                </div>
+                    <ContentCopyIcon className='ml-2 text-purple-400 text-lg cursor-pointer font-semibold' />
+                  </div>
+                )}
               </div>
               <div className='bg-white w-full text-center rounded-lg flex-col py-3 md:text-sm text-xl'>
                 <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>

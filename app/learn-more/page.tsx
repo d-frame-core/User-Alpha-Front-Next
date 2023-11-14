@@ -12,7 +12,9 @@ export default function Page() {
   const [learnMoreData, setLearnMoreData] = useState([]);
   async function getLearnMoreData() {
     const userAccessToken =
-      userToken || window.localStorage.getItem('userAccessToken');
+      userToken ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userAccessToken'));
     await fetch(
       'https://user-backend-402016.el.r.appspot.com/learnmore/api/learnmore/getall',
       {
