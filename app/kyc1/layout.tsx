@@ -1,13 +1,13 @@
 /** @format */
 
 export const metadata = {
-  title: 'D Frame - Help',
+  title: 'D Frame - KYC1',
   description:
     'Join D Frame for the Universal Basic Income (UBI) revolution on Blockchain',
   keywords: [],
 };
 
-export default function HelpLayout({
+export default function KYC1Layout({
   children,
 }: {
   children: React.ReactNode;

@@ -104,7 +104,7 @@ export default function SitesByTags() {
                 </div>
               ))}
           </div>
-          <div className='absolute md:top-44 top-52 md:right-12 right-5'>
+          <div className='absolute md:top-48 top-52 md:right-14 right-5'>
             <div
               className={`border py-2 px-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'web3'
