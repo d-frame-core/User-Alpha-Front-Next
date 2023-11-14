@@ -62,7 +62,7 @@ export default function WeeklyRewards() {
   useEffect(() => {
     fetchWeeklyRewards();
   }, []);
-  console.log(weeklyRewards);
+
   return (
     <div className='flex flex-col w-full'>
       <div className='md:text-3xl text-5xl font-semibold pb-5'>

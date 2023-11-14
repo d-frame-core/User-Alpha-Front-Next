@@ -182,14 +182,18 @@ export default function Wallet() {
                     {walletBalance} DFT
                   </span>
                 </div>
-                <div className=''>
-                  {walletAddress.slice(0, 7) + '...' + walletAddress.slice(-7)}
+                {walletAddress && (
+                  <div className=''>
+                    {walletAddress.slice(0, 7) +
+                      '...' +
+                      walletAddress.slice(-7)}
 
-                  <ContentCopyIcon
-                    className='ml-2 text-purple-400 text-lg cursor-pointer font-semibold'
-                    onClick={copyWalletAddress}
-                  />
-                </div>
+                    <ContentCopyIcon
+                      className='ml-2 text-purple-400 text-lg cursor-pointer font-semibold'
+                      onClick={copyWalletAddress}
+                    />
+                  </div>
+                )}
               </div>
               <div className='bg-white w-full text-center rounded-lg flex-col py-3 md:text-sm text-xl'>
                 <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>

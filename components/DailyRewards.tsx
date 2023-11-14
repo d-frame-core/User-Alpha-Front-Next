@@ -62,7 +62,6 @@ export default function DailyRewards() {
   useEffect(() => {
     fetchDailyRewards();
   }, []);
-  console.log(dailyRewards);
   return (
     <div className='flex flex-col w-full'>
       <div className='md:text-3xl text-5xl font-semibold pb-5'>

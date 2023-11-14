@@ -13,11 +13,15 @@ export default function SitesByVisits() {
   const [topSitesByVisits, setTopSitesByVisits] = useState([]);
   const { userWalletAddress, userToken } = useContext(AppContext);
   const walletAddress =
-    userWalletAddress || window.localStorage.getItem('userPublicAddress');
+    userWalletAddress ||
+    (typeof window !== 'undefined' &&
+      window.localStorage.getItem('userPublicAddress'));
 
   async function fetchTopSitesByVisits() {
     const userAccessToken =
-      userToken || window.localStorage.getItem('userAccessToken');
+      userToken ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userAccessToken'));
     toast.loading('Fetching top Sites', { id: '1' });
     await fetch(
       `https://user-backend-402016.el.r.appspot.com/user/api/user-data/top-sites/${walletAddress}`,

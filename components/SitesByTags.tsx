@@ -19,7 +19,9 @@ export default function SitesByTags() {
   ]);
   const { userWalletAddress, userToken } = useContext(AppContext);
   const walletAddress =
-    userWalletAddress || window.localStorage.getItem('userPublicAddress');
+    userWalletAddress ||
+    (typeof window !== 'undefined' &&
+      window.localStorage.getItem('userPublicAddress'));
 
   const [toggleMenu, setToggleMenu] = useState('web3');
 
