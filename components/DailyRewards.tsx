@@ -23,7 +23,7 @@ export default function DailyRewards() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
     await fetch(
-      `http://localhost:8080/rewards/api/rewards/daily/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/rewards/api/rewards/daily/${walletAddress}`,
       {
         method: 'GET',
         cache: 'no-cache',

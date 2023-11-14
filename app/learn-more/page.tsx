@@ -13,12 +13,15 @@ export default function Page() {
   async function getLearnMoreData() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
-    await fetch('http://localhost:8080/learnmore/api/learnmore/getall', {
-      method: 'GET',
-      cache: 'no-cache',
+    await fetch(
+      'https://user-backend-402016.el.r.appspot.com/learnmore/api/learnmore/getall',
+      {
+        method: 'GET',
+        cache: 'force-cache',
 
-      headers: { Authorization: `${userAccessToken}` },
-    })
+        headers: { Authorization: `${userAccessToken}` },
+      }
+    )
       .then((response: any) => response.json())
       .then((data: any) => {
         console.log('FETCHED');

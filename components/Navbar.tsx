@@ -13,7 +13,6 @@ const Navbar: React.FC = () => {
     window.localStorage.removeItem('dframeUserId');
     window.localStorage.removeItem('userAccessToken');
     window.localStorage.removeItem('dframeUserData');
-    window.localStorage.removeItem('userPublicAddress');
     try {
       await window.ethereum.request({
         method: 'eth_requestAccounts',

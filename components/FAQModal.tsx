@@ -14,11 +14,14 @@ const FAQModal = () => {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
 
-    await fetch('http://localhost:8080/faq/api/faq/getall', {
-      method: 'GET',
-      cache: 'force-cache',
-      headers: { Authorization: `${userAccessToken}` },
-    })
+    await fetch(
+      'https://user-backend-402016.el.r.appspot.com/faq/api/faq/getall',
+      {
+        method: 'GET',
+        cache: 'force-cache',
+        headers: { Authorization: `${userAccessToken}` },
+      }
+    )
       .then((response: any) => response.json())
       .then((data: any) => {
         setFaqData(data);

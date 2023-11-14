@@ -43,16 +43,19 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
 
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/user/api/add-tag/${walletAddress}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-      body: JSON.stringify({
-        tag: inputValue,
-      }),
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/add-tag/${walletAddress}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+        body: JSON.stringify({
+          tag: inputValue,
+        }),
+      }
+    )
       .then((response) => {
         toast.success('Added Tag', { id: '1' });
         console.log(response);
@@ -73,10 +76,13 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
     const walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
 
-    await fetch(`http://localhost:8080/user/api/user/${walletAddress}`, {
-      method: 'GET',
-      cache: 'no-cache',
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/user/${walletAddress}`,
+      {
+        method: 'GET',
+        cache: 'no-cache',
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);
@@ -168,16 +174,19 @@ const AddTagsModal: React.FC<AddTagsModalProps> = ({ open, onClose }) => {
 
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/user/api/delete-tag/${walletAddress}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-      body: JSON.stringify({
-        tag: String(item),
-      }),
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/delete-tag/${walletAddress}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+        body: JSON.stringify({
+          tag: String(item),
+        }),
+      }
+    )
       .then((response) => {
         toast.success('Deleted Tag', { id: '3' });
         console.log(response);

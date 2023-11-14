@@ -23,10 +23,10 @@ export default function WeeklyRewards() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
     await fetch(
-      `http://localhost:8080/rewards/api/rewards/weekly/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/rewards/api/rewards/weekly/${walletAddress}`,
       {
         method: 'GET',
-        cache: 'no-cache',
+        cache: 'force-cache',
         headers: {
           Authorization: `${userAccessToken}`,
         },

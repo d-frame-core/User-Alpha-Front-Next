@@ -42,9 +42,10 @@ export default function Survey() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
     await fetch(
-      `http://localhost:8080/user/api/get-unseen-surveys/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/user/api/get-unseen-surveys/${walletAddress}`,
       {
         method: 'GET',
+        cache: 'no-cache',
         headers: {
           Authorization: `${userAccessToken}`,
         },
@@ -78,7 +79,7 @@ export default function Survey() {
       userToken || window.localStorage.getItem('userAccessToken');
     // console.log(options);
     await fetch(
-      `http://localhost:8080/survey/api/update-survey/${
+      `https://user-backend-402016.el.r.appspot.com/survey/api/update-survey/${
         (particularSurveyData as any)._id
       }`,
       {
@@ -117,7 +118,7 @@ export default function Survey() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
     await fetch(
-      `http://localhost:8080/survey/api/get-surveys/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/survey/api/get-surveys/${walletAddress}`,
       {
         method: 'POST',
         headers: {
@@ -152,9 +153,10 @@ export default function Survey() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
     await fetch(
-      `http://localhost:8080/survey/api/rewards-data/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/survey/api/rewards-data/${walletAddress}`,
       {
         method: 'GET',
+        cache: 'no-cache',
         headers: {
           'Content-type': 'application/json',
           Authorization: `${userAccessToken}`,

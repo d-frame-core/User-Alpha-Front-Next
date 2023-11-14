@@ -26,10 +26,13 @@ export default function Profile() {
     const walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
     toast.loading('Fetching User Details', { id: '1' });
-    await fetch(`http://localhost:8080/user/api/user/${walletAddress}`, {
-      method: 'GET',
-      cache: 'no-cache',
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/user/${walletAddress}`,
+      {
+        method: 'GET',
+        cache: 'no-cache',
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);
@@ -90,13 +93,16 @@ export default function Profile() {
       userToken || window.localStorage.getItem('userAccessToken');
     const formData = new FormData();
     formData.append('profile-image', selectedFile);
-    await fetch(`http://localhost:8080/user/api/image/${walletAddress}`, {
-      method: 'PATCH',
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/image/${walletAddress}`,
+      {
+        method: 'PATCH',
 
-      body: formData,
+        body: formData,
 
-      headers: { Authorization: `${userAccessToken}` },
-    })
+        headers: { Authorization: `${userAccessToken}` },
+      }
+    )
       .then((response) => {
         toast.success('Updated Profile Image', { id: '4' });
         console.log(response);

@@ -71,16 +71,19 @@ export default function SellDFT() {
 
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/dex/api/dft-sale/${walletAddress}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-      body: JSON.stringify({
-        amount: Number(sendDFTAmount),
-      }),
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/dex/api/dft-sale/${walletAddress}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+        body: JSON.stringify({
+          amount: Number(sendDFTAmount),
+        }),
+      }
+    )
       .then((response) => {
         toast.success('Listed DFT', { id: '1' });
         console.log(response);
@@ -102,16 +105,19 @@ export default function SellDFT() {
 
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/dex/api/dft-sale/${walletAddress}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-      body: JSON.stringify({
-        amount: Number(sendDFTAmount),
-      }),
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/dex/api/dft-sale/${walletAddress}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+        body: JSON.stringify({
+          amount: Number(sendDFTAmount),
+        }),
+      }
+    )
       .then((response) => {
         toast.success('Deleted Listing', { id: '2' });
         console.log(response);
@@ -142,16 +148,19 @@ export default function SellDFT() {
 
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/dex/api/dft-sale/${walletAddress}`, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-      body: JSON.stringify({
-        amount: Number(sendDFTAmount),
-      }),
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/dex/api/dft-sale/${walletAddress}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+        body: JSON.stringify({
+          amount: Number(sendDFTAmount),
+        }),
+      }
+    )
       .then((response) => {
         toast.success('Edited Listing', { id: '3' });
         console.log(response);
@@ -196,10 +205,13 @@ export default function SellDFT() {
     const walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
 
-    await fetch(`http://localhost:8080/user/api/user/${walletAddress}`, {
-      method: 'GET',
-      cache: 'no-cache',
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/user/${walletAddress}`,
+      {
+        method: 'GET',
+        cache: 'no-cache',
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.user);
@@ -219,26 +231,32 @@ export default function SellDFT() {
   }
 
   async function getSaleHistory() {
+    toast.loading('Fetching Sale History', { id: '1' });
     const walletAddress =
       userWalletAddress || window.localStorage.getItem('userPublicAddress');
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
 
-    await fetch(`http://localhost:8080/dex/api/pastsale/${walletAddress}`, {
-      method: 'GET',
-      cache: 'no-cache',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/dex/api/pastsale/${walletAddress}`,
+      {
+        method: 'GET',
+        cache: 'force-cache',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         // console.log(data.user);
+        toast.success('Fetched Sale History', { id: '1' });
         setPastTransactions(data);
       })
       .catch((error) => {
+        toast.error('Error Fetching Sale History', { id: '1' });
         console.log(error);
       });
   }

@@ -23,7 +23,7 @@ export default function Wallet() {
   async function getPastTransactions() {
     toast.loading('Fetching Past Transactions', { id: '5' });
     await fetch(
-      `http://localhost:8080/wallet/past-transactions/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/wallet/past-transactions/${walletAddress}`,
       {
         method: 'GET',
         cache: 'force-cache',

@@ -56,10 +56,13 @@ export default function KYC1() {
     formData.append('idProof', governmentProof1);
     formData.append('addressProof', governmentProof2);
     formData.append('userPhoto', userPhoto);
-    await fetch(`http://localhost:8080/user/api/kyc3/${walletAddress}`, {
-      method: 'PATCH',
-      body: formData,
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/kyc3/${walletAddress}`,
+      {
+        method: 'PATCH',
+        body: formData,
+      }
+    )
       .then((response) => {
         toast.success('Updated KYC Level-3 Details', { id: '1' });
         console.log(response);

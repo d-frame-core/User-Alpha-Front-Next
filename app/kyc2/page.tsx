@@ -62,14 +62,17 @@ export default function KYC2() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
 
-    await fetch(`http://localhost:8080/user/api/kyc2/${walletAddress}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-      body: JSON.stringify(formData),
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/kyc2/${walletAddress}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((response) => {
         toast.success('Updated KYC Level-2 Details', { id: '1' });
         console.log(response);

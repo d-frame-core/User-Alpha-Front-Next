@@ -20,10 +20,10 @@ export default function SitesByVisits() {
       userToken || window.localStorage.getItem('userAccessToken');
     toast.loading('Fetching top Sites', { id: '1' });
     await fetch(
-      `http://localhost:8080/user/api/user-data/top-times/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/user/api/user-data/top-times/${walletAddress}`,
       {
         method: 'GET',
-        cache: 'no-cache',
+        cache: 'force-cache',
 
         headers: { Authorization: `${userAccessToken}` },
       }

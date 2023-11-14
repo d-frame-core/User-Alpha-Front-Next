@@ -92,20 +92,23 @@ const PhoneNumberModal: React.FC<PhoneNumberModalProps> = ({
           userToken || window.localStorage.getItem('userAccessToken');
 
         toast.loading('Updating Phone Number', { id: '2' });
-        await fetch(`http://localhost:8080/user/api/kyc1/${walletAddress}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: `${userAccessToken}`,
-          },
-          body: JSON.stringify({
-            firstName: userData.kyc1.details.firstName,
-            lastName: userData.kyc1.details.lastName,
-            userName: userData.kyc1.details.userName,
-            phoneNumber: phoneNumber,
-            email: userData.kyc1.details.email,
-          }),
-        })
+        await fetch(
+          `https://user-backend-402016.el.r.appspot.com/user/api/kyc1/${walletAddress}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-type': 'application/json',
+              Authorization: `${userAccessToken}`,
+            },
+            body: JSON.stringify({
+              firstName: userData.kyc1.details.firstName,
+              lastName: userData.kyc1.details.lastName,
+              userName: userData.kyc1.details.userName,
+              phoneNumber: phoneNumber,
+              email: userData.kyc1.details.email,
+            }),
+          }
+        )
           .then((response) => {
             toast.success('Updated Phone Number', { id: '2' });
           })

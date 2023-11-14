@@ -40,7 +40,7 @@ export default function page() {
       const userAccessToken =
         userToken || window.localStorage.getItem('userAccessToken');
       await fetch(
-        `http://localhost:8080/user/api/permissions/${walletAddress}`,
+        `https://user-backend-402016.el.r.appspot.com/user/api/permissions/${walletAddress}`,
         {
           method: 'PATCH',
           headers: {
@@ -62,7 +62,7 @@ export default function page() {
         console.log(response);
         setTimeout(() => {
           getPermissions();
-        }, 2000);
+        }, 1000);
       });
 
       // You can display a succesFs message or redirect the user as needed
@@ -80,10 +80,13 @@ export default function page() {
     const walletAddress =
       userWalletAddress || localStorage.getItem('userPublicAddress');
     toast.loading('Fetching Permissions', { id: '2' });
-    await fetch(`http://localhost:8080/user/api/user/${walletAddress}`, {
-      method: 'GET',
-      cache: 'no-cache',
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/user/${walletAddress}`,
+      {
+        method: 'GET',
+        cache: 'no-cache',
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         toast.success('Fetched Permissions', { id: '2' });
