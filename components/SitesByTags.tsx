@@ -91,12 +91,12 @@ export default function SitesByTags() {
         Top Sites by Tags
       </div>
       {topSitesByTags.length > 0 ? (
-        <div className='flex flex-row justify-between w-full '>
+        <div className='flex flex-row justify-between w-full md:-mt-5 '>
           <div className='flex flex-col gap-5 '>
-            <div className='md:-mt-5 md:block hidden '>
+            <div className='md:-mt-10 md:block hidden '>
               {Charts(topSitesByTags as any[], 'visits', h, w, ma)}
             </div>
-            <div className='bg-white text-sm w-[128.6%] overflow-y-auto  h-40'>
+            <div className='bg-white text-sm overflow-y-auto  h-40'>
               {topSitesByTags &&
                 topSitesByTags.map((item: any) => (
                   <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>
@@ -108,7 +108,7 @@ export default function SitesByTags() {
           </div>
           <div className='flex text-xl flex-col w-[10%] max-h-[57%] h-[57%] overflow-y-auto p-0 m-0'>
             <div
-              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
+              className={`border py-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'web3'
                   ? 'bg-white text-black  border-blue-900'
                   : 'bg-blue-900 text-white'

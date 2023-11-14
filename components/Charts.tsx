@@ -19,11 +19,11 @@ const COLORS = [
 ];
 const style = {
   top: '3vh',
-  right: '-4.2vw',
+  right: '-5vw',
   lineHeight: '30px',
   backgroundColor: 'white',
   padding: '4px',
-  fontSize: '13px',
+  fontSize: '16px',
   borderRadius: '5px',
 };
 

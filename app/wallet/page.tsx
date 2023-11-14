@@ -138,14 +138,16 @@ export default function Wallet() {
       <Sidebar />
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 h-[80vh]'>
         <div className='w-full'>
-          <h1 className='md:text-3xl text-5xl font-semibold mb-4'>Wallet</h1>
+          <h1 className='md:text-3xl text-5xl font-semibold md:pb-8 pb-16'>
+            Wallet
+          </h1>
           <div className='flex md:flex-row flex-col justify-evenly '>
             <div className='bg-white p-3 rounded-lg md:w-2/5 mx-auto w-11/12 flex justify-center items-center flex-col'>
               <div className='md:text-xl text-3xl pb-2 border-b-2 border-gray-300 text-center w-full font-semibold'>
                 Transactions
               </div>
               {pastTransactions && pastTransactions.length > 0 ? (
-                <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto md:h-80 md:max-h-80 h-96 max-h-96'>
+                <div className='border-b-2 border-gray-200 w-full text-lg text-center overflow-y-auto h-[22rem] max-h-[22rem]'>
                   {pastTransactions.map((event: any) => {
                     if (
                       event.returnValues.from.toString().toLowerCase() ===

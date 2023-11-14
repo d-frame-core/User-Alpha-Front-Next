@@ -88,7 +88,7 @@ export default function KYC1() {
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[82vh] h-[55vh]'>
         {userData?.kyc3.status === 'UNSUBMITTED' ? (
           <div className='w-full'>
-            <h1 className='md:text-3xl font-semibold mb-4 text-5xl'>
+            <h1 className='md:text-3xl font-semibold md:pb-8 pb-16 text-5xl'>
               KYC Level-3
             </h1>
             <div className='flex flex-col w-[75%] mx-auto justify-start'>

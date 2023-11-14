@@ -89,7 +89,7 @@ const ProfileDetails: React.FC<ButtonProps> = ({ title, value, editable }) => {
     }, 1000);
   };
   return (
-    <div className='flex md:text-xl md:text-left text-2xl md:my-4 my-10'>
+    <div className='flex md:text-xl md:text-left text-2xl md:my-6 my-10'>
       <div className='md:w-[30%] w-[38%]'>{title}</div>
       <div className='md:w-[5%] w-[2%]'>:</div>
       <div className='w-[50%] flex items-center'>

@@ -269,7 +269,7 @@ export default function SellDFT() {
       <Sidebar />
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[93vh]'>
         <div className='w-full'>
-          <h1 className='md:text-3xl text-5xl font-semibold md:mb-4 mb-10'>
+          <h1 className='md:text-3xl text-5xl font-semibold md:pb-8 pb-16'>
             Sell DFT
           </h1>
           <div className='flex md:flex-row flex-col justify-evenly '>
@@ -303,7 +303,7 @@ export default function SellDFT() {
                 </div>
               )}
             </div>
-            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 md:gap-4 gap-10'>
+            <div className='md:w-2/5 w-11/12 flex flex-col mx-auto mt-12 md:mt-0 md:gap-8 gap-10'>
               <div className='bg-white w-full text-center rounded-lg  flex-col py-4 md:text-lg text-2xl '>
                 <div className='mb-4'>
                   {' '}

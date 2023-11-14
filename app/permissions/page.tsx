@@ -117,7 +117,7 @@ export default function page() {
             Permissions
           </h1>
         </div>
-        <div className='flex flex-col md:gap-6 gap-10'>
+        <div className='flex flex-col md:gap-7 gap-10'>
           <div className='flex items-center md:text-lg text-2xl '>
             <h2 className='md:w-[18%] w-[30%]'>Browser Data</h2>
             <div className='w-[2%]'>:</div>
