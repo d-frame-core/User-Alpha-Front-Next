@@ -56,7 +56,7 @@ export default function SitesByVisits() {
       </div>
       {topSitesByVisits.length > 0 ? (
         <>
-          <div className='md:-mt-5 md:block hidden'>
+          <div className='md:-mt-5 ml-[10%] md:block hidden'>
             {Charts(topSitesByVisits as any[], 'visits', h, w, ma)}
           </div>
           <div className='bg-white text-sm w-full overflow-y-auto'>

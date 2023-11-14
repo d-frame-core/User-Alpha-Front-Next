@@ -50,15 +50,10 @@ export default function Analytics() {
             Sites Distribution
           </div>
         </div>
-        {toggleMenu === 'sites-distribution' ? (
-          <div className='mx-5 w-11/12 md:mx-auto bg-[#e3daf6] rounded flex md:flex-row flex-col p-3 pr-0 md:h-[75vh] h-[40vh] md:mt-0 mt-24'>
-            {contentComponent}
-          </div>
-        ) : (
-          <div className='mx-5 w-11/12 md:mx-auto bg-[#e3daf6] rounded flex md:flex-row flex-col p-3  md:h-[75vh] h-[40vh] md:mt-0 mt-24'>
-            {contentComponent}
-          </div>
-        )}
+
+        <div className='mx-5 w-11/12 md:mx-auto bg-[#e3daf6] rounded flex md:flex-row flex-col p-3  md:h-[75vh] h-[40vh] md:mt-0 mt-24'>
+          {contentComponent}
+        </div>
       </div>
     </div>
   );

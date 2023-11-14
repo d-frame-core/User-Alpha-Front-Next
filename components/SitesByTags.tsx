@@ -4,20 +4,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import Charts from './Charts';
 import { AppContext } from '@/context/Context';
 import { useMediaQuery } from '@mui/material';
-import toast from 'react-hot-toast';
 
 export default function SitesByTags() {
   const ma = useMediaQuery('(min-width:880px)');
   var h: number = 240;
-  var w: number = 640;
+  var w: number = 650;
   const [topSitesByTags, setTopSitesByTags] = useState([
-    { name: 'binance.com', visits: 5 },
+    { name: 'binancedsfasdf.com', visits: 5 },
     { name: 'mexc.com', visits: 10 },
     { name: 'bybit.com', visits: 5 },
     { name: 'wazirx.com', visits: 10 },
     { name: 'coindcx.com', visits: 10 },
   ]);
-  const { userWalletAddress, userToken } = useContext(AppContext);
+  const { userWalletAddress } = useContext(AppContext);
   const walletAddress =
     userWalletAddress ||
     (typeof window !== 'undefined' &&
@@ -28,87 +27,86 @@ export default function SitesByTags() {
   useEffect(() => {
     if (toggleMenu === 'sports') {
       setTopSitesByTags([
-        { name: 'ESPN', visits: 8 },
-        { name: 'NFL.com', visits: 5 },
-        { name: 'NBA.com', visits: 12 },
-        { name: 'FIFA.com', visits: 7 },
-        { name: 'Olympics.com', visits: 10 },
+        { name: 'https://www.espn.com', visits: 8 },
+        { name: 'https://www.nfl.com', visits: 5 },
+        { name: 'https://www.nba.com', visits: 12 },
+        { name: 'https://www.fifa.com', visits: 7 },
+        { name: 'https://www.olympics.com', visits: 10 },
       ]);
     } else if (toggleMenu === 'social') {
       setTopSitesByTags([
-        { name: 'Facebook', visits: 20 },
-        { name: 'Twitter', visits: 18 },
-        { name: 'Instagram', visits: 15 },
-        { name: 'LinkedIn', visits: 12 },
-        { name: 'Reddit', visits: 10 },
+        { name: 'https://www.facebook.com', visits: 20 },
+        { name: 'https://www.twitter.com', visits: 18 },
+        { name: 'https://www.instagram.com', visits: 15 },
+        { name: 'https://www.linkedin.com', visits: 12 },
+        { name: 'https://www.reddit.com', visits: 10 },
       ]);
     } else if (toggleMenu === 'food') {
       setTopSitesByTags([
-        { name: 'FoodNetwork.com', visits: 7 },
-        { name: 'AllRecipes.com', visits: 10 },
-        { name: 'Epicurious.com', visits: 5 },
-        { name: 'Tasty.co', visits: 8 },
-        { name: 'SeriousEats.com', visits: 6 },
+        { name: 'https://www.foodnetwork.com', visits: 7 },
+        { name: 'https://www.allrecipes.com', visits: 10 },
+        { name: 'https://www.epicurious.com', visits: 5 },
+        { name: 'https://www.tasty.co', visits: 8 },
+        { name: 'https://www.seriouseats.com', visits: 6 },
       ]);
     } else if (toggleMenu === 'crypto') {
       setTopSitesByTags([
-        { name: 'Coinbase', visits: 15 },
-        { name: 'Kraken', visits: 12 },
-        { name: 'Binance', visits: 20 },
-        { name: 'Bitfinex', visits: 8 },
-        { name: 'Gemini', visits: 10 },
+        { name: 'https://www.coinbase.com', visits: 15 },
+        { name: 'https://www.kraken.com', visits: 12 },
+        { name: 'https://www.binance.com', visits: 20 },
+        { name: 'https://www.bitfinex.com', visits: 8 },
+        { name: 'https://www.gemini.com', visits: 10 },
       ]);
     } else if (toggleMenu === 'news') {
       setTopSitesByTags([
-        { name: 'CNN', visits: 25 },
-        { name: 'BBC News', visits: 22 },
-        { name: 'Reuters', visits: 18 },
-        { name: 'The New York Times', visits: 20 },
-        { name: 'Al Jazeera', visits: 115 },
+        { name: 'https://www.cnn.com', visits: 25 },
+        { name: 'https://www.bbc.com/news', visits: 22 },
+        { name: 'https://www.reuters.com', visits: 18 },
+        { name: 'https://www.nytimes.com', visits: 20 },
+        { name: 'https://www.aljazeera.com', visits: 115 },
       ]);
     } else if (toggleMenu === 'stocks') {
       setTopSitesByTags([
-        { name: 'Yahoo Finance', visits: 18 },
-        { name: 'Bloomberg Markets', visits: 16 },
-        { name: 'MarketWatch', visits: 20 },
-        { name: 'The Motley Fool', visits: 14 },
-        { name: 'CNBC Markets', visits: 12 },
+        { name: 'https://www.yahoo.com/finance', visits: 18 },
+        { name: 'https://www.bloomberg.com/markets', visits: 16 },
+        { name: 'https://www.marketwatch.com', visits: 20 },
+        { name: 'https://www.fool.com', visits: 14 },
+        { name: 'https://www.cnbc.com/markets', visits: 12 },
       ]);
     } else {
       // For 'web3' or other cases, keep the default data
       setTopSitesByTags([
-        { name: 'binance.com', visits: 5 },
-        { name: 'mexc.com', visits: 10 },
-        { name: 'binance.com', visits: 5 },
-        { name: 'mexc.com', visits: 10 },
-        { name: 'mexc.com', visits: 10 },
+        { name: 'https://www.binance.com', visits: 5 },
+        { name: 'https://www.mexc.com', visits: 10 },
+        { name: 'https://www.binance.com', visits: 5 },
+        { name: 'https://www.mexc.com', visits: 10 },
+        { name: 'https://www.mexc.com', visits: 10 },
       ]);
     }
   }, [toggleMenu]);
+
   return (
-    <div className='flex flex-col w-full justify-between gap-0'>
+    <div className='flex flex-col justify-between w-full gap-4'>
       <div className='md:text-3xl text-4xl font-semibold'>
-        Top Sites by Tags
+        Top Sites By Tags
       </div>
       {topSitesByTags.length > 0 ? (
-        <div className='flex flex-row justify-between w-full md:-mt-5 '>
-          <div className='flex flex-col gap-5 '>
-            <div className='md:-mt-10 md:block hidden '>
-              {Charts(topSitesByTags as any[], 'visits', h, w, ma)}
-            </div>
-            <div className='bg-white text-sm overflow-y-auto  h-40'>
-              {topSitesByTags &&
-                topSitesByTags.map((item: any) => (
-                  <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>
-                    <div>{item.name}</div>
-                    <div>{item.visits} Times</div>
-                  </div>
-                ))}
-            </div>
+        <>
+          <div className='md:-mt-5 ml-[10%] md:block hidden'>
+            {Charts(topSitesByTags as any[], 'visits', h, w, ma)}
           </div>
-          <div className='flex text-xl flex-col w-[10%] max-h-[57%] h-[57%] overflow-y-auto p-0 m-0'>
+          <div className='bg-white text-sm w-full overflow-y-auto'>
+            {topSitesByTags &&
+              topSitesByTags.map((item: any) => (
+                <div className='md:py-3 py-5 border-b-2 border-gray-200 flex items-center justify-between md:px-20 px-2 md:text-sm text-xl'>
+                  <div>{item.name}</div>
+                  <div>{item.visits} Times</div>
+                </div>
+              ))}
+          </div>
+          <div className='absolute md:top-44 top-52 md:right-12 right-5'>
             <div
-              className={`border py-2 rounded text-center cursor-pointer text-sm ${
+              className={`border py-2 px-2 rounded text-center cursor-pointer text-sm ${
                 toggleMenu === 'web3'
                   ? 'bg-white text-black  border-blue-900'
                   : 'bg-blue-900 text-white'
@@ -162,7 +160,7 @@ export default function SitesByTags() {
               stocks
             </div>
           </div>
-        </div>
+        </>
       ) : (
         <div className='w-full h-full flex justify-center items-center text-3xl'>
           **Minimum 6 hours of data needed**
@@ -229,3 +227,62 @@ export default function SitesByTags() {
             </div>
           </div>
  */
+
+/**
+           * <div className='flex text-xl flex-col w-[10%] max-h-[57%] h-[57%] overflow-y-auto p-0 m-0'>
+            <div
+              className={`border py-2 rounded text-center cursor-pointer text-sm ${
+                toggleMenu === 'web3'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
+              }`}
+              onClick={() => setToggleMenu('web3')}>
+              Web3
+            </div>
+            <div
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
+                toggleMenu === 'sports'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
+              }`}
+              onClick={() => setToggleMenu('sports')}>
+              sports
+            </div>
+            <div
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
+                toggleMenu === 'social'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
+              }`}
+              onClick={() => setToggleMenu('social')}>
+              social
+            </div>
+            <div
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
+                toggleMenu === 'food'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
+              }`}
+              onClick={() => setToggleMenu('food')}>
+              food
+            </div>
+            <div
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
+                toggleMenu === 'news'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
+              }`}
+              onClick={() => setToggleMenu('news')}>
+              news
+            </div>
+            <div
+              className={`border  py-2 rounded text-center cursor-pointer text-sm ${
+                toggleMenu === 'stocks'
+                  ? 'bg-white text-black  border-blue-900'
+                  : 'bg-blue-900 text-white'
+              }`}
+              onClick={() => setToggleMenu('stocks')}>
+              stocks
+            </div>
+          </div>
+           */
