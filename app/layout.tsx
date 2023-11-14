@@ -6,7 +6,6 @@ import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import { AppContextProvider } from '@/context/Context';
 import Middleware from '@/middleware/Middleware';
-import '../global';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
