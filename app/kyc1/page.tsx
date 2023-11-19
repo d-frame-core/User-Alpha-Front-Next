@@ -19,6 +19,17 @@ export default function KYC1() {
   const { userWalletAddress, userData, userToken } = useContext(AppContext);
   const router = useRouter();
   async function submitKYC1() {
+    if (
+      firstName.length > 200 ||
+      lastName.length > 200 ||
+      userName.length > 200 ||
+      phoneNumber.length > 200 ||
+      email.length > 200
+    ) {
+      toast.error('Input fields should not exceed 200 characters');
+      return;
+    }
+
     if (!firstName || !lastName || !userName || !phoneNumber || !email) {
       toast.error('Fill All fields');
       return;

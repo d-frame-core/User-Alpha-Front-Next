@@ -50,6 +50,32 @@ export default function KYC2() {
   ];
 
   async function submitKYC2() {
+    for (const key in formData) {
+      if (Object.prototype.hasOwnProperty.call(formData, key)) {
+        const formDataKey = key as keyof typeof formData;
+        if (formData[formDataKey].length > 200) {
+          toast.error(
+            `Field "${formDataKey}" should not exceed 200 characters`
+          );
+          return;
+        }
+      }
+    }
+
+    if (
+      !formData.gender ||
+      !formData.country ||
+      !formData.state ||
+      !formData.city ||
+      !formData.street ||
+      !formData.doorno ||
+      !formData.pincode ||
+      !formData.dob ||
+      !formData.annualIncome
+    ) {
+      toast.error('Fill All fields');
+      return;
+    }
     if (!formData) {
       toast.error('Fill All fields');
       return;

@@ -55,6 +55,17 @@ export default function SellDFT() {
     }, 1000);
   }
   async function sendDFTFunction() {
+    const dftAmount = Number(sendDFTAmount);
+
+    if (dftAmount <= 0) {
+      toast.error('Please enter a valid amount');
+      return;
+    }
+
+    if ((dftAmount as any) > walletBalance) {
+      toast.error('Insufficient balance');
+      return;
+    }
     if (!/^\d+$/.test(sendDFTAmount)) {
       toast.error('Please enter a valid numeric amount');
       return;

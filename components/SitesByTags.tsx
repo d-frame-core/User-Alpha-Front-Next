@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Charts from './Charts';
 import { AppContext } from '@/context/Context';
 import { useMediaQuery } from '@mui/material';
+import toast from 'react-hot-toast';
 
 export default function SitesByTags() {
   const ma = useMediaQuery('(min-width:880px)');
@@ -60,18 +61,18 @@ export default function SitesByTags() {
     } else if (toggleMenu === 'news') {
       setTopSitesByTags([
         { name: 'https://www.cnn.com', visits: 25 },
-        { name: 'https://www.bbc.com/news', visits: 22 },
+        { name: 'https://www.bbc.com/', visits: 22 },
         { name: 'https://www.reuters.com', visits: 18 },
         { name: 'https://www.nytimes.com', visits: 20 },
         { name: 'https://www.aljazeera.com', visits: 115 },
       ]);
     } else if (toggleMenu === 'stocks') {
       setTopSitesByTags([
-        { name: 'https://www.yahoo.com/finance', visits: 18 },
-        { name: 'https://www.bloomberg.com/markets', visits: 16 },
+        { name: 'https://www.yahoo.com/', visits: 18 },
+        { name: 'https://www.bloomberg.com/', visits: 16 },
         { name: 'https://www.marketwatch.com', visits: 20 },
         { name: 'https://www.fool.com', visits: 14 },
-        { name: 'https://www.cnbc.com/markets', visits: 12 },
+        { name: 'https://www.cnbc.com/', visits: 12 },
       ]);
     } else {
       // For 'web3' or other cases, keep the default data
@@ -83,6 +84,10 @@ export default function SitesByTags() {
         { name: 'https://www.mexc.com', visits: 10 },
       ]);
     }
+
+    toast(
+      'This is DUMMY data, for your real time insights we need minimum 7 days of data'
+    );
   }, [toggleMenu]);
 
   return (
@@ -163,7 +168,7 @@ export default function SitesByTags() {
         </>
       ) : (
         <div className='w-full h-full flex justify-center items-center text-3xl'>
-          **Minimum 6 hours of data needed**
+          **Minimum 7 days of data needed**
         </div>
       )}
     </div>

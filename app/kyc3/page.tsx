@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 
-export default function KYC1() {
+export default function KYC3() {
   const { userWalletAddress, userData } = useContext(AppContext);
   const [userPhoto, setUserPhoto] = useState<any>(null);
   const [governmentProof1, setGovernmentProof1] = useState<any>(null);
@@ -18,7 +18,19 @@ export default function KYC1() {
 
   const uploadPhoto = async (e: any) => {
     const file = e.target.files[0];
+
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please upload an image file');
+        return;
+      }
+
+      // Check file size (limit to 5MB in this example)
+      const fileSizeLimit = 5 * 1024 * 1024; // 5MB in bytes
+      if (file.size > fileSizeLimit) {
+        toast.error('File size exceeds 5MB limit');
+        return;
+      }
       // Handle photo upload logic here
       console.log('Uploading photo:', file);
       setUserPhoto(file);
@@ -28,6 +40,17 @@ export default function KYC1() {
   const uploadGovernmentProof1 = async (e: any) => {
     const file = e.target.files[0];
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please upload an image file');
+        return;
+      }
+
+      // Check file size (limit to 5MB in this example)
+      const fileSizeLimit = 5 * 1024 * 1024; // 5MB in bytes
+      if (file.size > fileSizeLimit) {
+        toast.error('File size exceeds 5MB limit');
+        return;
+      }
       // Handle photo upload logic here
       console.log('Uploading photo:', file);
       setGovernmentProof1(file);
@@ -36,6 +59,17 @@ export default function KYC1() {
   const uploadGovernmentProof2 = async (e: any) => {
     const file = e.target.files[0];
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please upload an image file');
+        return;
+      }
+
+      // Check file size (limit to 5MB in this example)
+      const fileSizeLimit = 5 * 1024 * 1024; // 5MB in bytes
+      if (file.size > fileSizeLimit) {
+        toast.error('File size exceeds 5MB limit');
+        return;
+      }
       // Handle photo upload logic here
       console.log('Uploading photo:', file);
       setGovernmentProof2(file);

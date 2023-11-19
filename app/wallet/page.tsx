@@ -12,6 +12,7 @@ import Button from '@/components/Button';
 
 export default function Wallet() {
   const { userWalletAddress } = useContext(AppContext);
+  const { setUserData, userData } = useContext(AppContext);
   const walletAddress =
     userWalletAddress ||
     (typeof window !== 'undefined' &&
@@ -54,33 +55,114 @@ export default function Wallet() {
       toast.remove();
     }, 1000);
   }
+  useEffect(() => {
+    const storedData = window.localStorage.getItem('dframeUserData');
+    console.log('stored data', JSON.parse(storedData as any));
+    setUserData(JSON.parse(storedData as any));
+  }, []);
 
+  // async function sendDFTFunction() {
+  //   if (sendDFTAmount === '' || sendWalletAddress === '') {
+  //     toast.error('Please enter the required fields');
+  //     return;
+  //   }
+  //   toast.loading('Sending Transaction', { id: '1' });
+  //   const web3 = new Web3((window as any).ethereum);
+
+  //   // set the wallet address to query
+  //   const _walletAddress =
+  //     userWalletAddress ||
+  //     (typeof window !== 'undefined' &&
+  //       window.localStorage.getItem('userPublicAddress'));
+  //   // set the contract address of the DFRAME token
+
+  //   // get the DFRAME token contract instance
+  //   const dframeContract = new web3.eth.Contract(
+  //     dframeABI as any,
+  //     dframeAddress
+  //   );
+  //   const amount = web3.utils.toWei(sendDFTAmount.toString(), 'ether');
+
+  //   console.log(sendWalletAddress);
+  //   const tx = (dframeContract.methods as any)
+  //     .transfer(sendWalletAddress, amount)
+  //     .send({
+  //       from: userData?.publicAddress,
+  //       gasPrice: web3.utils.toWei('2000', 'gwei'), // increased gas price
+  //       gas: 21000, // this is just an example, you might need to adjust this value
+  //     })
+  //     .on('transactionHash', function (hash: any) {
+  //       console.log('Transaction Hash:', hash);
+  //     })
+  //     .on('receipt', function (receipt: any) {
+  //       console.log('Transaction Receipt:', receipt);
+  //     })
+  //     .on('confirmation', function (confirmationNumber: any, receipt: any) {
+  //       console.log('Confirmation Number:', confirmationNumber);
+  //       console.log('Transaction Receipt:', receipt);
+  //     })
+  //     .on('error', function (error: any) {
+  //       console.log('Error:', error.message);
+  //       alert('Error: ' + error.message);
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 3000);
+  //     });
+
+  //   // wait for the tx on metamask to be completed then recall the getBalance function to update the balance and getpastevents function
+  //   await tx;
+  //   toast.success('Sent Transaction', { id: '1' });
+  //   setTimeout(() => {
+  //     toast.remove();
+  //     setSendWalletAddress('');
+  //     setSendDFTAmount('');
+  //     getPastTransactions();
+  //   }, 1000);
+  // }
   async function sendDFTFunction() {
     if (sendDFTAmount === '' || sendWalletAddress === '') {
       toast.error('Please enter the required fields');
       return;
     }
+    if (parseFloat(sendDFTAmount) > parseFloat(walletBalance as any)) {
+      toast.error('Send DFT amount cannot exceed wallet balance');
+      return;
+    }
     toast.loading('Sending Transaction', { id: '1' });
     const web3 = new Web3((window as any).ethereum);
 
-    // set the wallet address to query
     const _walletAddress =
       userWalletAddress ||
       (typeof window !== 'undefined' &&
         window.localStorage.getItem('userPublicAddress'));
-    // set the contract address of the DFRAME token
 
-    // get the DFRAME token contract instance
     const dframeContract = new web3.eth.Contract(
-      dframeABI as any,
+      dframeABI,
       dframeAddress
-    );
+    ) as any;
     const amount = web3.utils.toWei(sendDFTAmount.toString(), 'ether');
 
-    const tx = (dframeContract.methods as any)
-      .transfer(sendWalletAddress, amount)
+    console.log('Sending Address:', _walletAddress);
+    console.log('Recipient Address:', sendWalletAddress);
+    console.log('Amount:', amount);
+
+    // Approve the spender to spend the specified amount of tokens
+    const tx1 = await dframeContract.methods
+      .approve(sendWalletAddress.trim(), amount)
       .send({
         from: _walletAddress,
+        gasPrice: web3.utils.toWei('2000', 'gwei'),
+        gas: 21000,
+      });
+    await tx1;
+
+    // Transfer the approved tokens
+    const tx = dframeContract.methods
+      .transfer(sendWalletAddress.trim(), amount)
+      .send({
+        from: _walletAddress,
+        gasPrice: web3.utils.toWei('2000', 'gwei'),
+        gas: 21000,
       })
       .on('transactionHash', function (hash: any) {
         console.log('Transaction Hash:', hash);
@@ -100,7 +182,6 @@ export default function Wallet() {
         }, 3000);
       });
 
-    // wait for the tx on metamask to be completed then recall the getBalance function to update the balance and getpastevents function
     await tx;
     toast.success('Sent Transaction', { id: '1' });
     setTimeout(() => {
@@ -157,6 +238,7 @@ export default function Wallet() {
                         <TransactionDetails
                           event={event}
                           sent={true}
+                          key={event.transactionHash}
                         />
                       );
                     } else {
@@ -164,6 +246,7 @@ export default function Wallet() {
                         <TransactionDetails
                           event={event}
                           sent={false}
+                          key={event.transactionHash}
                         />
                       );
                     }

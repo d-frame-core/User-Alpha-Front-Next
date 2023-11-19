@@ -13,6 +13,7 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import PollIcon from '@mui/icons-material/Poll';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import StorefrontIcon from '@mui/icons-material/Storefront';
+import DataObjectIcon from '@mui/icons-material/DataObject';
 const Sidebar: React.FC = () => {
   const router = useRouter();
   const { toggleTab, setToggleTab } = useContext(AppContext);
@@ -202,6 +203,24 @@ const Sidebar: React.FC = () => {
             <div className='pl-7 flex gap-4'>
               <StorefrontIcon />
               Sell DFT
+            </div>
+          )}
+        </div>
+        <div
+          className={`flex justify-start ml-6 py-2 mt-1 cursor-pointer`}
+          onClick={() => {
+            setToggleTab('my-data');
+            router.push('/my-data');
+          }}>
+          {toggleTab == 'my-data' ? (
+            <div className='bg-white w-full gap-4 rounded-l text-black flex justify-start pl-7 py-1'>
+              <DataObjectIcon />
+              Stored Data
+            </div>
+          ) : (
+            <div className='pl-7 flex gap-4'>
+              <DataObjectIcon />
+              Stored Data
             </div>
           )}
         </div>
