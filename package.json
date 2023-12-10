@@ -20,6 +20,7 @@
     "dayjs": "^1.11.10",
     "encoding": "^0.1.13",
     "firebase": "^10.5.1",
+    "jspdf": "^2.5.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

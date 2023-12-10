@@ -274,7 +274,7 @@ export default function Survey() {
                   <div className='text-center text-xl font-semibold pb-1 border-b-2 border-gray-200'>
                     More Surveys
                   </div>
-                  {(allSurveyData as any).map((item: any) => (
+                  {(allSurveyData as any).map((item: any, index: any) => (
                     <div
                       className={`bg-purple-200 flex flex-col gap-0 w-11/12 mx-auto rounded-lg text-sm md:my-4 my-6 cursor-pointer hover:bg-purple-400 ${
                         item._id === (particularSurveyData as any)._id
@@ -282,7 +282,7 @@ export default function Survey() {
                           : ''
                       }`}
                       onClick={() => setParticularSurveyData(item)}
-                      key={item._id}>
+                      key={index}>
                       <div className='text-center text-lg'>
                         <div>{item.surveyName}</div>
                       </div>

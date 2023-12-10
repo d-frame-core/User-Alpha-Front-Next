@@ -11,7 +11,10 @@ declare global {
     localStorage: Storage;
   }
 }
-
+interface Window {
+  ethereum: any;
+  localStorage: Storage;
+}
 export default function Middleware() {
   const { setUserData } = useContext(AppContext);
 
@@ -48,14 +51,14 @@ export default function Middleware() {
   };
 
   const checkMetamaskConnection = () => {
-    if (!(window as any).ethereum?.selectedAddress) {
+    if (!(window as Window).ethereum?.selectedAddress) {
       // Metamask wallet disconnected, redirect to root route
       router.push('/');
     }
   };
 
   const handleWalletDisconnect = () => {
-    if (!(window as any).ethereum?.selectedAddress) {
+    if (!(window as Window).ethereum?.selectedAddress) {
       // Metamask wallet disconnected
       router.push('/');
     }
@@ -63,10 +66,10 @@ export default function Middleware() {
 
   useEffect(() => {
     // Listen for changes in the selected address property
-    if ((window as any).ethereum) {
-      (window as any).ethereum.on('accountsChanged', handleWalletDisconnect);
+    if ((window as Window).ethereum) {
+      (window as Window).ethereum.on('accountsChanged', handleWalletDisconnect);
     }
-  }, [(window as any).ethereum]);
+  }, []);
   useEffect(() => {
     connectToPolygonMainnet();
     checkMetamaskConnection();
