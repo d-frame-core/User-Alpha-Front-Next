@@ -155,7 +155,7 @@ export default function page() {
                     <FormControlLabel
                       value='IPFS'
                       control={<Radio />}
-                      label='Blockchain'
+                      label='Blockchain (IPFS)'
                     />
                   </div>
                 </RadioGroup>
