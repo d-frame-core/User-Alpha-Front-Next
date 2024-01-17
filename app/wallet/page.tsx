@@ -24,25 +24,36 @@ export default function Wallet() {
   const [walletBalance, setWalletBalance] = useState<String>('');
 
   async function getPastTransactions() {
-    toast.loading('Fetching Past Transactions', { id: '5' });
-    await fetch(
-      `https://user-backend-402016.el.r.appspot.com/wallet/past-transactions/${walletAddress}`,
-      {
-        method: 'GET',
-        cache: 'force-cache',
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setPastTransactions(data.pastTransactions);
-        toast.success('Fetched Past Transactions', { id: '5' });
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.loading('Fetching Past Transactions', { id: '5' });
-      });
+    const walletAddress =
+      userWalletAddress ||
+      (typeof window !== 'undefined' &&
+        window.localStorage.getItem('userPublicAddress'));
+    console.log(walletAddress);
+    toast.loading(`Fetching Past Transactions`, {
+      id: '5',
+    });
+    if (walletAddress) {
+      await fetch(
+        `https://user-backend-402016.el.r.appspot.com/wallet/past-transactions/${walletAddress}`,
+        {
+          method: 'GET',
+          cache: 'force-cache',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPastTransactions(data.pastTransactions);
+          toast.success('Fetched Past Transactions', { id: '5' });
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error('Error Fetching Past Transactions', { id: '5' });
+        });
+    }
   }
-
   useEffect(() => {
     getPastTransactions();
     getBalance();

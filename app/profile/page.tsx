@@ -132,16 +132,14 @@ export default function Profile() {
           </h1>
           <div className='flex md:flex-row flex-col justify-evenly w-full'>
             <div>
-              <Image
+              <img
                 alt='Image'
                 src={
                   userData?.profileImage.length > 1
                     ? userData?.profileImage
                     : '/assets/dframe1.png'
                 }
-                width={160}
-                height={140}
-                className='rounded-full border-4 border-purple-500 max-h-[25vh] mx-auto hover:opacity-75 cursor-pointer'
+                className='rounded-full border-4 border-purple-500 mx-auto hover:opacity-75 cursor-pointer w-64'
                 onClick={handleImageClick}
               />
               <input

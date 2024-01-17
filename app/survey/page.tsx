@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 export default function Survey() {
   const { userWalletAddress, userId, userToken, setToggleTab } =
     useContext(AppContext);
-  const [unseenSurveys, setUnseenSurveys] = useState([]);
+  const [unseenSurveys, setUnseenSurveys] = useState<any>(null);
   const [particularSurveyData, setParticularSurveyData] = useState();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [allSurveyData, setAllSurveyData] = useState();
@@ -42,7 +42,7 @@ export default function Survey() {
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
     await fetch(
-      `https://user-backend-402016.el.r.appspot.com/user/api/get-unseen-surveys/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/user/api/get-unseen-survey-ids/${walletAddress}`,
       {
         method: 'GET',
         cache: 'no-cache',
@@ -53,8 +53,8 @@ export default function Survey() {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log('IDs', data);
         if (data !== null) {
-          console.log('IDs', data);
           setUnseenSurveys(data);
         }
       })
@@ -165,7 +165,7 @@ export default function Survey() {
       (typeof window !== 'undefined' &&
         window.localStorage.getItem('userAccessToken'));
     await fetch(
-      `https://user-backend-402016.el.r.appspot.com/survey/api/rewards-data/${walletAddress}`,
+      `https://user-backend-402016.el.r.appspot.com/survey/api/reward/${walletAddress}`,
       {
         method: 'GET',
         cache: 'no-cache',
@@ -177,7 +177,9 @@ export default function Survey() {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data !== null) {
+          toast.success('Fetched Survey Rewards Data');
           setSurveyRewardsData(data);
         }
       })
@@ -191,11 +193,11 @@ export default function Survey() {
   }
   useEffect(() => {
     fetchLatestSurveys();
-    getSurveyRewardsData();
   }, []);
 
   useEffect(() => {
-    if (unseenSurveys.length > 0) {
+    if (unseenSurveys && (unseenSurveys as any).length > 0) {
+      getSurveyRewardsData();
       fetchUnseenSurveys();
     }
   }, [unseenSurveys]);
@@ -258,7 +260,7 @@ export default function Survey() {
                 <div>
                   Total Survey Answered :{' '}
                   {surveyRewardsData
-                    ? (surveyRewardsData as any).surveyCount
+                    ? (surveyRewardsData as any).surveysLength
                     : 0}{' '}
                 </div>
                 <div>

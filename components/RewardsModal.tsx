@@ -17,10 +17,13 @@ const Modal = ({ onClose, id, walletAddress }: ModalProps) => {
   async function fetchHistory() {
     const walletAddress = localStorage.getItem('userPublicAddress');
     const userAccessToken = window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/rewards/history/${walletAddress}`, {
-      method: 'GET',
-      cache: 'no-cache',
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/rewards/history/${walletAddress}`,
+      {
+        method: 'GET',
+        cache: 'no-cache',
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
@@ -37,15 +40,18 @@ const Modal = ({ onClose, id, walletAddress }: ModalProps) => {
   async function fetchRewards() {
     const walletAddress = localStorage.getItem('userPublicAddress');
     const userAccessToken = window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/rewards/pending/${walletAddress}`, {
-      method: 'GET',
-      cache: 'no-cache',
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/rewards/pending/${walletAddress}`,
+      {
+        method: 'GET',
+        cache: 'no-cache',
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         if (data.status !== 'PENDING') {
-          setRewardsData(data.data);
+          setRewardsData(data);
         }
       })
       .catch((error) => {
@@ -59,19 +65,23 @@ const Modal = ({ onClose, id, walletAddress }: ModalProps) => {
     const userMongoID =
       typeof window !== 'undefined' &&
       window.localStorage.getItem('dframeUserId');
-    await fetch(`http://localhost:8080/rewards/rewardRequests/create`, {
-      method: 'POST',
-      body: JSON.stringify({
-        publicAddress: walletAddress,
-        amount: rewardsData.userOneTimeRewards + rewardsData.userDailyRewards,
-        status: 'PENDING',
-        DframeUserId: userMongoID,
-      }),
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/rewards/rewardRequests/create`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          publicAddress: walletAddress,
+          amount:
+            rewardsData.userOneTimeRewards + rewardsData.totalDailyRewards,
+          status: 'PENDING',
+          DframeUserId: userMongoID,
+        }),
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         onClose();
@@ -115,7 +125,7 @@ const Modal = ({ onClose, id, walletAddress }: ModalProps) => {
                   <div>
                     One time rewards: {rewardsData.userOneTimeRewards} DFT
                   </div>
-                  <div>Daily rewards: {rewardsData.userDailyRewards} DFT</div>
+                  <div>Daily rewards: {rewardsData.totalDailyRewards} DFT</div>
                 </div>
               )}
               {!rewardsData && (

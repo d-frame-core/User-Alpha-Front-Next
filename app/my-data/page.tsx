@@ -16,12 +16,15 @@ export default function MyData() {
   async function fetchStoredData() {
     const walletAddress = localStorage.getItem('userPublicAddress');
     const userAccessToken = window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/user/api/user-data/${walletAddress}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `${userAccessToken}`,
-      },
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/user/api/user-data/${walletAddress}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `${userAccessToken}`,
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -49,6 +52,7 @@ export default function MyData() {
   const handleDropdownChange = (event: any) => {};
 
   async function handleDropdownChangeIPFS(event: any) {
+    console.log('DROPDOWN value', ipfsData);
     setDropdownValue(event.target.value);
     setIpfsData(duplicateIPFSData.slice(0, parseInt(event.target.value)));
   }
@@ -56,91 +60,93 @@ export default function MyData() {
     const doc = new jsPDF();
     let yOffset = 10;
 
-    duplicateGcpData.forEach((entry: any, index: any) => {
-      // Add date
-      doc.setFontSize(16);
-      //  doc.setFontStyle('bold');
-      doc.text(`Date: ${entry.dataDate}`, 10, yOffset);
-      yOffset += 10;
-
-      entry.urlData.forEach((urlEntry: any, urlIndex: any) => {
-        let timeSpent;
-        if (urlEntry.timespent.length > 1) {
-          const totalTimeSpent = urlEntry.timespent.reduce(
-            (a: any, b: any) => a + b,
-            0
-          );
-          const totalTimeSpentInSeconds = totalTimeSpent / 1000; // Convert from milliseconds to seconds
-          if (totalTimeSpentInSeconds < 60) {
-            timeSpent = `${totalTimeSpentInSeconds.toFixed(2)} seconds`;
-          } else if (
-            totalTimeSpentInSeconds >= 60 &&
-            totalTimeSpentInSeconds < 3600
-          ) {
-            const minutes = Math.floor(totalTimeSpentInSeconds / 60);
-            timeSpent = `${minutes} minute${minutes > 1 ? 's' : ''}`;
-          } else {
-            const hours = Math.floor(totalTimeSpentInSeconds / 3600);
-            const remainingMinutes = Math.floor(
-              (totalTimeSpentInSeconds % 3600) / 60
-            );
-            timeSpent = `${hours} hour${
-              hours > 1 ? 's' : ''
-            } and ${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}`;
-          }
-        } else {
-          const timespentInSeconds = urlEntry.timespent[0] / 1000; // Convert from milliseconds to seconds
-          if (timespentInSeconds < 60) {
-            timeSpent = `${timespentInSeconds.toFixed(2)} seconds`;
-          } else if (timespentInSeconds >= 60 && timespentInSeconds < 3600) {
-            const minutes = Math.floor(timespentInSeconds / 60);
-            timeSpent = `${minutes} minute${minutes > 1 ? 's' : ''}`;
-          } else {
-            const hours = Math.floor(timespentInSeconds / 3600);
-            const remainingMinutes = Math.floor(
-              (timespentInSeconds % 3600) / 60
-            );
-            timeSpent = `${hours} hour${
-              hours > 1 ? 's' : ''
-            } and ${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}`;
-          }
-        }
-
-        // Add URL link
-        doc.setFontSize(14);
-        //  doc.setFontStyle('normal');
-        doc.text(urlEntry.urlLink, 20, yOffset);
-        yOffset += 10;
-
-        // Add visit details
-        doc.setFontSize(12);
-        doc.text(
-          `Visited ${urlEntry.timestamps.length} time${
-            urlEntry.timestamps.length > 1 ? 's' : ''
-          } for ${timeSpent}.`,
-          30,
-          yOffset
-        );
-        yOffset += 10;
-
-        const isLastEntry =
-          index === gcpData.length - 1 && urlIndex === entry.urlData.length - 1;
-        if (!isLastEntry) {
-          // Add space between entries
-          yOffset += 10;
-
-          // Check if the next entry will be on a new page
-          if (yOffset >= doc.internal.pageSize.getHeight()) {
-            doc.addPage();
-            yOffset = 10;
-          }
-        }
-      });
-
-      // Add space between entries
-      yOffset += 10;
-    });
     const walletAddress = localStorage.getItem('userPublicAddress');
+    const pageHeight = doc.internal.pageSize.height;
+    const img = new Image();
+    img.src = './assets/dframe.png';
+    doc.addImage(img, 'PNG', 2, 5, 40, 30);
+    // doc.setFontSize(34);
+    // doc.setTextColor('blue');
+    // doc.text('D Frame - User Data', doc.internal.pageSize.getWidth() / 2, 25, {
+    //   align: 'center',
+    // });
+    yOffset += 30; // Adjust as per your requirement
+    doc.setFontSize(20);
+    doc.setTextColor('red');
+    doc.text(
+      `Your Browser Data for ${new Date().toLocaleDateString(
+        'en-GB'
+      )} \non Google Cloud (Centralised Server)`,
+      doc.internal.pageSize.getWidth() / 2,
+      yOffset,
+      { align: 'center' }
+    );
+    yOffset += 20; // Adjust as per your requirement
+    doc.setTextColor('black');
+    doc.setFontSize(16);
+    gcpData.forEach((urlEntry: any) => {
+      let timeSpent;
+      if (urlEntry.timespent.length > 1) {
+        const totalTimeSpent = urlEntry.timespent.reduce(
+          (a: any, b: any) => a + b,
+          0
+        );
+        const totalTimeSpentInSeconds = totalTimeSpent / 1000;
+
+        if (totalTimeSpentInSeconds < 60) {
+          timeSpent = `${totalTimeSpentInSeconds.toFixed(2)} seconds`;
+        } else if (
+          totalTimeSpentInSeconds >= 60 &&
+          totalTimeSpentInSeconds < 3600
+        ) {
+          const minutes = Math.floor(totalTimeSpentInSeconds / 60);
+          timeSpent = `${minutes} minute${minutes > 1 ? 's' : ''}`;
+        } else {
+          const hours = Math.floor(totalTimeSpentInSeconds / 3600);
+          const remainingMinutes = Math.floor(
+            (totalTimeSpentInSeconds % 3600) / 60
+          );
+          timeSpent = `${hours} hour${
+            hours > 1 ? 's' : ''
+          } and ${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}`;
+        }
+      } else {
+        const timespentInSeconds = urlEntry.timespent[0] / 1000;
+
+        if (timespentInSeconds < 60) {
+          timeSpent = `${timespentInSeconds.toFixed(2)} seconds`;
+        } else if (timespentInSeconds >= 60 && timespentInSeconds < 3600) {
+          const minutes = Math.floor(timespentInSeconds / 60);
+          timeSpent = `${minutes} minute${minutes > 1 ? 's' : ''}`;
+        } else {
+          const hours = Math.floor(timespentInSeconds / 3600);
+          const remainingMinutes = Math.floor((timespentInSeconds % 3600) / 60);
+          timeSpent = `${hours} hour${
+            hours > 1 ? 's' : ''
+          } and ${remainingMinutes} minute${remainingMinutes > 1 ? 's' : ''}`;
+        }
+      }
+
+      if (yOffset > pageHeight - 10) {
+        doc.addPage();
+        doc.addImage(img, 'PNG', 2, 5, 40, 30);
+        yOffset = 10;
+        yOffset += 30;
+      }
+
+      doc.text(
+        `You visited ${urlEntry.urlLink} for ${
+          urlEntry.timestamps.length < 2
+            ? `${urlEntry.timestamps.length} time for `
+            : `${urlEntry.timestamps.length} times for `
+        } ${timeSpent}`,
+        10,
+        yOffset
+      );
+
+      yOffset += 12;
+    });
+
     doc.save(`gcp_data_${walletAddress}.pdf`);
   };
   const handleDownloadIPFSData = () => {
@@ -252,7 +258,7 @@ export default function MyData() {
                 <h1 className='text-2xl font-semibold'>
                   Your Browser Data on Google Cloud (Centralised Server)
                 </h1>
-                <select
+                {/* <select
                   value={dropdownValue}
                   onChange={handleDropdownChange}
                   className='p-2 border border-gray-300 rounded'>
@@ -261,100 +267,85 @@ export default function MyData() {
                   <option value='25'>25</option>
                   <option value='10'>10</option>
                   <option value='5'>5</option>
-                </select>
+                </select> */}
               </div>
 
               {gcpData &&
                 gcpData.length > 0 &&
-                gcpData.map((entry: any, index: any) => (
-                  <div
-                    key={index}
-                    className='my-4 border-b-2 border-gray-600 w-full'>
-                    {gcpData.map((urlEntry: any, index: any) => {
-                      let timeSpent;
-                      if (urlEntry.timespent.length > 1) {
-                        const totalTimeSpent = urlEntry.timespent.reduce(
-                          (a: number, b: number) => a + b,
-                          0
-                        );
-                        const totalTimeSpentInSeconds = totalTimeSpent / 1000; // Convert from milliseconds to seconds
-                        if (totalTimeSpentInSeconds < 60) {
-                          timeSpent = `${totalTimeSpentInSeconds.toFixed(
-                            2
-                          )} seconds`;
-                        } else if (
-                          totalTimeSpentInSeconds >= 60 &&
-                          totalTimeSpentInSeconds < 3600
-                        ) {
-                          const minutes = Math.floor(
-                            totalTimeSpentInSeconds / 60
-                          );
-                          timeSpent = `${minutes} minute${
-                            minutes > 1 ? 's' : ''
-                          }`;
-                        } else {
-                          const hours = Math.floor(
-                            totalTimeSpentInSeconds / 3600
-                          );
-                          const remainingMinutes = Math.floor(
-                            (totalTimeSpentInSeconds % 3600) / 60
-                          );
-                          timeSpent = `${hours} hour${
-                            hours > 1 ? 's' : ''
-                          } and ${remainingMinutes} minute${
-                            remainingMinutes > 1 ? 's' : ''
-                          }`;
-                        }
-                      } else {
-                        const timespentInSeconds = urlEntry.timespent[0] / 1000; // Convert from milliseconds to seconds
-                        if (timespentInSeconds < 60) {
-                          timeSpent = `${timespentInSeconds.toFixed(
-                            2
-                          )} seconds`;
-                        } else if (
-                          timespentInSeconds >= 60 &&
-                          timespentInSeconds < 3600
-                        ) {
-                          const minutes = Math.floor(timespentInSeconds / 60);
-                          timeSpent = `${minutes} minute${
-                            minutes > 1 ? 's' : ''
-                          }`;
-                        } else {
-                          const hours = Math.floor(timespentInSeconds / 3600);
-                          const remainingMinutes = Math.floor(
-                            (timespentInSeconds % 3600) / 60
-                          );
-                          timeSpent = `${hours} hour${
-                            hours > 1 ? 's' : ''
-                          } and ${remainingMinutes} minute${
-                            remainingMinutes > 1 ? 's' : ''
-                          }`;
-                        }
-                      }
-
-                      return (
-                        <div
-                          key={index}
-                          className='py-3 text-lg pl-20'>
-                          <p>
-                            <Link
-                              href={urlEntry.urlLink}
-                              target='_blank'
-                              rel='noReferrer'
-                              className=' cursor-pointer'>
-                              {urlEntry.urlLink}
-                            </Link>{' '}
-                            visited{' '}
-                            {urlEntry.timestamps.length < 2
-                              ? `${urlEntry.timestamps.length} time for `
-                              : `${urlEntry.timestamps.length} times for `}
-                            {timeSpent}.
-                          </p>
-                        </div>
+                gcpData.map((urlEntry: any, index: any) => {
+                  let timeSpent;
+                  if (urlEntry.timespent.length > 1) {
+                    const totalTimeSpent = urlEntry.timespent.reduce(
+                      (a: number, b: number) => a + b,
+                      0
+                    );
+                    const totalTimeSpentInSeconds = totalTimeSpent / 1000; // Convert from milliseconds to seconds
+                    if (totalTimeSpentInSeconds < 60) {
+                      timeSpent = `${totalTimeSpentInSeconds.toFixed(
+                        2
+                      )} seconds`;
+                    } else if (
+                      totalTimeSpentInSeconds >= 60 &&
+                      totalTimeSpentInSeconds < 3600
+                    ) {
+                      const minutes = Math.floor(totalTimeSpentInSeconds / 60);
+                      timeSpent = `${minutes} minute${minutes > 1 ? 's' : ''}`;
+                    } else {
+                      const hours = Math.floor(totalTimeSpentInSeconds / 3600);
+                      const remainingMinutes = Math.floor(
+                        (totalTimeSpentInSeconds % 3600) / 60
                       );
-                    })}
-                  </div>
-                ))}
+                      timeSpent = `${hours} hour${
+                        hours > 1 ? 's' : ''
+                      } and ${remainingMinutes} minute${
+                        remainingMinutes > 1 ? 's' : ''
+                      }`;
+                    }
+                  } else {
+                    const timespentInSeconds = urlEntry.timespent[0] / 1000; // Convert from milliseconds to seconds
+                    if (timespentInSeconds < 60) {
+                      timeSpent = `${timespentInSeconds.toFixed(2)} seconds`;
+                    } else if (
+                      timespentInSeconds >= 60 &&
+                      timespentInSeconds < 3600
+                    ) {
+                      const minutes = Math.floor(timespentInSeconds / 60);
+                      timeSpent = `${minutes} minute${minutes > 1 ? 's' : ''}`;
+                    } else {
+                      const hours = Math.floor(timespentInSeconds / 3600);
+                      const remainingMinutes = Math.floor(
+                        (timespentInSeconds % 3600) / 60
+                      );
+                      timeSpent = `${hours} hour${
+                        hours > 1 ? 's' : ''
+                      } and ${remainingMinutes} minute${
+                        remainingMinutes > 1 ? 's' : ''
+                      }`;
+                    }
+                  }
+
+                  return (
+                    <div
+                      key={index}
+                      className='py-3 text-lg pl-20'>
+                      <p>
+                        <Link
+                          href={urlEntry.urlLink}
+                          target='_blank'
+                          rel='noReferrer'
+                          className=' cursor-pointer'>
+                          {urlEntry.urlLink}
+                        </Link>{' '}
+                        visited{' '}
+                        {urlEntry.timestamps.length < 2
+                          ? `${urlEntry.timestamps.length} time for `
+                          : `${urlEntry.timestamps.length} times for `}
+                        {timeSpent}.
+                      </p>
+                    </div>
+                  );
+                })}
+
               {gcpData && gcpData.length < 1 && (
                 <div className='flex justify-center items-center h-full w-full font-semibold text-2xl'>
                   NO GCP DATA to display{' '}
@@ -368,7 +359,7 @@ export default function MyData() {
                   Your Browser Data for {new Date().toLocaleDateString('en-GB')}{' '}
                   on Blockchain - IPFS (Decentralised Server)
                 </h1>
-                <select
+                {/* <select
                   value={dropdownValue}
                   onChange={handleDropdownChangeIPFS}
                   className='p-2 border border-gray-300 rounded'>
@@ -377,7 +368,7 @@ export default function MyData() {
                   <option value='25'>25</option>
                   <option value='10'>10</option>
                   <option value='5'>5</option>
-                </select>
+                </select> */}
               </div>
 
               {ipfsData &&
@@ -386,7 +377,10 @@ export default function MyData() {
                   if (data.length > 0) {
                     console.log(data);
                     return (
-                      <div key={index}>
+                      <div
+                        key={index}
+                        className=' border-gray-900 py-2 text-xl border-b-2
+'>
                         {data.length > 0 &&
                           data.map((item: any, index: any) => {
                             let timeSpent = '';
@@ -420,7 +414,7 @@ export default function MyData() {
                               }`;
                             }
                             return (
-                              <div className='py-2 my-4 border-b-2 text-xl border-gray-600 w-full'>
+                              <div className='my-4 text-xl'>
                                 You visited {item.urlLink} for {timeSpent} at{' '}
                                 {item.localeTimeString.slice(0, 5)} Hours
                               </div>
@@ -454,11 +448,11 @@ export default function MyData() {
                   onClick={handleDownloadIPFSData}>
                   <Storage /> Download Blockchain (IPFS) Data
                 </button>
-                <button
+                {/* <button
                   className='bg-black rounded px-4 py-2 text-white'
                   onClick={handleDownloadIPFSData}>
                   <Storage /> Request Older Data
-                </button>
+                </button> */}
               </div>
             </div>
           )}

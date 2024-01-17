@@ -82,17 +82,20 @@ export default function SellDFT() {
 
     const userAccessToken =
       userToken || window.localStorage.getItem('userAccessToken');
-    await fetch(`http://localhost:8080/dex/api/dft-sale/${walletAddress}`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `${userAccessToken}`,
-      },
-      body: JSON.stringify({
-        amount: Number(sendDFTAmount),
-        userId: userId,
-      }),
-    })
+    await fetch(
+      `https://user-backend-402016.el.r.appspot.com/dex/api/dft-sale/${walletAddress}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `${userAccessToken}`,
+        },
+        body: JSON.stringify({
+          amount: Number(sendDFTAmount),
+          userId: userId,
+        }),
+      }
+    )
       .then((response) => {
         toast.success('Listed DFT', { id: '1' });
         console.log(response);
