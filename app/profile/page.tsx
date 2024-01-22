@@ -123,6 +123,7 @@ export default function Profile() {
 
   return (
     <div className='flex'>
+      <Navbar />
       <Sidebar />
       {/* <Navbar /> */}
       <div className='mx-5 md:w-3/4 w-11/12 overflow-y-auto border-8 border-[#e3daf6] md:mx-auto mt-24 md:mt-20 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[84vh] h-[80vh]'>

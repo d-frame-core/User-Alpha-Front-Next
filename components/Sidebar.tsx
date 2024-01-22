@@ -36,9 +36,10 @@ const Sidebar: React.FC = () => {
   return (
     // <div className='flex'>
     <div
-      className={`bg-gradient-to-b from-[rgba(92,15,255,.66)] to-pink-300 text-white h-screen  ${
+      className={`bg-gradient-to-b from-[rgba(92,15,255,.66)] relative to-pink-300 text-white h-screen  ${
         menuOpen ? 'md:w-[18%] w-[50vw]' : 'md:w-[18%] w-0'
-      } `}>
+      } `}
+      style={{ zIndex: 1000 }}>
       {/* Hamburger Icon (visible on mobile screens) */}
       <div className='md:hidden'>
         <button
@@ -255,7 +256,6 @@ const Sidebar: React.FC = () => {
         }}>
         Learn more
       </div>
-      <Navbar />
       {/* <Navbar /> */}
     </div>
   );
