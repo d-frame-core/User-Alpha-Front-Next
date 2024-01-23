@@ -15,6 +15,7 @@ import { countries } from '@/utils/Utils';
 import { AppContext } from '@/context/Context';
 import { useRouter } from 'next/navigation';
 import KYCSubmitted from '@/components/KYCSubmitted';
+import Navbar from '@/components/Navbar';
 // import FormControlLabel from '@mui/'
 export default function KYC2() {
   const [formData, setFormData] = useState({
@@ -126,6 +127,7 @@ export default function KYC2() {
   return (
     <div className='flex'>
       <Sidebar />
+      <Navbar />
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto md:mt-24 mt-48 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[82vh] h-[57vh]'>
         {userData?.kyc2.status === 'UNSUBMITTED' ? (
           <div className='w-full'>

@@ -3,6 +3,7 @@
 import BrowserData from '@/components/BrowserData';
 import CallData from '@/components/CallData';
 import EmailData from '@/components/EmailData';
+import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import React, { useState } from 'react';
 
@@ -21,6 +22,7 @@ export default function Data() {
   return (
     <div className='flex'>
       <Sidebar />
+      <Navbar />
       <div className='flex flex-col md:justify-between w-4/5 mx-auto mt-16 md:pb-4 px-auto'>
         <div className='flex h-14 items-center justify-center text-xl'>
           <div

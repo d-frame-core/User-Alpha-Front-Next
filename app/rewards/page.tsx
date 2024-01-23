@@ -2,6 +2,7 @@
 'use client';
 import DailyRewards from '@/components/DailyRewards';
 import MonthlyRewards from '@/components/MonthlyRewards';
+import Navbar from '@/components/Navbar';
 import Modal from '@/components/RewardsModal';
 import Sidebar from '@/components/Sidebar';
 import WeeklyRewards from '@/components/WeeklyRewards';
@@ -23,6 +24,7 @@ export default function Rewards() {
   return (
     <div className='flex'>
       <Sidebar />
+      <Navbar />
       <div className='flex flex-col md:justify-between w-4/5 mx-auto mt-16 pb-4 px-auto'>
         <div className='flex h-14 items-center justify-center text-xl'>
           <div

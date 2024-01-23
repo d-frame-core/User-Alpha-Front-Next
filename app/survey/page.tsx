@@ -1,6 +1,7 @@
 /** @format */
 'use client';
 import Button from '@/components/Button';
+import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import { AppContext } from '@/context/Context';
 import { useRouter } from 'next/navigation';
@@ -204,6 +205,7 @@ export default function Survey() {
   return (
     <div className='flex'>
       <Sidebar />
+      <Navbar />
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh] h-[70vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl font-semibold md:pb-8 pb-16 text-5xl'>

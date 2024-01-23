@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import jsPDF from 'jspdf';
 import { Storage, ViewStream } from '@mui/icons-material';
+import Navbar from '@/components/Navbar';
 export default function MyData() {
   const [toggleMenu, setToggleMenu] = useState('gcp');
   const [gcpData, setGcpData] = useState<any>([]);
@@ -221,6 +222,7 @@ export default function MyData() {
   return (
     <div className='flex'>
       <Sidebar />
+      <Navbar />
       <div className='flex flex-col md:justify-between w-4/5 mx-auto mt-16 md:pb-4 px-auto'>
         <div className='flex h-14 items-center justify-center text-xl'>
           <div

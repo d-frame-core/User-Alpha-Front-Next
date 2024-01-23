@@ -12,6 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useRouter } from 'next/navigation';
 import DoneIcon from '@mui/icons-material/Done';
 import SaleHistory from '@/components/SaleHistory';
+import Navbar from '@/components/Navbar';
 export default function SellDFT() {
   const {
     userWalletAddress,
@@ -281,6 +282,7 @@ export default function SellDFT() {
   return (
     <div className='flex'>
       <Sidebar />
+      <Navbar />
       <div className='mx-5 md:w-3/4 w-11/12 md:mx-auto mt-24 bg-[#e3daf6] rounded flex md:flex-row flex-col p-5 md:h-[80vh]'>
         <div className='w-full'>
           <h1 className='md:text-3xl text-5xl font-semibold md:pb-8 pb-16'>

@@ -1,5 +1,6 @@
 /** @format */
 'use client';
+import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import SitesByTags from '@/components/SitesByTags';
 import SitesByTimes from '@/components/SitesByTimes';
@@ -20,6 +21,7 @@ export default function Analytics() {
   return (
     <div className='flex'>
       <Sidebar />
+      <Navbar />
       <div className='flex flex-col md:justify-between w-4/5 mx-auto mt-16 pb-4 px-auto'>
         <div className='flex h-14 items-center justify-center text-xl'>
           <div
